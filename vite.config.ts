@@ -1,11 +1,10 @@
 import { defineConfig } from "vite";
-import path, { resolve } from "path";
+import { resolve } from "path";
 import handlebars from "vite-plugin-handlebars";
-import { fileURLToPath } from "url";
 import inspect from "vite-plugin-inspect";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const root = resolve(__dirname, "./src");
+const outDir = resolve(__dirname, "dist");
 
 export default defineConfig({
   server: {
@@ -13,22 +12,23 @@ export default defineConfig({
     strictPort: true,
     host: true,
   },
-  root: resolve(__dirname, "src"),
+  root,
   build: {
-    outDir: resolve(__dirname, "dist"),
+    outDir,
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        login: resolve(__dirname, "pages/login/index.html"),
-        registration: resolve(__dirname, "pages/registration/index.html"),
-        error500: resolve(__dirname, "pages/error500/index.html"),
-        error404: resolve(__dirname, "pages/error404/index.html"),
+        login: resolve(root, "pages/login/index.html"),
+        registration: resolve(root, "pages/registration/index.html"),
+        error500: resolve(root, "pages/error500/index.html"),
+        error404: resolve(root, "pages/error404/index.html"),
       },
     },
   },
   plugins: [
     inspect(),
     handlebars({
+      partialDirectory: resolve(root, "components"),
       context: {
         username: "Name",
       },

@@ -68,38 +68,4 @@
     flex: 1 1 auto;
     gap: 12px;
   }
-
-  &_button {
-    height: 36px;
-    outline: none;
-    background-color: transparent;
-    border: 1px solid #1e1e1e;
-    border-radius: 6px;
-    transition: 0.3s;
-    cursor: pointer;
-
-    &:hover {
-      border-color: #3369f3;
-    }
-
-    &_primary {
-      background-color: #3369f3;
-      color: #fff;
-      border-color: #3369f3;
-
-      &:hover {
-        background-color: #1454f6;
-        border-color: #1454f6;
-      }
-    }
-
-    &_link {
-      border: none;
-      color: #3369f3;
-
-      &:hover {
-        color: #1454f6;
-      }
-    }
-  }
 }
