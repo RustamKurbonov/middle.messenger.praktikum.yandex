@@ -20,6 +20,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         login: resolve(__dirname, "pages/login/index.html"),
+        registration: resolve(__dirname, "pages/registration/index.html"),
+        error500: resolve(__dirname, "pages/error500/index.html"),
+        error404: resolve(__dirname, "pages/error404/index.html"),
       },
     },
   },
