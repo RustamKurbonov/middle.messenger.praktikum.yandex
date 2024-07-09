@@ -1,6 +1,7 @@
 <html>
   <head>
-    <title>Error 500</title>
+    <title>Ошибка 500</title>
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../../css/common.scss" />
     <link rel="stylesheet" href="./styles.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,9 +16,9 @@
       <div class="error500_wrapper">
         <div class="error500_text">
           <h1 class="error500_title">500</h1>
-          <h3 class="error500_subTitle">We are already fixing it</h3>
+          <h3 class="error500_subTitle">Мы уже чиним</h3>
         </div>
-        <a class="error500_back">Back to chats</a>
+        {{> button label="Назад к чатам" href='../login/' type='button_link'}}
       </div>
     </section>
   </body>

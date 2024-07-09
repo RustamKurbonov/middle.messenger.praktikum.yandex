@@ -1,6 +1,7 @@
 <html>
   <head>
-    <title>Error 404</title>
+    <title>Ошибка 404</title>
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../../css/common.scss" />
     <link rel="stylesheet" href="./styles.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,9 +16,9 @@
       <div class="error404_wrapper">
         <div class="error404_text">
           <h1 class="error404_title">404</h1>
-          <h3 class="error404_subTitle">There is no such page</h3>
+          <h3 class="error404_subTitle">Не туда попали</h3>
         </div>
-        <a class="error404_back">Back to chats</a>
+        {{> button label="Назад к чатам" href='../login/' type='button_link'}}
       </div>
     </section>
   </body>

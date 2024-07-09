@@ -1,6 +1,7 @@
 <html>
   <head>
-    <title>Login</title>
+    <title>Авторизация</title>
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../../css/form.scss" />
     <link rel="stylesheet" href="../../css/common.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,19 +14,19 @@
   <body>
     <section class="login form">
       <div class="form_wrapper">
-        <h3 class="form_title">Login</h3>
+        <h3 class="form_title">Авторизация</h3>
         <form class="form_body">
           <div class="form_item">
-            <label class="form_label" for="login">Name</label>
+            <label class="form_label" for="login">Логин</label>
             <input class="form_input" type="text" id="login" />
           </div>
           <div class="form_item">
-            <label class="form_label" for="password">Password</label>
+            <label class="form_label" for="password">Пароль</label>
             <input class="form_input" type="password" id="password" />
           </div>
           <div class="form_buttons">
-            {{> button label="Sign in" href='../registration/'
-            type='button_primary'}} {{> button label="Sign up"
+            {{> button label="Войти" href='../registration/'
+            type='button_primary'}} {{> button label="Зарегистрироваться"
             href='../registration/' type='button_link'}}
           </div>
         </form>
