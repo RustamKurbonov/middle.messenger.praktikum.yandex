@@ -23,7 +23,6 @@
     color: #1e1e1e;
     font-size: 24px;
     line-height: 30px;
-    font-family: "Poppins", sans-serif;
     font-weight: 500;
     padding-bottom: 64px;
   }
@@ -43,14 +42,11 @@
 
   &_label {
     font-size: 12px;
-    font-family: "Poppins", sans-serif;
     margin-bottom: 6px;
   }
 
   &_input {
-    font-family: "Poppins", sans-serif;
     border: none;
-    font-size: 14px;
     border-bottom: 1px solid #1e1e1e;
     transition: 0.3s;
 

@@ -1,0 +1,246 @@
+.chat {
+  display: flex;
+
+  &-sidebar {
+    height: 100%;
+    width: 340px;
+    flex: 0 0 340px;
+    border-right: 1px solid #eaeaea;
+    padding: 0 16px;
+
+    &-header {
+      border-bottom: 1px solid #eaeaea;
+      display: flex;
+      height: 60px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    &-search {
+      width: 100%;
+      border-radius: 6px;
+      background-color: #efefef;
+      padding: 6px;
+      height: 34px;
+
+      & input {
+        margin: 0 6px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        width: 100%;
+      }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-message {
+      border-bottom: 1px solid #eaeaea;
+      height: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      &-icon {
+        width: 47px;
+        height: 47px;
+      }
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: 4px;
+      }
+
+      &-title {
+        font-weight: 600;
+      }
+
+      &-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      &-date {
+        font-size: 12px;
+        color: #999999;
+      }
+
+      &-count {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #3369f3;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 12px;
+      }
+    }
+  }
+
+  &-body {
+    padding: 0 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &_header {
+      display: flex;
+      align-items: center;
+      height: 60px;
+      border-bottom: 1px solid #eaeaea;
+      justify-content: space-between;
+    }
+
+    &_user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      &-icon {
+        width: 34px;
+        height: 34px;
+
+        & embed {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &-name {
+        font-weight: 600;
+      }
+    }
+
+    &_setting {
+      width: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    &_content {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: end;
+      padding: 16px 0;
+      overflow: scroll;
+      flex-direction: column;
+      justify-content: end;
+    }
+
+    &_message {
+      position: relative;
+      max-width: 50%;
+      padding: 10px 10px 30px 10px;
+      border-radius: 12px;
+      line-height: 20px;
+      width: fit-content;
+
+      &-item {
+        width: 100%;
+        margin-top: 16px;
+        height: fit-content;
+      }
+
+      &-incoming {
+        border-top-left-radius: 0px;
+        background-color: #f8f8f8;
+        margin: 0 auto 0 0;
+
+        & .chat-body_message-time {
+          color: #999999;
+        }
+      }
+
+      &-outgoing {
+        border-bottom-right-radius: 0px;
+        background-color: #e4edfd;
+        margin: 0 0 0 auto;
+
+        & .chat-body_message-time {
+          color: #3369f3;
+        }
+      }
+
+      &-time {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+      }
+    }
+
+    &_form {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #eaeaea;
+      height: 60px;
+      gap: 16px;
+    }
+
+    &_clip {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+
+      & embed {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &_input {
+      flex: 1 1 auto;
+
+      &-wrapper {
+        width: 100%;
+        border-radius: 30px;
+        background-color: #efefef;
+        padding: 6px;
+        height: 34px;
+      }
+
+      & input {
+        margin: 0 6px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        width: 100%;
+      }
+    }
+
+    &_submit {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+
+      & embed {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
