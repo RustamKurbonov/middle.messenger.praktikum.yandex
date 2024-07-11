@@ -20,6 +20,7 @@ export default defineConfig({
       input: {
         login: resolve(root, "pages/login/index.html"),
         chat: resolve(root, "pages/chat/index.html"),
+        profile: resolve(root, "pages/profile/index.html"),
         registration: resolve(root, "pages/registration/index.html"),
         error500: resolve(root, "pages/error500/index.html"),
         error404: resolve(root, "pages/error404/index.html"),
@@ -31,7 +32,12 @@ export default defineConfig({
     handlebars({
       partialDirectory: resolve(root, "components"),
       context: {
-        username: "Name",
+        username: "Иван",
+        login: "ivanivanov",
+        email: "ivanivanov@mail.com",
+        firstName: "Иван",
+        secondName: "Иванов",
+        phone: "+7999999999",
       },
     }),
   ],
