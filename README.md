@@ -55,3 +55,5 @@ npm run preview
 - профиль: http://127.0.0.1:5173/pages/profile/
 - ошибка 404: http://127.0.0.1:5173/pages/error404/
 - ошибка 500: http://127.0.0.1:5173/pages/error500/
+
+Netlify: https://app.netlify.com/sites/celebrated-pudding-60a952/overview
