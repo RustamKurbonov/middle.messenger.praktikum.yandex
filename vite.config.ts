@@ -13,6 +13,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
+        main: resolve(root, "index.html"),
         login: resolve(root, "pages/login/index.html"),
         chat: resolve(root, "pages/chat/index.html"),
         profile: resolve(root, "pages/profile/index.html"),
