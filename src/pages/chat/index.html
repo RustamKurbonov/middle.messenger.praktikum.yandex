@@ -14,33 +14,34 @@
   </head>
   <body class="chat">
     <section class="chat-sidebar">
-	<div class="chat-sidebar-header">
-		<div class="chat-sidebar-search">
-			<input placeholder="Поиск" />
-		</div>
-		{{> button label="Профиль >" href='../login/' type='button_link'}}
-	</div>
-	<div class="chat-sidebar-content">
-		<div class="chat-sidebar-message">
-			<div class="chat-sidebar-message-icon">
-				<embed
-				src="../../assets/icons/Ellipse.svg"
-			       ></embed>
-			</div>
-			<div class="chat-sidebar-message-content">
-				<div class="chat-sidebar-message-title">
-					Андрей
-				</div>
-				<div class="chat-sidebar-message-text">
-					Друзья, у меня для вас особенный выпуск новостей! Друзья, у меня для вас особенный
-				</div>
-			</div>
-			<div class="chat-sidebar-message-info">
-				<div class="chat-sidebar-message-date">10:49</div>
-				<div class="chat-sidebar-message-count">4</div>
-			</div>
-		</div>
-	</div>
+      <div class="chat-sidebar-header">
+        <div class="chat-sidebar-search">
+          <input placeholder="Поиск" />
+        </div>
+        {{> button label="Профиль >" href='../login/' type='button_link'}}
+      </div>
+      <div class="chat-sidebar-content">
+        <div class="chat-sidebar-message">
+          <div class="chat-sidebar-message-icon">
+            <embed
+              src="../../assets/icons/Ellipse.svg"
+              type="image/svg+xml"
+              pluginspage="http://www.adobe.com/svg/viewer/install/"
+            />
+          </div>
+          <div class="chat-sidebar-message-content">
+            <div class="chat-sidebar-message-title">Андрей</div>
+            <div class="chat-sidebar-message-text">
+              Друзья, у меня для вас особенный выпуск новостей! Друзья, у меня
+              для вас особенный
+            </div>
+          </div>
+          <div class="chat-sidebar-message-info">
+            <div class="chat-sidebar-message-date">10:49</div>
+            <div class="chat-sidebar-message-count">4</div>
+          </div>
+        </div>
+      </div>
     </section>
     <section class="chat-body">
       <section class="chat-body_header">
@@ -48,48 +49,62 @@
           <div class="chat-body_user-icon">
             <embed
               src="../../assets/icons/Ellipse.svg"
-            ></embed>
+              type="image/svg+xml"
+              pluginspage="http://www.adobe.com/svg/viewer/install/"
+            />
           </div>
           <div class="chat-body_user-name">Вадим</div>
         </div>
         <div class="chat-body_setting">
-          <img src="../../assets/icons/Setting.svg" />
+          <embed
+            src="../../assets/icons/Setting.svg"
+            type="image/svg+xml"
+            pluginspage="http://www.adobe.com/svg/viewer/install/"
+          />
         </div>
       </section>
       <section class="chat-body_content">
-	<div class="chat-body_message-item">
-		<div class="chat-body_message chat-body_message-incoming">
-			Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. 
-			Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. 
-			Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
-			<span class="chat-body_message-time">11:56</span>
-		</div>
-	</div>
+        <div class="chat-body_message-item">
+          <div class="chat-body_message chat-body_message-incoming">
+            Привет! Смотри, тут всплыл интересный кусок лунной космической
+            истории — НАСА в какой-то момент попросила Хассельблад адаптировать
+            модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты
+            летали с моделью 500 EL — и к слову говоря, все тушки этих камер все
+            еще находятся на поверхности Луны, так как астронавты с собой
+            забрали только кассеты с пленкой. Хассельблад в итоге адаптировал
+            SWC для космоса, но что-то пошло не так и на ракету они так никогда
+            и не попали. Всего их было произведено 25 штук, одну из них недавно
+            продали на аукционе за 45000 евро.
+            <span class="chat-body_message-time">11:56</span>
+          </div>
+        </div>
 
-	<div class="chat-body_message-item">
-		<div class="chat-body_message chat-body_message-outgoing">
-			Круто! 
-			<span class="chat-body_message-time">11:56</span>
-		</div>
-	</div>
+        <div class="chat-body_message-item">
+          <div class="chat-body_message chat-body_message-outgoing">
+            Круто!
+            <span class="chat-body_message-time">11:56</span>
+          </div>
+        </div>
       </section>
       <section class="chat-body_form">
         <button class="chat-body_clip">
-          <object
+          <embed
+            src="../../assets/icons/Clip.svg"
             type="image/svg+xml"
-            data="../../assets/icons/Clip.svg"
-          ></object>
+            pluginspage="http://www.adobe.com/svg/viewer/install/"
+          />
         </button>
         <div class="chat-body_input">
-	<div class="chat-body_input-wrapper">
-          <input placeholder="Введите сообщение" />
-	</div>
+          <div class="chat-body_input-wrapper">
+            <input placeholder="Введите сообщение" />
+          </div>
         </div>
         <button class="chat-body_submit">
-          <object
+          <embed
+            src="../../assets/icons/ArrowButton.svg"
             type="image/svg+xml"
-            data="../../assets/icons/ArrowButton.svg"
-          ></object>
+            pluginspage="http://www.adobe.com/svg/viewer/install/"
+          />
         </button>
       </section>
     </section>
