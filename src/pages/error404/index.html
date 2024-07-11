@@ -2,8 +2,7 @@
   <head>
     <title>Ошибка 404</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../css/common.scss" />
-    <link rel="stylesheet" href="./styles.scss" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,14 +11,6 @@
     />
   </head>
   <body>
-    <section class="error404">
-      <div class="error404_wrapper">
-        <div class="error404_text">
-          <h1 class="error404_title">404</h1>
-          <h3 class="error404_subTitle">Не туда попали</h3>
-        </div>
-        {{> button label="Назад к чатам" href='../login/' type='button_link'}}
-      </div>
-    </section>
+    {{> error error="404" errorName="Не туда попали"}}
   </body>
 </html>

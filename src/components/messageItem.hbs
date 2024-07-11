@@ -1,0 +1,20 @@
+<head>
+  <style>
+    .message-item { width: 100%; margin-top: 16px; height: fit-content;}
+    .message-item_text {position: relative; width: fit-content; max-width: 50%;
+    padding: 10px 10px 30px 10px; border-radius: 12px; line-height: 20px; }
+    .message-item_time { position: absolute; bottom: 10px; right: 10px;
+    font-size: 12px; } .message-item_text.incoming { border-top-left-radius:
+    0px; background-color: #f8f8f8; margin: 0 auto 0 0; }
+    .message-item_text.incoming .chat-body_message-time { color: #999999; }
+    .message-item_text.outgoing { border-bottom-right-radius: 0px;
+    background-color: #e4edfd; margin: 0 0 0 auto; } .message-item_text.outgoing
+    .chat-body_message-time { color: #3369f3; }
+  </style>
+</head>
+<div class="message-item">
+  <div class="message-item_text {{type}}">
+    {{text}}
+    <span class="message-item_time">{{time}}</span>
+  </div>
+</div>

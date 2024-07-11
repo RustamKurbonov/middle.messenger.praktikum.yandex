@@ -3,7 +3,7 @@
     <title>Чат</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../css/form.scss" />
-    <link rel="stylesheet" href="../../css/common.scss" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
     <link rel="stylesheet" href="./chat.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,26 +20,9 @@
         </div>
         {{> button label="Профиль >" href='../profile/' type='button_link'}}
       </div>
-      <div class="chat-sidebar-content">
-        <div class="chat-sidebar-message">
-          <div class="chat-sidebar-message-icon">
-            <embed
-              src="../../assets/icons/Ellipse.svg"
-              type="image/svg+xml"
-              pluginspage="http://www.adobe.com/svg/viewer/install/"
-            />
-          </div>
-          <div class="chat-sidebar-message-content">
-            <div class="chat-sidebar-message-title">Андрей</div>
-            <div class="chat-sidebar-message-text">
-              Друзья, у меня для вас особенный выпуск новостей! Друзья, у меня
-              для вас особенный
-            </div>
-          </div>
-          <div class="chat-sidebar-message-info">
-            <div class="chat-sidebar-message-date">10:49</div>
-            <div class="chat-sidebar-message-count">4</div>
-          </div>
+      <div class="chat-sidebar-content">  
+      {{> chatMessage icon="../../assets/icons/Ellipse.svg" name="Андрей" text="Друзья, у меня для вас особенный выпуск новостей! Друзья, у меня для вас
+      особенный" date="10:49" count="4" }}
         </div>
       </div>
     </section>
@@ -64,27 +47,16 @@
         </div>
       </section>
       <section class="chat-body_content">
-        <div class="chat-body_message-item">
-          <div class="chat-body_message chat-body_message-incoming">
-            Привет! Смотри, тут всплыл интересный кусок лунной космической
-            истории — НАСА в какой-то момент попросила Хассельблад адаптировать
-            модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты
-            летали с моделью 500 EL — и к слову говоря, все тушки этих камер все
-            еще находятся на поверхности Луны, так как астронавты с собой
-            забрали только кассеты с пленкой. Хассельблад в итоге адаптировал
-            SWC для космоса, но что-то пошло не так и на ракету они так никогда
-            и не попали. Всего их было произведено 25 штук, одну из них недавно
-            продали на аукционе за 45000 евро.
-            <span class="chat-body_message-time">11:56</span>
-          </div>
-        </div>
+        {{> messageItem type="incoming" text="Привет! Смотри, тут всплыл интересный кусок лунной космической истории —
+    НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для
+    полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL
+    — и к слову говоря, все тушки этих камер все еще находятся на поверхности
+    Луны, так как астронавты с собой забрали только кассеты с пленкой.
+    Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на
+    ракету они так никогда и не попали. Всего их было произведено 25 штук, одну
+    из них недавно продали на аукционе за 45000 евро." time="11:56" }} 
 
-        <div class="chat-body_message-item">
-          <div class="chat-body_message chat-body_message-outgoing">
-            Круто!
-            <span class="chat-body_message-time">11:56</span>
-          </div>
-        </div>
+       {{> messageItem type="outgoing" text="Круто!" time="12:00" }} 
       </section>
       <section class="chat-body_form">
         <button class="chat-body_clip">

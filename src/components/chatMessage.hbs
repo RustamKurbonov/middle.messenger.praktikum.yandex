@@ -1,0 +1,35 @@
+<head>
+  <style>
+    .chat-message { border-bottom: 1px solid #eaeaea; min-height: 94px; display:
+    flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .chat-message_icon { width: 47px; height: 47px; } .chat-message_content {
+    display: flex; flex-direction: column; justify-content: start; gap: 4px; }
+    .chat-message_title { font-weight: 600; } .chat-message_text { display:
+    -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow:
+    hidden; text-overflow: ellipsis; } .chat-message_info { display: flex;
+    flex-direction: column; align-items: center; gap: 8px; } .chat-message_date
+    { font-size: 12px; color: #999999; } .chat-message_count { display: flex;
+    align-items: center; justify-content: center; background-color: #3369f3;
+    color: #fff; width: 20px; height: 20px; border-radius: 50%; font-size: 12px;
+    }
+  </style>
+</head>
+<div class="chat-message">
+  <div class="chat-message_icon">
+    <embed
+      src={{icon}}
+      type="image/svg+xml"
+      pluginspage="http://www.adobe.com/svg/viewer/install/"
+    />
+  </div>
+  <div class="chat-message_content">
+    <div class="chat-message_title">{{name}}</div>
+    <div class="chat-message_text">
+      {{text}}
+    </div>
+  </div>
+  <div class="chat-message_info">
+    <div class="chat-message_date">{{date}}</div>
+    <div class="chat-message_count">{{count}}</div>
+  </div>
+</div>

@@ -2,8 +2,8 @@
   <head>
     <title>Регистрация</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../css/form.scss" />
-    <link rel="stylesheet" href="../../css/common.scss" />
+    <link rel="stylesheet" href="../../assets/css/form.scss" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,30 +16,12 @@
       <div class="form_wrapper">
         <h3 class="form_title">Регистрация</h3>
         <form class="form_body">
-          <div class="form_item">
-            <label class="form_label" for="first_name">Имя</label>
-            <input class="form_input" type="text" id="first_name" />
-          </div>
-          <div class="form_item">
-            <label class="form_label" for="second_name">Фамилия</label>
-            <input class="form_input" type="text" id="second_name" />
-          </div>
-          <div class="form_item">
-            <label class="form_label" for="login">Логин</label>
-            <input class="form_input" type="text" id="login" />
-          </div>
-          <div class="form_item">
-            <label class="form_label" for="email">Почта</label>
-            <input class="form_input" type="text" id="email" />
-          </div>
-          <div class="form_item">
-            <label class="form_label" for="Phone">Телефон</label>
-            <input class="form_input" type="text" id="phone" />
-          </div>
-          <div class="form_item">
-            <label class="form_label" for="password">Пароль</label>
-            <input class="form_input" type="password" id="password" />
-          </div>
+          {{> formItem label="Имя" type='text' id='first_name'}} {{> formItem
+          label="Фамилия" type='text' id='second_name'}} {{> formItem
+          label="Логин" type='text' id='login'}} {{> formItem label="Почта"
+          type='email' id='email'}} {{> formItem label="Телефон" type='phone'
+          id='phone'}} {{> formItem label="Пароль" type='password'
+          id='password'}}
           <div class="form_buttons">
             {{> button label="Зарегистрироваться" href='../chat/'
             type='button_primary'}} {{> button label="Войти" href='../login/'

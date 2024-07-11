@@ -2,8 +2,8 @@
   <head>
     <title>Авторизация</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../css/form.scss" />
-    <link rel="stylesheet" href="../../css/common.scss" />
+    <link rel="stylesheet" href="../../assets/css/form.scss" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,14 +16,8 @@
       <div class="form_wrapper">
         <h3 class="form_title">Авторизация</h3>
         <form class="form_body">
-          <div class="form_item">
-            <label class="form_label" for="login">Логин</label>
-            <input class="form_input" type="text" id="login" />
-          </div>
-          <div class="form_item">
-            <label class="form_label" for="password">Пароль</label>
-            <input class="form_input" type="password" id="password" />
-          </div>
+          {{> formItem label="Логин" type='text' id='login'}} {{> formItem
+          label="Пароль" type='password' id='password'}}
           <div class="form_buttons">
             {{> button label="Войти" href='../chat/' type='button_primary'}} {{>
             button label="Зарегистрироваться" href='../registration/'

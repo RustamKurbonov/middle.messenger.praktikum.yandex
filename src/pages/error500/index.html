@@ -2,8 +2,7 @@
   <head>
     <title>Ошибка 500</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../css/common.scss" />
-    <link rel="stylesheet" href="./styles.scss" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,14 +11,6 @@
     />
   </head>
   <body>
-    <section class="error500">
-      <div class="error500_wrapper">
-        <div class="error500_text">
-          <h1 class="error500_title">500</h1>
-          <h3 class="error500_subTitle">Мы уже чиним</h3>
-        </div>
-        {{> button label="Назад к чатам" href='../login/' type='button_link'}}
-      </div>
-    </section>
+    {{> error error="500" errorName="Уже чиним"}}
   </body>
 </html>
