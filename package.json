@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
-    "dev": "vite preview"
+    "preview": "vite preview",
+    "start": "vite build && vite --port 3000"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

@@ -12,25 +12,23 @@
     />
   </head>
   <body>
-    <section class="profile">
-      <div class="profile_icon">
-        <embed
-          src="../../assets/icons/Ellipse.svg"
-          type="image/svg+xml"
-          pluginspage="http://www.adobe.com/svg/viewer/install/"
-        />
-      </div>
-      <h2 class="profile_name">{{username}}</h2>
-      <div class="profile_params">
-        {{> profileParam title="Логин" value="ivanivanov"}} {{> profileParam
-        title="Имя" value="Иван"}} {{> profileParam title="Фамилия"
-        value="Иванов"}} {{> profileParam title="Телефон" value="+7999999999"}}
-        {{> profileParam title="Почта" value="ivanivanov@mail.com"}}
-      </div>
-      <div>
-        {{> button label="Изменить данные" href='./' type='button_link'}} {{>
-        button label="Изменить пароль" href='./' type='button_link'}} {{> button
-        label="Выйти" href='../login/' type='button_warning'}}
+    <section class="profile_body">
+      <a class="profile_sidebar" href="../chat/"></a>
+      <div class="profile_wrapper">
+        <div class="profile_icon"></div>
+        <h2 class="profile_name">{{username}}</h2>
+        <div class="profile_params">
+          {{> profileParam title="Логин" value="ivanivanov"}} {{> profileParam
+          title="Имя" value="Иван"}} {{> profileParam title="Фамилия"
+          value="Иванов"}} {{> profileParam title="Телефон"
+          value="+7999999999"}} {{> profileParam title="Почта"
+          value="ivanivanov@mail.com"}}
+        </div>
+        <div>
+          {{> button label="Изменить данные" href='./' type='button_link'}} {{>
+          button label="Изменить пароль" href='./' type='button_link'}} {{>
+          button label="Выйти" href='../login/' type='button_warning'}}
+        </div>
       </div>
     </section>
   </body>

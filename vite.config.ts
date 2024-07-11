@@ -7,11 +7,6 @@ const root = resolve(__dirname, "./src");
 const outDir = resolve(__dirname, "dist");
 
 export default defineConfig({
-  server: {
-    port: 3000,
-    strictPort: true,
-    host: true,
-  },
   root,
   build: {
     outDir,

@@ -2,8 +2,10 @@
   <style>
     .chat-message { border-bottom: 1px solid #eaeaea; min-height: 94px; display:
     flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .chat-message_icon { width: 47px; height: 47px; } .chat-message_content {
-    display: flex; flex-direction: column; justify-content: start; gap: 4px; }
+    .chat-message_icon { width: 47px; height: 47px; min-width: 47px; min-height:
+    47px; background-repeat: no-repeat; background-position: center;
+    background-size: contain;} .chat-message_content { display: flex;
+    flex-direction: column; justify-content: start; gap: 4px; }
     .chat-message_title { font-weight: 600; } .chat-message_text { display:
     -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow:
     hidden; text-overflow: ellipsis; } .chat-message_info { display: flex;
@@ -15,12 +17,7 @@
   </style>
 </head>
 <div class="chat-message">
-  <div class="chat-message_icon">
-    <embed
-      src={{icon}}
-      type="image/svg+xml"
-      pluginspage="http://www.adobe.com/svg/viewer/install/"
-    />
+  <div class="chat-message_icon" style="background-image: url({{icon}})">
   </div>
   <div class="chat-message_content">
     <div class="chat-message_title">{{name}}</div>
