@@ -56,5 +56,5 @@ npm run preview
 - ошибка 404: http://127.0.0.1:5173/pages/error404/
 - ошибка 500: http://127.0.0.1:5173/pages/error500/
 
-Netlify: https://app.netlify.com/sites/celebrated-pudding-60a952/overview
+Netlify: https://celebrated-pudding-60a952.netlify.app/
 Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
