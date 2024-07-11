@@ -2,7 +2,7 @@
   <head>
     <title>Список</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../assets/css/common.scss" />
+    <link rel="stylesheet" href="./assets/css/common.scss" />
     <link rel="stylesheet" href="./main.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,17 +12,16 @@
     />
   </head>
   <body>
-    <section class="main">
+    <main class="main">
       <h1 class="main_title">Список страниц</h1>
-      <div class="main_list">
-        {{> button label="Авторизация" href='/pages/login/' type='button_link'}}
-        {{> button label="Регистрация" href='/pages/registration/'
-        type='button_link'}} {{> button label="Чат" href='/pages/chat/'
-        type='button_link'}} {{> button label="Профиль" href='/pages/profile/'
-        type='button_link'}} {{> button label="Ошибка 404"
-        href='/pages/error404/ ' type='button_link'}}{{> button label="Ошибка
-        500" href='/pages/error500/ ' type='button_link'}}
+      <ul class="main_list">
+        <li>{{> button label="Авторизация" href='/pages/login/' type='button_link'}}</li>
+        <li> {{> button label="Регистрация" href='/pages/registration/' type='button_link'}}</li> 
+        <li>{{> button label="Чат" href='/pages/chat/' type='button_link'}}</li>
+        <li>{{> button label="Профиль" href='/pages/profile/' type='button_link'}}</li> 
+        <li>{{> button label="Ошибка 404" href='/pages/error404/ ' type='button_link'}}</li>
+        <li>{{> button label="Ошибка 500" href='/pages/error500/ ' type='button_link'}}</li>
       </div>
-    </section>
+    </main>
   </body>
 </html>

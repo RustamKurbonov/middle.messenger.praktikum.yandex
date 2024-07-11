@@ -1,21 +1,10 @@
-<head>
-  <style>
-    .error{ display: flex; align-items: center; justify-content: center; width:
-    100vw; height: 100vh; } .error_wrapper { display: flex; align-items: center;
-    overflow: hidden; flex-wrap: wrap; flex-direction: column; font-weight: 500;
-    } .error_text { display: flex; align-items: center; justify-content: center;
-    flex-direction: column; margin-bottom: 42px; } .error_title { font-size:
-    65px; margin-bottom: 24px; } .error_subtitle { font-size: 24px;
-    margin-bottom: 24px; }
-  </style>
-</head>
-<section class="error">
-  <div class="error_wrapper">
+<main class="error">
+  <section class="error_wrapper">
     <div class="error_text">
       <h1 class="error_title">{{error}}</h1>
       <h3 class="error_subTitle">{{errorName}}</h3>
     </div>
     {{> button label="Назад к
     чатам" href='../login/' type='button_link'}}
-  </div>
-</section>
+  </section>
+</main>

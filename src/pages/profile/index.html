@@ -12,24 +12,30 @@
     />
   </head>
   <body>
-    <section class="profile_body">
+    <main class="profile_body">
       <a class="profile_sidebar" href="../chat/"></a>
-      <div class="profile_wrapper">
+      <section class="profile_wrapper">
         <div class="profile_icon"></div>
         <h2 class="profile_name">{{username}}</h2>
-        <div class="profile_params">
-          {{> profileParam title="Логин" value="ivanivanov"}} {{> profileParam
-          title="Имя" value="Иван"}} {{> profileParam title="Фамилия"
-          value="Иванов"}} {{> profileParam title="Телефон"
-          value="+7999999999"}} {{> profileParam title="Почта"
-          value="ivanivanov@mail.com"}}
-        </div>
-        <div>
-          {{> button label="Изменить данные" href='./' type='button_link'}} {{>
-          button label="Изменить пароль" href='./' type='button_link'}} {{>
-          button label="Выйти" href='../login/' type='button_warning'}}
-        </div>
-      </div>
-    </section>
+        <ul class="profile_params">
+          <li>{{> profileParam title="Логин" value="ivanivanov"}}</li>
+          <li>{{> profileParam title="Имя" value="Иван"}}</li>
+          <li>{{> profileParam title="Фамилия" value="Иванов"}}</li>
+          <li>{{> profileParam title="Телефон" value="+7999999999"}}</li>
+          <li>{{> profileParam title="Почта" value="ivanivanov@mail.com"}}</li>
+        </ul>
+        <ul>
+          <li>
+            {{> button label="Изменить данные" href='./' type='button_link'}}
+          </li>
+          <li>
+            {{>button label="Изменить пароль" href='./' type='button_link'}}
+          </li>
+          <li>
+            {{>button label="Выйти" href='../login/' type='button_warning'}}
+          </li>
+        </ul>
+      </section>
+    </main>
   </body>
 </html>
