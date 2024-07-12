@@ -16,12 +16,13 @@
       <section class="form_wrapper">
         <h3 class="form_title">Авторизация</h3>
         <form class="form_body">
-          {{> formItem label="Логин" type='text' id='login'}} {{> formItem
-          label="Пароль" type='password' id='password'}}
+          {{> formItem label="Логин" type='text' id='login' name='login'}} {{>
+          formItem label="Пароль" type='password' id='password'
+          name='password'}}
           <div class="form_buttons">
             {{> button label="Войти" href='../chat/' type='button_primary'}} {{>
             button label="Зарегистрироваться" href='../registration/'
-            type='button_link'}}
+            type='button_link' }}
           </div>
         </form>
       </section>

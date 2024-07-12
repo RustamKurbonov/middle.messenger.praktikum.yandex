@@ -16,12 +16,13 @@
       <section class="form_wrapper">
         <h3 class="form_title">Регистрация</h3>
         <form class="form_body">
-          {{> formItem label="Имя" type='text' id='first_name'}} {{> formItem
-          label="Фамилия" type='text' id='second_name'}} {{> formItem
-          label="Логин" type='text' id='login'}} {{> formItem label="Почта"
-          type='email' id='email'}} {{> formItem label="Телефон" type='phone'
-          id='phone'}} {{> formItem label="Пароль" type='password'
-          id='password'}}
+          {{> formItem label="Имя" type='text' id='first_name'
+          name='first_name'}} {{> formItem label="Фамилия" type='text'
+          id='second_name' name='second_name'}} {{> formItem label="Логин"
+          type='text' id='login' name='login'}} {{> formItem label="Почта"
+          type='email' id='email' name='email'}} {{> formItem label="Телефон"
+          type='phone' id='phone' name='phone'}} {{> formItem label="Пароль"
+          type='password' id='password' name='password'}}
           <div class="form_buttons">
             {{> button label="Зарегистрироваться" href='../chat/'
             type='button_primary'}} {{> button label="Войти" href='../login/'
