@@ -20,6 +20,7 @@ export default defineConfig({
         registration: resolve(root, "pages/registration/index.html"),
         error500: resolve(root, "pages/error500/index.html"),
         error404: resolve(root, "pages/error404/index.html"),
+        editingProfile: resolve(root, "pages/editingProfile/index.html"),
       },
     },
   },

@@ -53,6 +53,7 @@ npm run preview
 - регистрация: http://127.0.0.1:5173/pages/registration/
 - чат: http://127.0.0.1:5173/pages/chat/
 - профиль: http://127.0.0.1:5173/pages/profile/
+- редактирование профиля: http://127.0.0.1:5173/pages/editingProfile/
 - ошибка 404: http://127.0.0.1:5173/pages/error404/
 - ошибка 500: http://127.0.0.1:5173/pages/error500/
 

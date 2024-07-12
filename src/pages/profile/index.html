@@ -13,7 +13,7 @@
   </head>
   <body>
     <main class="profile_body">
-      <a class="profile_sidebar" href="../chat/"></a>
+      {{> profileSidebar href="../chat/"}}
       <section class="profile_wrapper">
         <div class="profile_icon"></div>
         <h2 class="profile_name">{{username}}</h2>
@@ -26,7 +26,8 @@
         </ul>
         <ul>
           <li>
-            {{> button label="Изменить данные" href='./' type='button_link'}}
+            {{> button label="Изменить данные" href='../editingProfile/'
+            type='button_link'}}
           </li>
           <li>
             {{>button label="Изменить пароль" href='./' type='button_link'}}

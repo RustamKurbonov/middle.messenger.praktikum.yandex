@@ -1,5 +1,5 @@
-.profile {
-  &_body {
+.editingProfile {
+  &.body {
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -34,7 +34,11 @@
     font-weight: 600;
   }
 
-  &_params {
+  &_form {
     width: 500px;
+  }
+
+  &_buttons {
+    width: 280px;
   }
 }
