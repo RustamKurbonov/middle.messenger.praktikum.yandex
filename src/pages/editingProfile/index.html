@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Редактирование профиля</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
+    <link rel="stylesheet" href="./editingProfile.scss" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="editingProfile_body">
+      {{> profileSidebar href="../chat/"}}
+      <section class="editingProfile_wrapper">
+        <div class="editingProfile_icon"></div>
+        <h2 class="editingProfile_name">{{username}}</h2>
+        <form class="editingProfile_form">
+          {{> formItem label="Имя" type='text' id='first_name'
+          name='first_name'}} {{> formItem label="Фамилия" type='text'
+          id='second_name' name='second_name'}} {{> formItem label="Никнейм"
+          type='text' id='display_name' name='display_name'}} {{> formItem
+          label="Логин" type='text' id='login' name='login'}} {{> formItem
+          label="Почта" type='email' id='email' name='email'}} {{> formItem
+          label="Телефон" type='phone' id='phone' name='phone'}} {{> formItem
+          label="Старый пароль" type='password' id='oldPassword'
+          name='oldPassword'}} {{> formItem label="Новый пароль" type='password'
+          id='newPassword' name='newPassword'}}
+        </form>
+        <ul class="editingProfile_buttons">
+          <li>
+            {{> button label="Сохранить" href='./' type='button_primary'}}
+          </li>
+          <li>{{>button label="Отмена" href='./' type='button_link'}}</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

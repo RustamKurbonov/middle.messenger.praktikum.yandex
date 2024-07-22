@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Профиль</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../assets/css/common.scss" />
+    <link rel="stylesheet" href="./profile.scss" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="profile_body">
+      {{> profileSidebar href="../chat/"}}
+      <section class="profile_wrapper">
+        <div class="profile_icon"></div>
+        <h2 class="profile_name">{{username}}</h2>
+        <ul class="profile_params">
+          <li>{{> profileParam title="Логин" value="ivanivanov"}}</li>
+          <li>{{> profileParam title="Имя" value="Иван"}}</li>
+          <li>{{> profileParam title="Фамилия" value="Иванов"}}</li>
+          <li>{{> profileParam title="Телефон" value="+7999999999"}}</li>
+          <li>{{> profileParam title="Почта" value="ivanivanov@mail.com"}}</li>
+        </ul>
+        <ul>
+          <li>
+            {{> button label="Изменить данные" href='../editingProfile/'
+            type='button_link'}}
+          </li>
+          <li>
+            {{>button label="Изменить пароль" href='./' type='button_link'}}
+          </li>
+          <li>
+            {{>button label="Выйти" href='../login/' type='button_warning'}}
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
