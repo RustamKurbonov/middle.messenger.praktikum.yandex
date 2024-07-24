@@ -1,0 +1,6 @@
+src/app/modules/**
+HelmCharts
+node_modules
+.next
+
+tests/data/**
