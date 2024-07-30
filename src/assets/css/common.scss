@@ -195,41 +195,6 @@ html * {
   }
 }
 
-.error {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-
-  &_wrapper {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    flex-wrap: wrap;
-    flex-direction: column;
-    font-weight: 500;
-  }
-
-  &_text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 42px;
-  }
-
-  &_title {
-    font-size: 65px;
-    margin-bottom: 24px;
-  }
-
-  &_subtitle {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-}
-
 .message-item {
   width: 100%;
   margin-top: 16px;
