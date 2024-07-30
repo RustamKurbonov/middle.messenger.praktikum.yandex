@@ -54,10 +54,10 @@ export default () => {
               click: () => {
                 const login = (
                   document.querySelector('#login') as HTMLInputElement
-                ).value;
+                )?.value;
                 const password = (
                   document.querySelector('#password') as HTMLInputElement
-                ).value;
+                )?.value;
 
                 console.log({ login, password });
               },

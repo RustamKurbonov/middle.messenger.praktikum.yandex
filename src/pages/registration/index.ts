@@ -122,22 +122,22 @@ export default () => {
               click: () => {
                 const firstName = (
                   document.querySelector('#first_name') as HTMLInputElement
-                ).value;
+                )?.value;
                 const secondName = (
                   document.querySelector('#second_name') as HTMLInputElement
-                ).value;
+                )?.value;
                 const login = (
                   document.querySelector('#login') as HTMLInputElement
-                ).value;
+                )?.value;
                 const email = (
                   document.querySelector('#email') as HTMLInputElement
-                ).value;
+                )?.value;
                 const phone = (
                   document.querySelector('#phone') as HTMLInputElement
-                ).value;
+                )?.value;
                 const password = (
                   document.querySelector('#password') as HTMLInputElement
-                ).value;
+                )?.value;
 
                 console.log({
                   firstName,

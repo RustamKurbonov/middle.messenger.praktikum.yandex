@@ -10,14 +10,14 @@ class Profile extends Component {
     super({
       tagName: 'main',
       propsAndChildren: {
-        username: 'Авторизация',
+        username: 'Иван',
         buttons: [
           new Button({
             tagName: 'a',
             propsAndChildren: {
               label: 'Изменить данные',
               attr: {
-                href: '../editingProfile/',
+                href: '../editingProfile',
               },
             },
           }),
@@ -33,7 +33,7 @@ class Profile extends Component {
               label: 'Выйти',
               type: 'warning',
               attr: {
-                href: '../login/',
+                href: '../login',
               },
             },
           }),
