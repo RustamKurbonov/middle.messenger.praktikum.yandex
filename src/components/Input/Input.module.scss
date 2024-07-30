@@ -1,0 +1,10 @@
+.input {
+  border: none;
+  border-bottom: 1px solid #1e1e1e;
+  transition: 0.3s;
+
+  &:focus,
+  &:focus-visible {
+    border-color: #3369f3;
+  }
+}

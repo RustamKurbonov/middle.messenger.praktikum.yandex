@@ -114,7 +114,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -128,7 +128,7 @@ input:focus-visible {
 }
 
 html * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   box-sizing: border-box;
 }
@@ -230,28 +230,6 @@ html * {
   }
 }
 
-.form-item {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 18px;
-
-  &_label {
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-
-  &_input {
-    border: none;
-    border-bottom: 1px solid #1e1e1e;
-    transition: 0.3s;
-
-    &:focus,
-    &:focus-visible {
-      border-color: #3369f3;
-    }
-  }
-}
-
 .message-item {
   width: 100%;
   margin-top: 16px;
@@ -321,14 +299,14 @@ html * {
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 50%;
     left: 34%;
     width: 34px;
     height: 34px;
-    background-image: url("../../assets/icons/ArrowButton.svg");
+    background-image: url('../../assets/icons/ArrowButton.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
