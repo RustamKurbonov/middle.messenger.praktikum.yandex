@@ -1,0 +1,31 @@
+.profileSidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  border: none;
+  background-color: #eaeaea5a;
+  border-right: 1px solid #eaeaea;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 34%;
+    width: 34px;
+    height: 34px;
+    background-image: url('../../assets/icons/ArrowButton.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+}

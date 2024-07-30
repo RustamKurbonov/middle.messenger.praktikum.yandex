@@ -1,27 +1,22 @@
 import tpl from './tpl';
 import { Component, ComponentProps } from '../../share/classes/Component';
-import styles from './form.module.scss';
+import styles from './profileParam.module.scss';
 
-interface FormProps extends ComponentProps {
+interface ProfileParamProps extends ComponentProps {
   propsAndChildren: {
     title: string;
-    fields: Component[];
-    buttons?: Component[];
-    attr?: {
-      class: string;
-    };
+    value: string;
   };
 }
 
-class Form extends Component {
-  constructor(props: FormProps) {
+class ProfileParam extends Component {
+  constructor(props: ProfileParamProps) {
     super({
       ...props,
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          ...props.propsAndChildren?.attr,
-          class: styles.form,
+          class: styles.profileParam,
         },
       },
     });
@@ -34,4 +29,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default ProfileParam;

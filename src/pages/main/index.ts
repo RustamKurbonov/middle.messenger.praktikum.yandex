@@ -14,7 +14,7 @@ class Main extends Component {
 }
 
 export default () => {
-  const main = new Main({
+  return new Main({
     tagName: 'nav',
     propsAndChildren: {
       list: [
@@ -68,5 +68,4 @@ export default () => {
       },
     },
   });
-  return main;
 };

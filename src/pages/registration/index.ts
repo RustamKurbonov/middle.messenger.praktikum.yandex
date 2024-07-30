@@ -4,7 +4,7 @@ import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 
 export default () => {
-  const main = new Form({
+  return new Form({
     tagName: 'main',
     propsAndChildren: {
       title: 'Регистрация',
@@ -160,5 +160,4 @@ export default () => {
       ],
     },
   });
-  return main;
 };
