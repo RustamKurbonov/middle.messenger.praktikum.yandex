@@ -82,7 +82,7 @@ export default () => {
                 if (isLoginValid && isPasswordValid) {
                   console.log({
                     login: loginValue,
-                    password: password as HTMLInputElement,
+                    password: password,
                   });
                 } else {
                   form?.classList.add('error');

@@ -1,8 +1,15 @@
-type ValidatorType = 'login' | 'password';
+type ValidatorType =
+  | 'login'
+  | 'password'
+  | 'name'
+  | 'email'
+  | 'phone'
+  | 'message'
+  | 'displayName';
 
 const errorClass = 'error';
 
-const minMax: Record<ValidatorType, { min: number; max: number }> = {
+const minMax: Record<ValidatorType, { min?: number; max?: number }> = {
   login: {
     min: 3,
     max: 30,
@@ -10,6 +17,26 @@ const minMax: Record<ValidatorType, { min: number; max: number }> = {
   password: {
     min: 8,
     max: 40,
+  },
+  name: {
+    min: undefined,
+    max: undefined,
+  },
+  email: {
+    min: undefined,
+    max: undefined,
+  },
+  phone: {
+    min: 10,
+    max: 15,
+  },
+  message: {
+    min: undefined,
+    max: undefined,
+  },
+  displayName: {
+    min: undefined,
+    max: undefined,
   },
 };
 
@@ -42,14 +69,31 @@ export const validator = (
 
   switch (type) {
     case 'login':
-      //Латиница + числа + символы + запрет числа без букв
       return checkRule(
         new RegExp(/^[a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*$/).test(value),
       );
 
     case 'password':
-      //Хотя бы одна заглавная буква и цифра
       return checkRule(new RegExp(/^(?=.*[A-Z])(?=.*\d).*$/).test(value));
+
+    case 'name':
+      return checkRule(new RegExp(/^[A-ZА-Я][a-zA-ZА-Яа-я-]*$/).test(value));
+
+    case 'email':
+      return checkRule(
+        new RegExp(
+          /^[a-zA-Z0-9_-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+        ).test(value),
+      );
+
+    case 'phone':
+      return checkRule(new RegExp(/^\+?\d{10,15}$/).test(value));
+
+    case 'message':
+      return checkRule(value.trim() !== '');
+
+    case 'displayName':
+      return checkRule(value.trim() !== '');
 
     default:
       return checkRule(false);

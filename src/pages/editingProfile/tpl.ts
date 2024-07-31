@@ -3,10 +3,9 @@ const tpl = `
       <section class="editingProfile_wrapper">
         <div class="editingProfile_icon"></div>
         <h2 class="editingProfile_name">{{username}}</h2>
-        <form class="editingProfile_form">
-        {{{profileFields}}}
-        </form>
-        <div>
+         <div class="editingProfileForm_wrapper" id="editingProfile">
+            {{{editingForm}}}
+      </div>
 	  {{{buttons}}}
 	</div>
       </section>

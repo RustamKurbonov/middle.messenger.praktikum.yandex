@@ -33,8 +33,29 @@
       font-weight: 600;
     }
 
-    .editingProfile_form {
-      width: 500px;
+    .editingProfileForm_wrapper {
+      :global {
+        .editingProfileform_error {
+          position: absolute;
+          display: none;
+          bottom: 30px;
+          padding: 4px;
+          color: red;
+          border: 1px solid red;
+          width: 500px;
+          text-align: center;
+        }
+      }
+
+      &.error {
+        .editingProfileform_error {
+          display: block;
+        }
+      }
     }
   }
+}
+
+.editingProfileForm {
+  width: 500px;
 }

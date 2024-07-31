@@ -3,6 +3,7 @@ import ChatItem from '../../components/ChatItem';
 import MessageItem from '../../components/MessageItem';
 import Search from '../../components/Search';
 import { Component } from '../../share/classes/Component';
+import { validator } from '../../share/utils/validator';
 import styles from './chat.module.scss';
 import tpl from './tpl';
 
@@ -16,11 +17,13 @@ class ButtonSubmit extends Component {
         },
         events: {
           click: () => {
-            const message = (
-              document.querySelector('#message') as HTMLInputElement
-            )?.value;
+            const message = document.querySelector('#message');
+            const messageValue = (message as HTMLInputElement)?.value;
+            const isMessageValid = validator(messageValue, message, 'message');
 
-            console.log({ message });
+            if (isMessageValid) {
+              console.log(message);
+            }
           },
         },
       },
@@ -44,6 +47,14 @@ class MessageField extends Component {
           name: 'message',
           id: 'message',
           class: styles.messageField,
+        },
+        events: {
+          blur: (e) => {
+            const value = (<HTMLInputElement>e.target).value;
+            console.log(value, 'value');
+
+            e.target && validator(value, e.target as Element, 'message');
+          },
         },
       },
     });
