@@ -5,6 +5,7 @@ import profile from './pages/profile';
 import editingProfile from './pages/editingProfile';
 import error404 from './pages/error404';
 import error500 from './pages/error500';
+import chat from './pages/chat';
 import { Component } from './share/classes/Component';
 
 export enum Pages {
@@ -15,6 +16,7 @@ export enum Pages {
   EditingProfile = '/editingProfile',
   Error404 = '/error404',
   Error500 = '/error500',
+  Chat = '/chat',
 }
 
 export const routs: Record<Pages, () => Component> = {
@@ -25,4 +27,5 @@ export const routs: Record<Pages, () => Component> = {
   '/editingProfile': editingProfile,
   '/error404': error404,
   '/error500': error500,
+  '/chat': chat,
 };
