@@ -6,7 +6,17 @@
   height: 100vh;
 
   :global {
+    .form_error {
+      position: absolute;
+      display: none;
+      bottom: 30px;
+      padding: 4px;
+      color: red;
+      border: 1px solid red;
+    }
+
     .form_wrapper {
+      position: relative;
       display: flex;
       padding: 64px 46px;
       align-items: center;
@@ -17,6 +27,12 @@
       min-height: 460px;
       flex-wrap: wrap;
       flex-direction: column;
+
+      &.error {
+        .form_error {
+          display: block;
+        }
+      }
     }
 
     .form_title {

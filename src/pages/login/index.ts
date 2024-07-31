@@ -2,12 +2,14 @@ import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
+import { validator } from '../../share/utils/validator';
 
 export default () => {
   return new Form({
     tagName: 'main',
     propsAndChildren: {
       title: 'Авторизация',
+      id: 'authorization',
       fields: [
         new FormItem({
           tagName: 'div',
@@ -21,6 +23,12 @@ export default () => {
                   id: 'login',
                   name: 'login',
                   type: 'text',
+                },
+                events: {
+                  blur: (e) => {
+                    const value = (<HTMLInputElement>e.target).value;
+                    e.target && validator(value, e.target as Element, 'login');
+                  },
                 },
               },
             }),
@@ -39,6 +47,12 @@ export default () => {
                   name: 'password',
                   type: 'password',
                 },
+                events: {
+                  blur: (e) => {
+                    const value = (<HTMLInputElement>e.target).value;
+                    validator(value, e.target as Element, 'password');
+                  },
+                },
               },
             }),
           },
@@ -52,14 +66,27 @@ export default () => {
             type: 'primary',
             events: {
               click: () => {
-                const login = (
-                  document.querySelector('#login') as HTMLInputElement
-                )?.value;
-                const password = (
-                  document.querySelector('#password') as HTMLInputElement
-                )?.value;
+                const login = document.querySelector('#login');
+                const password = document.querySelector('#password');
+                const form = document.querySelector('#authorization');
+                const loginValue = (login as HTMLInputElement).value;
+                const passwordValue = (password as HTMLInputElement).value;
 
-                console.log({ login, password });
+                const isLoginValid = validator(loginValue, login, 'login');
+                const isPasswordValid = validator(
+                  passwordValue,
+                  password,
+                  'password',
+                );
+
+                if (isLoginValid && isPasswordValid) {
+                  console.log({
+                    login: loginValue,
+                    password: password as HTMLInputElement,
+                  });
+                } else {
+                  form?.classList.add('error');
+                }
               },
             },
           },
@@ -71,6 +98,9 @@ export default () => {
           },
         }),
       ],
+      attr: {
+        class: 'asdadasds',
+      },
     },
   });
 };

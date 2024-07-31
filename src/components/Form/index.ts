@@ -7,8 +7,9 @@ interface FormProps extends ComponentProps {
     title: string;
     fields: Component[];
     buttons?: Component[];
+    id?: string;
     attr?: {
-      class: string;
+      class?: string;
     };
   };
 }
