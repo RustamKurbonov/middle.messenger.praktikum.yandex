@@ -21,7 +21,8 @@
     "paths": {
       "src/*": ["./src/*"]
     },
-    "jsx": "react"
+    "jsx": "react",
+    "noUnusedParameters": true
   },
   "exclude": [
     "build",
