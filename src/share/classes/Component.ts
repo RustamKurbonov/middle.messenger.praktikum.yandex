@@ -1,6 +1,6 @@
-import EventBus from './EventBus';
 import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
+import EventBus from './EventBus';
 
 export interface ComponentProps {
   tagName?: string;
@@ -25,12 +25,19 @@ export class Component {
   };
 
   _props: PropsAndChildren;
+
   _id: string;
+
   _element: HTMLElement | null = null;
+
   _meta: { tagName: string; props?: PropsAndChildren } | null = null;
+
   _eventBus: EventBus;
-  _setUpdate: boolean = false;
+
+  _setUpdate = false;
+
   _lists: PropsAndChildren;
+
   _children: PropsAndChildren;
 
   constructor({ tagName = 'div', propsAndChildren = {} }: ComponentProps) {
@@ -74,7 +81,7 @@ export class Component {
     return { props, lists, children };
   }
 
-  compile(template: string, props?: PropsAndChildren) {
+  compile(template: string, props?: PropsAndChildren): DocumentFragment {
     if (typeof props === 'undefined') {
       props = this._props;
     }
@@ -83,8 +90,7 @@ export class Component {
 
     this._children &&
       Object.entries(this._children).forEach(([key, child]) => {
-        propsAndStubs[key] =
-          `<div data-id="${(child as Component)._id}"></div>`;
+        propsAndStubs[key] = `<div data-id="${(child as Component)._id}"></div>`;
       });
 
     this._lists &&
@@ -92,18 +98,17 @@ export class Component {
         propsAndStubs[key] = `<div data-id="__1_${key}" class='test'></div>`;
       });
 
-    const fragment = this._createDocumentElement(
-      'template',
-    ) as HTMLTemplateElement;
+    const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
     Object.values(this._children).forEach((child) => {
-      const stub = fragment.content?.querySelector(
-        `[data-id="${(child as Component)._id}"]`,
-      );
+      const stub = fragment.content?.querySelector(`[data-id="${(child as Component)._id}"]`);
 
       if (stub) {
-        stub.replaceWith((child as Component).getContent()!);
+        const data = (child as Component).getContent();
+        if (data) {
+          stub.replaceWith(data);
+        }
       }
     });
 
@@ -115,9 +120,7 @@ export class Component {
           return;
         }
 
-        const listContent = this._createDocumentElement(
-          'template',
-        ) as HTMLTemplateElement;
+        const listContent = this._createDocumentElement('template') as HTMLTemplateElement;
 
         (child as Array<Component>).forEach((item) => {
           if (item instanceof Component) {
@@ -134,14 +137,14 @@ export class Component {
     return fragment.content;
   }
 
-  _registerEvents(eventBus: EventBus) {
+  _registerEvents(eventBus: EventBus): void {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  init() {
+  init(): void {
     const meta = this._meta;
 
     if (meta) {
@@ -152,34 +155,34 @@ export class Component {
     this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
   }
 
-  _componentDidMount() {
+  _componentDidMount(): void {
     this.componentDidMount();
     Object.values(this._children).forEach((child) => {
       (child as Component).dispatchComponentDidMount();
     });
   }
 
-  componentDidMount() {}
+  componentDidMount(): void {}
 
-  dispatchComponentDidMount() {
+  dispatchComponentDidMount(): void {
     this._eventBus.emit(Component.EVENTS.FLOW_CDM);
     if (Object.keys(this._children).length) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
   }
 
-  _componentDidUpdate() {
+  _componentDidUpdate(): void {
     const isReRender = this.componentDidUpdate();
     if (isReRender) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): boolean {
     return true;
   }
 
-  setProps = (nextProps: PropsAndChildren) => {
+  setProps = (nextProps: PropsAndChildren): void => {
     if (!nextProps) {
       return;
     }
@@ -203,17 +206,17 @@ export class Component {
     }
   };
 
-  get element() {
+  get element(): HTMLElement | null {
     return this._element;
   }
 
-  _render() {
+  _render(): void {
     const block = this.render();
 
-    if (block) {
+    if (block && this._element) {
       this.removeEvents();
-      this._element!.innerHTML = '';
-      this._element?.appendChild(block);
+      this._element.innerHTML = '';
+      this._element.appendChild(block);
       this.addAttribute();
       this.addEvents();
     }
@@ -221,23 +224,37 @@ export class Component {
 
   render(): Node | void {}
 
-  addEvents() {
+  addEvents(): void {
     const { events = {} } = this._props;
 
     Object.keys(events).forEach((name) => {
-      this._element?.addEventListener(name, events[name]);
+      this._element?.addEventListener(
+        name,
+        (
+          events as {
+            [name: string]: () => void;
+          }
+        )[name]
+      );
     });
   }
 
-  removeEvents() {
+  removeEvents(): void {
     const { events = {} } = this._props;
 
     Object.keys(events).forEach((name) => {
-      this._element?.removeEventListener(name, events[name]);
+      this._element?.removeEventListener(
+        name,
+        (
+          events as {
+            [name: string]: () => void;
+          }
+        )[name]
+      );
     });
   }
 
-  addAttribute() {
+  addAttribute(): void {
     const { attr = {} } = this._props;
 
     Object.entries(attr).forEach(([key, value]) => {
@@ -245,7 +262,7 @@ export class Component {
     });
   }
 
-  getContent() {
+  getContent(): HTMLElement | null {
     return this.element;
   }
 
@@ -256,18 +273,20 @@ export class Component {
   _createDocumentElement(tagName: string): HTMLElement {
     const element = document.createElement(tagName);
 
-    // if (this._props?.settings?.withInternalId) {
-    //   element.setAttribute('data-id', this._id);
-    // }
-
     return element;
   }
 
-  show() {
-    this.getContent()!.style.display = 'block';
+  show(): void {
+    const content = this.getContent();
+    if (content) {
+      content.style.display = 'block';
+    }
   }
 
-  hide() {
-    this.getContent()!.style.display = 'none';
+  hide(): void {
+    const content = this.getContent();
+    if (content) {
+      content.style.display = 'none';
+    }
   }
 }

@@ -19,7 +19,7 @@ class ButtonSubmit extends Component {
           click: () => {
             const message = document.querySelector('#message');
             const messageValue = (message as HTMLInputElement)?.value;
-            const isMessageValid = validator(messageValue, message, 'message');
+            const isMessageValid = validator(messageValue, message as HTMLElement, 'message');
 
             if (isMessageValid) {
               console.log(message);
@@ -30,7 +30,7 @@ class ButtonSubmit extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile('', {
       ...this._props,
     });
@@ -49,18 +49,18 @@ class MessageField extends Component {
           class: styles.messageField,
         },
         events: {
-          blur: (e) => {
-            const value = (<HTMLInputElement>e.target).value;
+          blur: (e: FocusEvent) => {
+            const { value } = <HTMLInputElement>e.target;
             console.log(value, 'value');
 
-            e.target && validator(value, e.target as Element, 'message');
+            e.target && validator(value, e.target as HTMLElement, 'message');
           },
         },
       },
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile('', {
       ...this._props,
     });
@@ -121,13 +121,13 @@ class Chat extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, {
       ...this._props,
     });
   }
 }
 
-export default () => {
-  return new Chat();
-};
+const chat = (): Chat => new Chat();
+
+export default chat;

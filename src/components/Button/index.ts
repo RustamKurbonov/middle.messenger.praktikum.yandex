@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import styles from './button.module.scss';
-import { Component, ComponentProps } from '../../share/classes/Component.ts';
+import { Component, ComponentProps } from '../../share/classes/Component';
 
 interface ButtonProps extends ComponentProps {
   propsAndChildren: {
@@ -23,16 +23,13 @@ class Button extends Component {
         ...props.propsAndChildren,
         attr: {
           ...props.propsAndChildren?.attr,
-          class: cn(
-            styles.button,
-            styles[props.propsAndChildren?.type || 'link'],
-          ),
+          class: cn(styles.button, styles[props.propsAndChildren?.type || 'link']),
         },
       },
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile('{{label}}', {
       ...this._props,
     });

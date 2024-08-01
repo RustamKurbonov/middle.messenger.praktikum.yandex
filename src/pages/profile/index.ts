@@ -70,11 +70,10 @@ class Profile extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, this._props);
   }
 }
 
-export default () => {
-  return new Profile();
-};
+const profile = (): Profile => new Profile();
+export default profile;

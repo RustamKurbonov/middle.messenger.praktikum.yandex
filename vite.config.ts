@@ -1,10 +1,10 @@
-import { defineConfig } from "vite";
-import { resolve } from "path";
-import handlebars from "./vite-plugin-handlebars-precompile";
-import viteTsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import handlebars from './vite-plugin-handlebars-precompile';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
-const root = resolve(__dirname, "./src");
-const outDir = resolve(__dirname, "dist");
+const root = resolve(__dirname, './src');
+const outDir = resolve(__dirname, 'dist');
 
 export default defineConfig({
   root,
@@ -13,7 +13,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(root, "index.html"),
+        main: resolve(root, 'index.html'),
       },
     },
   },

@@ -5,7 +5,7 @@ class EventBus {
     this.listeners = {};
   }
 
-  on(event: string, callback: Function) {
+  on(event: string, callback: Function): void {
     if (event && typeof event === 'string') {
       if (!this.listeners?.[event]) {
         this.listeners[event] = [];
@@ -15,19 +15,17 @@ class EventBus {
     }
   }
 
-  off(event: string, callback: Function) {
+  off(event: string, callback: Function): void {
     if (event && typeof event === 'string') {
       if (this.listeners[event]) {
-        this.listeners[event] = this.listeners[event].filter(
-          (item) => item !== callback,
-        );
+        this.listeners[event] = this.listeners[event].filter((item) => item !== callback);
       } else {
         throw new Error(`Нет события: ${event}`);
       }
     }
   }
 
-  emit<T = unknown>(event: string, ...args: Array<T>) {
+  emit<T = Record<string, string>>(event: string, ...args: Array<T>): void {
     if (event && typeof event === 'string') {
       if (this.listeners[event]) {
         this.listeners[event].forEach((listener) => {

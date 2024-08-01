@@ -1,6 +1,6 @@
 import styles from './chatItem.module.scss';
-import tpl from './tpl.ts';
-import { Component, ComponentProps } from '../../share/classes/Component.ts';
+import tpl from './tpl';
+import { Component, ComponentProps } from '../../share/classes/Component';
 
 interface ChatItemProps extends ComponentProps {
   propsAndChildren: {
@@ -25,7 +25,7 @@ class ChatItem extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, {
       ...this._props,
     });

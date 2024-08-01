@@ -23,7 +23,7 @@ class Error extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, this._props);
   }
 }

@@ -1,21 +1,38 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "strict": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "outDir": "./build/",
+    "module": "commonjs",
+    "target": "es6",
     "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "lib": ["es6", "es2019", "dom", "es2021"],
+    "sourceMap": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "allowImportingTsExtensions": true
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+    "jsx": "react"
   },
-  "include": ["src"]
+  "exclude": [
+    "build",
+    "coverage",
+    "docker",
+    "tests-examples",
+    "jest.config",
+    "mock",
+    "node_modules",
+    "public",
+    "scripts",
+    "playwright.config.ts"
+  ]
 }

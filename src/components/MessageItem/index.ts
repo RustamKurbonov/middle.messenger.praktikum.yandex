@@ -1,6 +1,6 @@
 import styles from './messageItem.module.scss';
 import tpl from './tpl';
-import { Component, ComponentProps } from '../../share/classes/Component.ts';
+import { Component, ComponentProps } from '../../share/classes/Component';
 
 interface MessageItemProps extends ComponentProps {
   propsAndChildren: {
@@ -23,7 +23,7 @@ class MessageItem extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, {
       ...this._props,
     });

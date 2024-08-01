@@ -23,7 +23,7 @@ class Search extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile('{{search}}', {
       ...this._props,
     });

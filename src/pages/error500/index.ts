@@ -1,8 +1,8 @@
 import Button from '../../components/Button';
 import Error from '../../components/Error';
 
-export default () => {
-  return new Error({
+const error500 = (): Error =>
+  new Error({
     tagName: 'main',
     propsAndChildren: {
       title: '500',
@@ -18,4 +18,5 @@ export default () => {
       }),
     },
   });
-};
+
+export default error500;

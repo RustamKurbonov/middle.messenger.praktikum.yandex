@@ -4,8 +4,8 @@ import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 import { validator } from '../../share/utils/validator';
 
-export default () => {
-  return new Form({
+const login = (): Form =>
+  new Form({
     tagName: 'main',
     propsAndChildren: {
       title: 'Авторизация',
@@ -26,7 +26,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     e.target && validator(value, e.target as Element, 'login');
                   },
                 },
@@ -49,7 +49,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     validator(value, e.target as Element, 'password');
                   },
                 },
@@ -73,16 +73,12 @@ export default () => {
                 const passwordValue = (password as HTMLInputElement).value;
 
                 const isLoginValid = validator(loginValue, login, 'login');
-                const isPasswordValid = validator(
-                  passwordValue,
-                  password,
-                  'password',
-                );
+                const isPasswordValid = validator(passwordValue, password, 'password');
 
                 if (isLoginValid && isPasswordValid) {
                   console.log({
                     login: loginValue,
-                    password: password,
+                    password,
                   });
                 } else {
                   form?.classList.add('error');
@@ -103,4 +99,5 @@ export default () => {
       },
     },
   });
-};
+
+export default login;

@@ -1,20 +1,20 @@
 import tpl from './tpl';
-import { Component } from '../../share/classes/Component';
+import { Component, ComponentProps } from '../../share/classes/Component';
 import styles from './main.module.scss';
 import Button from '../../components/Button';
 
 class Main extends Component {
-  constructor(props) {
+  constructor(props: ComponentProps) {
     super(props);
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, this._props);
   }
 }
 
-export default () => {
-  return new Main({
+const main = (): Main =>
+  new Main({
     tagName: 'nav',
     propsAndChildren: {
       list: [
@@ -68,4 +68,5 @@ export default () => {
       },
     },
   });
-};
+
+export default main;

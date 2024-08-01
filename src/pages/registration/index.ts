@@ -4,8 +4,8 @@ import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 import { validator } from '../../share/utils/validator';
 
-export default () => {
-  return new Form({
+const registration = (): Form =>
+  new Form({
     tagName: 'main',
     propsAndChildren: {
       title: 'Регистрация',
@@ -26,7 +26,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     e.target && validator(value, e.target as Element, 'name');
                   },
                 },
@@ -49,7 +49,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     e.target && validator(value, e.target as Element, 'name');
                   },
                 },
@@ -72,7 +72,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     e.target && validator(value, e.target as Element, 'login');
                   },
                 },
@@ -95,7 +95,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     e.target && validator(value, e.target as Element, 'email');
                   },
                 },
@@ -118,7 +118,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     e.target && validator(value, e.target as Element, 'phone');
                   },
                 },
@@ -141,7 +141,7 @@ export default () => {
                 },
                 events: {
                   blur: (e) => {
-                    const value = (<HTMLInputElement>e.target).value;
+                    const { value } = <HTMLInputElement>e.target;
                     validator(value, e.target as Element, 'password');
                   },
                 },
@@ -172,24 +172,12 @@ export default () => {
                 const passwordValue = (password as HTMLInputElement)?.value;
                 const form = document.querySelector('#registration');
 
-                const isFirstNameValid = validator(
-                  firstNameValue,
-                  firstName,
-                  'name',
-                );
-                const isSecondNameValid = validator(
-                  secondNameValue,
-                  secondName,
-                  'name',
-                );
+                const isFirstNameValid = validator(firstNameValue, firstName, 'name');
+                const isSecondNameValid = validator(secondNameValue, secondName, 'name');
                 const isLoginValid = validator(loginValue, login, 'login');
                 const isEmailValid = validator(emailValue, email, 'email');
                 const isPhoneValid = validator(phoneValue, phone, 'phone');
-                const isPasswordValid = validator(
-                  passwordValue,
-                  password,
-                  'password',
-                );
+                const isPasswordValid = validator(passwordValue, password, 'password');
 
                 if (
                   isFirstNameValid &&
@@ -223,4 +211,5 @@ export default () => {
       ],
     },
   });
-};
+
+export default registration;

@@ -1,6 +1,6 @@
+import cn from 'classnames';
 import { Component, ComponentProps } from '../../share/classes/Component';
 import styles from './Input.module.scss';
-import cn from 'classnames';
 
 interface InputProps extends ComponentProps {
   propsAndChildren: {
@@ -24,7 +24,8 @@ class Input extends Component {
       },
     });
   }
-  render() {
+
+  render(): DocumentFragment {
     return this.compile('{{{Input}}}', this._props);
   }
 }

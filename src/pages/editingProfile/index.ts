@@ -27,10 +27,10 @@ class EditingProfileForm extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(
       '{{{formItems}}}<div class="editingProfileform_error">Ошибка валидации</div>',
-      this._props,
+      this._props
     );
   }
 }
@@ -52,11 +52,9 @@ class EditingProfile extends Component {
                   const firstName = document.querySelector('#first_name');
                   const firstNameValue = (firstName as HTMLInputElement)?.value;
                   const secondName = document.querySelector('#second_name');
-                  const secondNameValue = (secondName as HTMLInputElement)
-                    ?.value;
+                  const secondNameValue = (secondName as HTMLInputElement)?.value;
                   const displayName = document.querySelector('#display_name');
-                  const displayNameValue = (displayName as HTMLInputElement)
-                    ?.value;
+                  const displayNameValue = (displayName as HTMLInputElement)?.value;
                   const login = document.querySelector('#login');
                   const loginValue = (login as HTMLInputElement)?.value;
                   const email = document.querySelector('#email');
@@ -64,41 +62,23 @@ class EditingProfile extends Component {
                   const phone = document.querySelector('#phone');
                   const phoneValue = (phone as HTMLInputElement)?.value;
                   const oldPassword = document.querySelector('#oldPassword');
-                  const oldPasswordValue = (oldPassword as HTMLInputElement)
-                    ?.value;
+                  const oldPasswordValue = (oldPassword as HTMLInputElement)?.value;
                   const newPassword = document.querySelector('#newPassword');
-                  const newPasswordValue = (newPassword as HTMLInputElement)
-                    ?.value;
+                  const newPasswordValue = (newPassword as HTMLInputElement)?.value;
                   const form = document.querySelector('#editingProfile');
 
-                  const isFirstNameValid = validator(
-                    firstNameValue,
-                    firstName,
-                    'name',
-                  );
-                  const isSecondNameValid = validator(
-                    secondNameValue,
-                    secondName,
-                    'name',
-                  );
+                  const isFirstNameValid = validator(firstNameValue, firstName, 'name');
+                  const isSecondNameValid = validator(secondNameValue, secondName, 'name');
                   const isDisplayNameValid = validator(
                     displayNameValue,
                     displayName,
-                    'displayName',
+                    'displayName'
                   );
                   const isLoginValid = validator(loginValue, login, 'login');
                   const isEmailValid = validator(emailValue, email, 'email');
                   const isPhoneValid = validator(phoneValue, phone, 'phone');
-                  const isOldPasswordValid = validator(
-                    oldPasswordValue,
-                    oldPassword,
-                    'password',
-                  );
-                  const isNewPasswordValid = validator(
-                    newPasswordValue,
-                    newPassword,
-                    'password',
-                  );
+                  const isOldPasswordValid = validator(oldPasswordValue, oldPassword, 'password');
+                  const isNewPasswordValid = validator(newPasswordValue, newPassword, 'password');
 
                   if (
                     isFirstNameValid &&
@@ -152,9 +132,8 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
-                          e.target &&
-                            validator(value, e.target as Element, 'name');
+                          const { value } = <HTMLInputElement>e.target;
+                          e.target && validator(value, e.target as Element, 'name');
                         },
                       },
                     },
@@ -176,9 +155,8 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
-                          e.target &&
-                            validator(value, e.target as Element, 'name');
+                          const { value } = <HTMLInputElement>e.target;
+                          e.target && validator(value, e.target as Element, 'name');
                         },
                       },
                     },
@@ -200,13 +178,8 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
-                          e.target &&
-                            validator(
-                              value,
-                              e.target as Element,
-                              'displayName',
-                            );
+                          const { value } = <HTMLInputElement>e.target;
+                          e.target && validator(value, e.target as Element, 'displayName');
                         },
                       },
                     },
@@ -228,9 +201,8 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
-                          e.target &&
-                            validator(value, e.target as Element, 'login');
+                          const { value } = <HTMLInputElement>e.target;
+                          e.target && validator(value, e.target as Element, 'login');
                         },
                       },
                     },
@@ -252,9 +224,8 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
-                          e.target &&
-                            validator(value, e.target as Element, 'email');
+                          const { value } = <HTMLInputElement>e.target;
+                          e.target && validator(value, e.target as Element, 'email');
                         },
                       },
                     },
@@ -276,9 +247,8 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
-                          e.target &&
-                            validator(value, e.target as Element, 'phone');
+                          const { value } = <HTMLInputElement>e.target;
+                          e.target && validator(value, e.target as Element, 'phone');
                         },
                       },
                     },
@@ -300,7 +270,7 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
+                          const { value } = <HTMLInputElement>e.target;
                           validator(value, e.target as Element, 'password');
                         },
                       },
@@ -323,7 +293,7 @@ class EditingProfile extends Component {
                       },
                       events: {
                         blur: (e) => {
-                          const value = (<HTMLInputElement>e.target).value;
+                          const { value } = <HTMLInputElement>e.target;
                           validator(value, e.target as Element, 'password');
                         },
                       },
@@ -344,11 +314,11 @@ class EditingProfile extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile(tpl, this._props);
   }
 }
 
-export default () => {
-  return new EditingProfile();
-};
+const editingProfile = (): EditingProfile => new EditingProfile();
+
+export default editingProfile;

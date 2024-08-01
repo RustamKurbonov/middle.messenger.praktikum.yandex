@@ -1,5 +1,5 @@
 import styles from './profileSidebar.module.scss';
-import { Component, ComponentProps } from '../../share/classes/Component.ts';
+import { Component, ComponentProps } from '../../share/classes/Component';
 
 interface ProfileSidebarProps extends ComponentProps {
   propsAndChildren: {
@@ -24,7 +24,7 @@ class ProfileSidebar extends Component {
     });
   }
 
-  render() {
+  render(): DocumentFragment {
     return this.compile('{{href}}', {
       ...this._props,
     });
