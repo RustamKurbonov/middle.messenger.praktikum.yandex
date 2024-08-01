@@ -11,21 +11,21 @@ const tpl = `
   </div>
 </nav>
 
-<section class="chatBody">
-  <nav class="chatBody_header">
-    <div class="chatBody_user">
-      <div class="chatBody_icon"></div>
-        <div class="chatBody_name">{{userName}}</div>
+<section class="chat-body">
+  <nav class="chat-body_header">
+    <div class="chat-body_user">
+      <div class="chat-body_icon"></div>
+        <div class="chat-body_name">{{userName}}</div>
       </div>
   </nav>
 
-  <div class="chatBody_content">
+  <div class="chat-body_content">
     {{{messageItems}}}
   </div>
 
-  <section class="chatBody_form">
-    <button class="chatBody_clip"></button>
-      <form class="chatBody_field" id="messageForm">
+  <section class="chat-body_form">
+    <button class="chat-body_clip"></button>
+      <form class="chat-body_field" id="messageForm">
         {{{messageField}}}
       </form>
       {{{buttonSubmit}}}

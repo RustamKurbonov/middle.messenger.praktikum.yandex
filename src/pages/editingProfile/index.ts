@@ -21,7 +21,7 @@ class EditingProfileForm extends Component {
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          class: styles.editingProfileForm,
+          class: styles['editing-profile-form'],
         },
       },
     });
@@ -29,7 +29,7 @@ class EditingProfileForm extends Component {
 
   render(): DocumentFragment {
     return this.compile(
-      '{{{formItems}}}<div class="editingProfileform_error">Ошибка валидации</div>',
+      '{{{formItems}}}<div class="editing-profile-form-error">Ошибка валидации</div>',
       this._props
     );
   }
@@ -308,7 +308,7 @@ class EditingProfile extends Component {
           propsAndChildren: { attr: { href: './chat' } },
         }),
         attr: {
-          class: styles.editingProfile,
+          class: styles['editing-profile'],
         },
       },
     });

@@ -1,13 +1,13 @@
 const tpl = `
-      <section class="form_wrapper" id={{id}}>
-        <form class="form_body">
-          <h3 class="form_title">{{title}}</h3>
+      <section class="form-wrapper" id={{id}}>
+        <form class="form-body">
+          <h3 class="form-title">{{title}}</h3>
           {{{fields}}}
-          <div class="form_buttons">
+          <div class="form-buttons">
           {{{buttons}}}
           </div>
         </form>
-        <div class="form_error">
+        <div class="form-error">
          Ошибка валидации
         </div>
       </section>`;

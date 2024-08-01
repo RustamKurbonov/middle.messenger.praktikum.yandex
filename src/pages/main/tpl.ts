@@ -1,6 +1,6 @@
 const tpl = `
-  <h1 class="main_title">{{title}}</h1>
-  <ul class="main_list">
+  <h1 class="main-title">{{title}}</h1>
+  <ul class="main-list">
     {{{list}}}
   </ul>
 `;

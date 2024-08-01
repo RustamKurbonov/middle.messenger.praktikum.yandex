@@ -1,5 +1,5 @@
 const tpl = `
-  <label class="formItem_label" for={{id}}>{{label}}</label>
+  <label class="form-item-label" for={{id}}>{{label}}</label>
   {{{input}}}
 `;
 

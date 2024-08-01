@@ -16,7 +16,7 @@ class ProfileParam extends Component {
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          class: styles.profileParam,
+          class: styles['profile-param'],
         },
       },
     });

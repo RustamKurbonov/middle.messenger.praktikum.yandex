@@ -18,7 +18,7 @@ class ProfileSidebar extends Component {
         ...props.propsAndChildren,
         attr: {
           ...props.propsAndChildren.attr,
-          class: styles.profileSidebar,
+          class: styles['profile-sidebar'],
         },
       },
     });

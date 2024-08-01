@@ -1,10 +1,10 @@
-.editingProfile {
+.editing-profile {
   position: relative;
   width: 100vw;
   height: 100vh;
 
   :global {
-    .editingProfile_wrapper {
+    .editing-profile-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -14,7 +14,7 @@
       height: 100%;
     }
 
-    .editingProfile_icon {
+    .editing-profile-icon {
       width: 120px;
       height: 120px;
       background-image: url('../../assets/icons/Ellipse.svg');
@@ -28,14 +28,14 @@
       }
     }
 
-    .editingProfile_name {
+    .editing-profile-name {
       font-size: 18px;
       font-weight: 600;
     }
 
-    .editingProfileForm_wrapper {
+    .editing-profile-form-wrapper {
       :global {
-        .editingProfileform_error {
+        .editing-profile-form-error {
           position: absolute;
           display: none;
           bottom: 30px;
@@ -48,7 +48,7 @@
       }
 
       &.error {
-        .editingProfileform_error {
+        .editing-profile-form-error {
           display: block;
         }
       }
@@ -56,6 +56,6 @@
   }
 }
 
-.editingProfileForm {
+.editing-profile-form {
   width: 500px;
 }

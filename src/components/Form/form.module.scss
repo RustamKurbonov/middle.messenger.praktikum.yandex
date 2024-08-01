@@ -6,7 +6,7 @@
   height: 100vh;
 
   :global {
-    .form_error {
+    .form-error {
       position: absolute;
       display: none;
       bottom: 30px;
@@ -15,27 +15,26 @@
       border: 1px solid red;
     }
 
-    .form_wrapper {
+    .form-wrapper {
       position: relative;
       display: flex;
       padding: 64px 46px;
       align-items: center;
-      box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1411764706);
+      box-shadow: 0 0 4px 4px rgb(0 0 0 / 14.1%);
       border-radius: 12px;
       overflow: hidden;
       width: 380px;
       min-height: 460px;
-      flex-wrap: wrap;
-      flex-direction: column;
+      flex-flow: column wrap;
 
       &.error {
-        .form_error {
+        .form-error {
           display: block;
         }
       }
     }
 
-    .form_title {
+    .form-title {
       display: flex;
       color: #1e1e1e;
       font-size: 24px;
@@ -44,14 +43,14 @@
       padding-bottom: 64px;
     }
 
-    .form_body {
+    .form-body {
       display: flex;
       flex-direction: column;
       width: 100%;
       flex: 1 1 auto;
     }
 
-    .form_buttons {
+    .form-buttons {
       display: flex;
       margin-top: 16px;
       flex-direction: column;

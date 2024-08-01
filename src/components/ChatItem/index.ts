@@ -19,7 +19,7 @@ class ChatItem extends Component {
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          class: styles.chatItem,
+          class: styles['chat-item'],
         },
       },
     });

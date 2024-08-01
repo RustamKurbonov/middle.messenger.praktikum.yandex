@@ -1,7 +1,7 @@
 const tpl = `
-  <div class="messageItem_text {{type}}">
+  <div class="message-item-text {{type}}">
     {{text}}
-    <span class="messageItem_time">{{time}}</span>
+    <span class="message-item-time">{{time}}</span>
   </div>
 `;
 

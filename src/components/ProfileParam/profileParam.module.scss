@@ -1,4 +1,4 @@
-.profileParam {
+.profile-param {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,8 +8,8 @@
   margin-bottom: 6px;
 
   :global {
-    .profileParam_value {
-      color: #999999;
+    .profile-param-value {
+      color: #999;
     }
   }
 }

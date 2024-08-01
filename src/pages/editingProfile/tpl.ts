@@ -1,9 +1,9 @@
 const tpl = `
       {{{profileSidebar}}}
-      <section class="editingProfile_wrapper">
-        <div class="editingProfile_icon"></div>
-        <h2 class="editingProfile_name">{{username}}</h2>
-         <div class="editingProfileForm_wrapper" id="editingProfile">
+      <section class="editing-profile-wrapper">
+        <div class="editing-profile-icon"></div>
+        <h2 class="editing-profile-name">{{username}}</h2>
+         <div class="editing-profile-form-wrapper" id="editingProfile">
             {{{editingForm}}}
       </div>
 	  {{{buttons}}}

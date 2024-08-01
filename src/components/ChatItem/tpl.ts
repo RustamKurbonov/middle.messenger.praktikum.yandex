@@ -1,15 +1,15 @@
 const tpl = `
-  <div class="chatItem_icon" style="background-image: url({{icon}})">
+  <div class="chat-item-icon" style="background-image: url({{icon}})">
   </div>
-  <div class="chatItem_content">
-    <div class="chatItem_title">{{name}}</div>
-    <div class="chatItem_text">
+  <div class="chat-item-content">
+    <div class="chat-item-title">{{name}}</div>
+    <div class="chat-item-text">
       {{text}}
     </div>
   </div>
-  <div class="chatItem_info">
-    <div class="chatItem_date">{{date}}</div>
-    <div class="chatItem_count">{{count}}</div>
+  <div class="chat-item-info">
+    <div class="chat-item-date">{{date}}</div>
+    <div class="chat-item-count">{{count}}</div>
   </div>
 `;
 

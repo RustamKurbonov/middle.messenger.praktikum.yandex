@@ -8,13 +8,13 @@
   gap: 12px;
 
   :global {
-    .main_list {
+    .main-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .main_title {
+    .main-title {
       font-size: 30px;
       margin-bottom: 24px;
     }

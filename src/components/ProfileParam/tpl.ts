@@ -1,6 +1,6 @@
 const tpl = `
-  <span class="profile_param_title">{{title}}</span>
-  <span class="profileParam_value">{{value}}</span>
+  <span class="profile-param-title">{{title}}</span>
+  <span class="profile-param-value">{{value}}</span>
 `;
 
 export default tpl;

@@ -17,7 +17,7 @@ class FormItem extends Component {
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          class: styles.formItem,
+          class: styles['form-item'],
         },
       },
     });

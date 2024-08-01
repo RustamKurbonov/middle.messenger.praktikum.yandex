@@ -6,16 +6,15 @@
   height: 100vh;
 
   :global {
-    .error_wrapper {
+    .error-wrapper {
       display: flex;
       align-items: center;
       overflow: hidden;
-      flex-wrap: wrap;
-      flex-direction: column;
+      flex-flow: column wrap;
       font-weight: 500;
     }
 
-    .error_text {
+    .error-text {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -23,12 +22,12 @@
       margin-bottom: 42px;
     }
 
-    .error_title {
+    .error-title {
       font-size: 65px;
       margin-bottom: 24px;
     }
 
-    .error_subtitle {
+    .error-subtitle {
       font-size: 24px;
       margin-bottom: 24px;
     }

@@ -13,7 +13,7 @@ class ButtonSubmit extends Component {
       tagName: 'button',
       propsAndChildren: {
         attr: {
-          class: styles.buttonSubmit,
+          class: styles['button-submit'],
         },
         events: {
           click: () => {
@@ -46,7 +46,7 @@ class MessageField extends Component {
           placeholder: 'Введите сообщение',
           name: 'message',
           id: 'message',
-          class: styles.messageField,
+          class: styles['message-field'],
         },
         events: {
           blur: (e: FocusEvent) => {

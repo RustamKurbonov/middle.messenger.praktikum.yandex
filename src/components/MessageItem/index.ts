@@ -17,7 +17,7 @@ class MessageItem extends Component {
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          class: styles.messageItem,
+          class: styles['message-item'],
         },
       },
     });

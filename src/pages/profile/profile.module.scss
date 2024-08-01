@@ -4,7 +4,7 @@
   height: 100vh;
 
   :global {
-    .profile_wrapper {
+    .profile-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -14,7 +14,7 @@
       height: 100%;
     }
 
-    .profile_icon {
+    .profile-icon {
       width: 120px;
       height: 120px;
       background-image: url('../../assets/icons/Ellipse.svg');
@@ -28,12 +28,12 @@
       }
     }
 
-    .profile_name {
+    .profile-name {
       font-size: 18px;
       font-weight: 600;
     }
 
-    .profile_params {
+    .profile-params {
       width: 500px;
     }
   }
