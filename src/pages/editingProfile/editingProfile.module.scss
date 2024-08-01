@@ -4,6 +4,7 @@
   height: 100vh;
 
   :global {
+
     .editing-profile-wrapper {
       display: flex;
       align-items: center;
@@ -34,7 +35,9 @@
     }
 
     .editing-profile-form-wrapper {
+
       :global {
+
         .editing-profile-form-error {
           position: absolute;
           display: none;
@@ -48,6 +51,7 @@
       }
 
       &.error {
+
         .editing-profile-form-error {
           display: block;
         }

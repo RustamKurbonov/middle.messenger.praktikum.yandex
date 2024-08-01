@@ -62,6 +62,22 @@ npm run lint
 npm run lint:fix
 ```
 
+## Stylelint
+
+В проект добавлен анализатор кода Stylelint.
+
+Команда запуска:
+
+```bash
+npm run stylelint
+```
+
+Команда фикса:
+
+```bash
+npm run stylelint:fix
+```
+
 ## Prettier
 
 В проект добавлен анализатор кода Prettier.

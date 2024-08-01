@@ -12,6 +12,8 @@
     "preview": "vite preview",
     "lint": "eslint \"./src/**/*.@(ts)\"",
     "lint:fix": "eslint \"./src/**/*.@(ts)\" --fix",
+    "stylelint": "stylelint \"**/*module.scss\"",
+    "stylelint:fix": "stylelint \"**/*module.scss\" --fix",
     "format:check": "prettier --check \"**/*.{d.ts,ts,js,css,scss,less}\"",
     "format": "prettier --write \"**/*.{d.ts,ts,tsx,js,css,scss,less}\"",
     "start": "vite build && vite preview --port 3000"
