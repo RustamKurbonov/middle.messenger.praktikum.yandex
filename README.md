@@ -15,8 +15,7 @@ Messenger предназначен для широкого круга польз
 
 ## Установка
 
-Ссылка на проект: https://github.com/RustamKurbonov/middle.messenger.praktikum.yandex.
-Что бы установить проект, нужно скачать его с github и установить зависимости:
+Ссылка на проект: https://github.com/RustamKurbonov/middle.messenger.praktikum.yandex. Что бы установить проект, нужно скачать его с github и установить зависимости:
 
 ```bash
 git clone https://github.com/RustamKurbonov/middle.messenger.praktikum.yandex.git
@@ -47,15 +46,62 @@ npm run build
 npm run preview
 ```
 
+## ESlint
+
+В проект добавлен анализатор кода ESlint.
+
+Команда запуска:
+
+```bash
+npm run lint
+```
+
+Команда фикса:
+
+```bash
+npm run lint:fix
+```
+
+## Stylelint
+
+В проект добавлен анализатор кода Stylelint.
+
+Команда запуска:
+
+```bash
+npm run stylelint
+```
+
+Команда фикса:
+
+```bash
+npm run stylelint:fix
+```
+
+## Prettier
+
+В проект добавлен анализатор кода Prettier.
+
+Команда запуска:
+
+```bash
+npm run format:check
+```
+
+Команда фикса:
+
+```bash
+npm run format
+```
+
 ## Список страниц
 
-- авторизация: http://127.0.0.1:5173/pages/login/
-- регистрация: http://127.0.0.1:5173/pages/registration/
-- чат: http://127.0.0.1:5173/pages/chat/
-- профиль: http://127.0.0.1:5173/pages/profile/
-- редактирование профиля: http://127.0.0.1:5173/pages/editingProfile/
-- ошибка 404: http://127.0.0.1:5173/pages/error404/
-- ошибка 500: http://127.0.0.1:5173/pages/error500/
+- авторизация: http://127.0.0.1:5173/login/
+- регистрация: http://127.0.0.1:5173/registration/
+- чат: http://127.0.0.1:5173/chat/
+- профиль: http://127.0.0.1:5173/profile/
+- редактирование профиля: http://127.0.0.1:5173/editingProfile/
+- ошибка 404: http://127.0.0.1:5173/error404/
+- ошибка 500: http://127.0.0.1:5173/error500/
 
-Netlify: https://regal-griffin-964a9d.netlify.app/
-Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
+Netlify: https://regal-griffin-964a9d.netlify.app/ Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1

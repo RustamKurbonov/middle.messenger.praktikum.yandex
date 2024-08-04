@@ -1,0 +1,36 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  :global {
+
+    .error-wrapper {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      flex-flow: column wrap;
+      font-weight: 500;
+    }
+
+    .error-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 42px;
+    }
+
+    .error-title {
+      font-size: 65px;
+      margin-bottom: 24px;
+    }
+
+    .error-subtitle {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+  }
+}

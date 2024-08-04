@@ -1,0 +1,41 @@
+.editing-profile {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  :global {
+
+    .editing-profile-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 36px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .editing-profile-icon {
+      width: 120px;
+      height: 120px;
+      background-image: url('../../assets/icons/Ellipse.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+
+      & embed {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .editing-profile-name {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
+
+.editing-profile-form {
+  width: 500px;
+}

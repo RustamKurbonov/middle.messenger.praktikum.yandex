@@ -1,0 +1,16 @@
+.profile-param {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 6px;
+
+  :global {
+
+    .profile-param-value {
+      color: #999;
+    }
+  }
+}
