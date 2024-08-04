@@ -2,6 +2,18 @@ type ValidatorType = 'login' | 'password' | 'name' | 'email' | 'phone' | 'messag
 
 const errorClass = 'error';
 
+const text: Record<ValidatorType, string> = {
+  login:
+    'От 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)',
+  password: 'От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
+  phone: 'От 10 до 15 символов, состоит из цифр, может начинается с плюса',
+  message: 'Не должно быть пустым',
+  name: 'Латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис)',
+  displayName: 'Не может быть пустым',
+  email:
+    'Латиница, может включать цифры и спецсимволы вроде дефиса и подчёркивания, обязательно должна быть «собака» (@) и точка после неё, но перед точкой обязательно должны быть буквы',
+};
+
 const minMax: Record<ValidatorType, { min?: number; max?: number }> = {
   login: {
     min: 3,
@@ -33,12 +45,20 @@ const minMax: Record<ValidatorType, { min?: number; max?: number }> = {
   },
 };
 
-export const validator = (value: string, elem: Element | null, type: ValidatorType): boolean => {
+export const validator = (
+  value: string,
+  elem: Element | null,
+  type: ValidatorType,
+  id: string
+): boolean => {
   if (!elem) {
     return false;
   }
 
   const { min, max } = minMax[type];
+  const addedErrorBlock = document.querySelector(`#error-text-${id}`);
+
+  addedErrorBlock?.remove();
 
   const checkRule = (ruleSuccessful: boolean): boolean => {
     if (ruleSuccessful) {
@@ -48,8 +68,17 @@ export const validator = (value: string, elem: Element | null, type: ValidatorTy
     addErrorClass();
     return false;
   };
-  const removeErrorClass = (): void => elem?.classList.remove(errorClass);
-  const addErrorClass = (): void => elem?.classList.add(errorClass);
+  const removeErrorClass = (): void => {
+    elem?.classList.remove(errorClass);
+  };
+  const addErrorClass = (): void => {
+    const errorBlock = document.createElement('div');
+    errorBlock?.append(text[type]);
+    errorBlock.classList.add('error-text', `.error-text-${id}`);
+    errorBlock.id = `error-text-${id}`;
+    elem.parentElement?.append(errorBlock);
+    elem?.classList.add(errorClass);
+  };
 
   if (min && max && (value.length < min || value.length > max)) {
     return checkRule(false);

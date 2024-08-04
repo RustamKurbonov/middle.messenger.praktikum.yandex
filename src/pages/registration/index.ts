@@ -27,7 +27,7 @@ const registration = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'name');
+                    e.target && validator(value, e.target as Element, 'name', 'first_name');
                   },
                 },
               },
@@ -50,7 +50,7 @@ const registration = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'name');
+                    e.target && validator(value, e.target as Element, 'name', 'second_name');
                   },
                 },
               },
@@ -73,7 +73,7 @@ const registration = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'login');
+                    e.target && validator(value, e.target as Element, 'login', 'login');
                   },
                 },
               },
@@ -96,7 +96,7 @@ const registration = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'email');
+                    e.target && validator(value, e.target as Element, 'email', 'email');
                   },
                 },
               },
@@ -119,7 +119,7 @@ const registration = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'phone');
+                    e.target && validator(value, e.target as Element, 'phone', 'phone');
                   },
                 },
               },
@@ -142,7 +142,7 @@ const registration = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    validator(value, e.target as Element, 'password');
+                    validator(value, e.target as Element, 'password', 'password');
                   },
                 },
               },
@@ -172,12 +172,17 @@ const registration = (): Form =>
                 const passwordValue = (password as HTMLInputElement)?.value;
                 const form = document.querySelector('#registration');
 
-                const isFirstNameValid = validator(firstNameValue, firstName, 'name');
-                const isSecondNameValid = validator(secondNameValue, secondName, 'name');
-                const isLoginValid = validator(loginValue, login, 'login');
-                const isEmailValid = validator(emailValue, email, 'email');
-                const isPhoneValid = validator(phoneValue, phone, 'phone');
-                const isPasswordValid = validator(passwordValue, password, 'password');
+                const isFirstNameValid = validator(firstNameValue, firstName, 'name', 'first_name');
+                const isSecondNameValid = validator(
+                  secondNameValue,
+                  secondName,
+                  'name',
+                  'second_name'
+                );
+                const isLoginValid = validator(loginValue, login, 'login', 'login');
+                const isEmailValid = validator(emailValue, email, 'email', 'email');
+                const isPhoneValid = validator(phoneValue, phone, 'phone', 'phone');
+                const isPasswordValid = validator(passwordValue, password, 'password', 'password');
 
                 if (
                   isFirstNameValid &&

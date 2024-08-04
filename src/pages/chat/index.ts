@@ -19,7 +19,12 @@ class ButtonSubmit extends Component {
           click: () => {
             const message = document.querySelector('#message');
             const messageValue = (message as HTMLInputElement)?.value;
-            const isMessageValid = validator(messageValue, message as HTMLElement, 'message');
+            const isMessageValid = validator(
+              messageValue,
+              message as HTMLElement,
+              'message',
+              'message'
+            );
 
             if (isMessageValid) {
               console.log(message);
@@ -53,7 +58,7 @@ class MessageField extends Component {
             const { value } = <HTMLInputElement>e.target;
             console.log(value, 'value');
 
-            e.target && validator(value, e.target as HTMLElement, 'message');
+            e.target && validator(value, e.target as HTMLElement, 'message', 'message');
           },
         },
       },

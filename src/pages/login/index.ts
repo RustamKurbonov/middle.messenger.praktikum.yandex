@@ -27,7 +27,7 @@ const login = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'login');
+                    e.target && validator(value, e.target as Element, 'login', 'login');
                   },
                 },
               },
@@ -50,7 +50,7 @@ const login = (): Form =>
                 events: {
                   blur: (e) => {
                     const { value } = <HTMLInputElement>e.target;
-                    validator(value, e.target as Element, 'password');
+                    validator(value, e.target as Element, 'password', 'password');
                   },
                 },
               },
@@ -72,8 +72,8 @@ const login = (): Form =>
                 const loginValue = (login as HTMLInputElement).value;
                 const passwordValue = (password as HTMLInputElement).value;
 
-                const isLoginValid = validator(loginValue, login, 'login');
-                const isPasswordValid = validator(passwordValue, password, 'password');
+                const isLoginValid = validator(loginValue, login, 'login', 'login');
+                const isPasswordValid = validator(passwordValue, password, 'password', 'password');
 
                 if (isLoginValid && isPasswordValid) {
                   console.log({

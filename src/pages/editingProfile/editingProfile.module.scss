@@ -4,7 +4,6 @@
   height: 100vh;
 
   :global {
-
     .editing-profile-wrapper {
       display: flex;
       align-items: center;
@@ -32,30 +31,6 @@
     .editing-profile-name {
       font-size: 18px;
       font-weight: 600;
-    }
-
-    .editing-profile-form-wrapper {
-
-      :global {
-
-        .editing-profile-form-error {
-          position: absolute;
-          display: none;
-          bottom: 30px;
-          padding: 4px;
-          color: red;
-          border: 1px solid red;
-          width: 500px;
-          text-align: center;
-        }
-      }
-
-      &.error {
-
-        .editing-profile-form-error {
-          display: block;
-        }
-      }
     }
   }
 }

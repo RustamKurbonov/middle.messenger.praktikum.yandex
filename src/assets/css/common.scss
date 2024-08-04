@@ -143,3 +143,9 @@ html * {
 input.error {
   border-color: red !important;
 }
+
+.error-text {
+  padding: 4px 0;
+  color: red;
+  font-size: 10px;
+}

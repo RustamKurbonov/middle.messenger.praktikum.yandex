@@ -4,7 +4,6 @@
   height: 100%;
 
   :global {
-
     .sidebar {
       height: 100%;
       width: 340px;
@@ -93,11 +92,11 @@
 
       &_form {
         display: flex;
-        align-items: center;
         border-top: 1px solid #eaeaea;
-        height: 60px;
+        min-height: 82px;
+        height: 82px;
         gap: 16px;
-        padding: 0 16px;
+        padding: 14px;
       }
 
       &_clip {
@@ -146,7 +145,6 @@
 }
 
 .message-field {
-  margin: 0 6px;
   outline: none;
   background-color: transparent;
   background-color: #efefef;

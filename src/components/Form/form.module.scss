@@ -6,7 +6,6 @@
   height: 100vh;
 
   :global {
-
     .form-error {
       position: absolute;
       display: none;
@@ -27,13 +26,6 @@
       width: 380px;
       min-height: 460px;
       flex-flow: column wrap;
-
-      &.error {
-
-        .form-error {
-          display: block;
-        }
-      }
     }
 
     .form-title {

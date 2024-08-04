@@ -7,9 +7,6 @@ const tpl = `
           {{{buttons}}}
           </div>
         </form>
-        <div class="form-error">
-         Ошибка валидации
-        </div>
       </section>`;
 
 export default tpl;
