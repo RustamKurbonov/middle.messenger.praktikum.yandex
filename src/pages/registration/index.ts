@@ -1,8 +1,10 @@
+import router from 'src/share/classes/Router';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 import { validator } from '../../share/utils/validator';
+import { Paths } from 'src/share/constants/routes';
 
 const registration = (): Form =>
   new Form({
@@ -152,12 +154,13 @@ const registration = (): Form =>
       ],
       buttons: [
         new Button({
-          tagName: 'a',
+          tagName: 'button',
           propsAndChildren: {
             label: 'Зарегистрироваться',
             type: 'primary',
             events: {
-              click: () => {
+              click: (e) => {
+                e.preventDefault();
                 const firstName = document.querySelector('#first_name');
                 const firstNameValue = (firstName as HTMLInputElement)?.value;
                 const secondName = document.querySelector('#second_name');
@@ -200,6 +203,8 @@ const registration = (): Form =>
                     phone: phoneValue,
                     password: passwordValue,
                   });
+
+                  router.go(Paths.Chat);
                 } else {
                   form?.classList.add('error');
                 }
@@ -208,9 +213,15 @@ const registration = (): Form =>
           },
         }),
         new Button({
-          tagName: 'a',
+          tagName: 'button',
           propsAndChildren: {
             label: 'Войти',
+            events: {
+              click(e) {
+                e.preventDefault();
+                router.go(Paths.Login);
+              },
+            },
           },
         }),
       ],

@@ -1,5 +1,7 @@
+import router from 'src/share/classes/Router';
 import Button from '../../components/Button';
 import Error from '../../components/Error';
+import { Paths } from 'src/share/constants/routes';
 
 const error500 = (): Error =>
   new Error({
@@ -8,11 +10,13 @@ const error500 = (): Error =>
       title: '500',
       text: 'Уже чиним',
       button: new Button({
-        tagName: 'a',
+        tagName: 'button',
         propsAndChildren: {
           label: 'Назад к чатам',
-          attr: {
-            href: './chat',
+          events: {
+            click() {
+              router.go(Paths.Chat);
+            },
           },
         },
       }),

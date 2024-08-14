@@ -1,3 +1,4 @@
+import router from 'src/share/classes/Router';
 import Button from '../../components/Button';
 import ChatItem from '../../components/ChatItem';
 import MessageItem from '../../components/MessageItem';
@@ -6,6 +7,7 @@ import { Component } from '../../share/classes/Component';
 import { validator } from '../../share/utils/validator';
 import styles from './chat.module.scss';
 import tpl from './tpl';
+import { Paths } from 'src/share/constants/routes';
 
 class ButtonSubmit extends Component {
   constructor() {
@@ -82,9 +84,15 @@ class Chat extends Component {
           propsAndChildren: { attr: { placeholder: 'Поиск' } },
         }),
         profileButton: new Button({
-          tagName: 'a',
+          tagName: 'button',
           propsAndChildren: {
             label: 'Профиль',
+            events: {
+              click(e) {
+                e.preventDefault();
+                router.go(Paths.Profile);
+              },
+            },
           },
         }),
         buttonSubmit: new ButtonSubmit(),

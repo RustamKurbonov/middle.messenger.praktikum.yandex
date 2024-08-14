@@ -5,6 +5,7 @@ import EventBus from './EventBus';
 export interface ComponentProps {
   tagName?: string;
   propsAndChildren?: PropsAndChildren;
+  rootQuery?: string;
 }
 
 export type PropsAndChildren = {
@@ -21,6 +22,7 @@ export class Component {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   };
 
@@ -142,6 +144,7 @@ export class Component {
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   init(): void {
@@ -169,6 +172,12 @@ export class Component {
     if (Object.keys(this._children).length) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
+  }
+
+  _componentWillUnmount(): void {}
+
+  dispatchComponentWillUnmount(): void {
+    this._eventBus.emit(Component.EVENTS.FLOW_CWU);
   }
 
   _componentDidUpdate(): void {
@@ -274,19 +283,5 @@ export class Component {
     const element = document.createElement(tagName);
 
     return element;
-  }
-
-  show(): void {
-    const content = this.getContent();
-    if (content) {
-      content.style.display = 'block';
-    }
-  }
-
-  hide(): void {
-    const content = this.getContent();
-    if (content) {
-      content.style.display = 'none';
-    }
   }
 }

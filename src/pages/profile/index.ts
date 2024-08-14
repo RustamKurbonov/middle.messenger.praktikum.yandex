@@ -4,6 +4,8 @@ import styles from './profile.module.scss';
 import Button from '../../components/Button';
 import ProfileParam from '../../components/ProfileParam';
 import ProfileSidebar from '../../components/ProfileSidebar';
+import router from 'src/share/classes/Router';
+import { Paths } from 'src/share/constants/routes';
 
 class Profile extends Component {
   constructor() {
@@ -13,18 +15,14 @@ class Profile extends Component {
         username: 'Иван',
         buttons: [
           new Button({
-            tagName: 'a',
+            tagName: 'button',
             propsAndChildren: {
               label: 'Изменить данные',
-              attr: {
-                href: '../editingProfile',
+              events: {
+                click() {
+                  router.go(Paths.EditingProfile);
+                },
               },
-            },
-          }),
-          new Button({
-            tagName: 'a',
-            propsAndChildren: {
-              label: 'Изменить пароль',
             },
           }),
           new Button({
@@ -61,7 +59,13 @@ class Profile extends Component {
           }),
         ],
         profileSidebar: new ProfileSidebar({
-          propsAndChildren: { attr: { href: './chat' } },
+          propsAndChildren: {
+            events: {
+              click() {
+                router.back();
+              },
+            },
+          },
         }),
         attr: {
           class: styles.profile,

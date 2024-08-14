@@ -6,7 +6,9 @@ const tpl = `
          <div class="editing-profile-form-wrapper" id="editingProfile">
             {{{editingForm}}}
       </div>
+      <div class="editing-profile-buttons">
 	  {{{buttons}}}
+      </div>
 	</div>
       </section>
 `;

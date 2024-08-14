@@ -6,6 +6,8 @@ import ProfileSidebar from '../../components/ProfileSidebar';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 import { validator } from '../../share/utils/validator';
+import router from 'src/share/classes/Router';
+import { Paths } from 'src/share/constants/routes';
 
 interface EditingProfileFormProps extends ComponentProps {
   propsAndChildren: {
@@ -45,7 +47,8 @@ class EditingProfile extends Component {
               label: 'Сохранить',
               type: 'primary',
               events: {
-                click: () => {
+                click: (e) => {
+                  e.preventDefault();
                   const firstName = document.querySelector('#first_name');
                   const firstNameValue = (firstName as HTMLInputElement)?.value;
                   const secondName = document.querySelector('#second_name');
@@ -118,6 +121,7 @@ class EditingProfile extends Component {
                       oldPassword: oldPasswordValue,
                       newPassword: newPasswordValue,
                     });
+                    router.go(Paths.Chat);
                   } else {
                     form?.classList.add('error');
                   }
@@ -129,6 +133,12 @@ class EditingProfile extends Component {
             tagName: 'a',
             propsAndChildren: {
               label: 'Отмена',
+              events: {
+                click(e) {
+                  e.preventDefault();
+                  router.go(Paths.Chat);
+                },
+              },
             },
           }),
         ],
@@ -324,7 +334,13 @@ class EditingProfile extends Component {
           },
         }),
         profileSidebar: new ProfileSidebar({
-          propsAndChildren: { attr: { href: './chat' } },
+          propsAndChildren: {
+            events: {
+              click() {
+                router.back();
+              },
+            },
+          },
         }),
         attr: {
           class: styles['editing-profile'],

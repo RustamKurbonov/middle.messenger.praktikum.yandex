@@ -1,8 +1,10 @@
+import router from 'src/share/classes/Router';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 import { validator } from '../../share/utils/validator';
+import { Paths } from 'src/share/constants/routes';
 
 const login = (): Form =>
   new Form({
@@ -60,12 +62,13 @@ const login = (): Form =>
       ],
       buttons: [
         new Button({
-          tagName: 'a',
+          tagName: 'button',
           propsAndChildren: {
             label: 'Войти',
             type: 'primary',
             events: {
-              click: () => {
+              click: (e) => {
+                e.preventDefault();
                 const login = document.querySelector('#login');
                 const password = document.querySelector('#password');
                 const form = document.querySelector('#authorization');
@@ -80,6 +83,7 @@ const login = (): Form =>
                     login: loginValue,
                     password,
                   });
+                  router.go(Paths.Chat);
                 } else {
                   form?.classList.add('error');
                 }
@@ -88,9 +92,15 @@ const login = (): Form =>
           },
         }),
         new Button({
-          tagName: 'a',
+          tagName: 'button',
           propsAndChildren: {
             label: 'Зарегистрироваться',
+            events: {
+              click(e) {
+                e.preventDefault();
+                router.go(Paths.Registration);
+              },
+            },
           },
         }),
       ],

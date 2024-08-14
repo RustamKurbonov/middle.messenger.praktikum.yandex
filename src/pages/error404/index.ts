@@ -1,5 +1,7 @@
+import router from 'src/share/classes/Router';
 import Button from '../../components/Button';
 import Error from '../../components/Error';
+import { Paths } from 'src/share/constants/routes';
 
 const error404 = (): Error =>
   new Error({
@@ -8,11 +10,13 @@ const error404 = (): Error =>
       title: '404',
       text: 'Не туда попали',
       button: new Button({
-        tagName: 'a',
+        tagName: 'button',
         propsAndChildren: {
           label: 'Назад к чатам',
-          attr: {
-            href: './chat',
+          events: {
+            click() {
+              router.go(Paths.Chat);
+            },
           },
         },
       }),
