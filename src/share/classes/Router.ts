@@ -1,4 +1,4 @@
-import { Pages, routes } from '../constants/routes';
+import { Paths, routes } from '../constants/routes';
 import { Component } from './Component';
 import { Route } from './Route';
 
@@ -22,7 +22,7 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname: Pages, block: () => Component): Router {
+  use(pathname: Paths, block: () => Component): Router {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
 
     this.routes.push(route);
@@ -35,14 +35,14 @@ class Router {
       const target = event.currentTarget as EventTarget & { location: Location };
 
       if (target) {
-        this._onRoute(target.location.pathname as Pages);
+        this._onRoute(target.location.pathname as Paths);
       }
     }).bind(this);
 
-    this._onRoute(window.location.pathname as Pages);
+    this._onRoute(window.location.pathname as Paths);
   }
 
-  _onRoute(pathname: Pages): void {
+  _onRoute(pathname: Paths): void {
     const route = this.getRoute(pathname);
 
     if (!route) {
@@ -57,7 +57,7 @@ class Router {
     route.render();
   }
 
-  go(pathname: Pages): void {
+  go(pathname: Paths): void {
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
@@ -70,7 +70,7 @@ class Router {
     this.history.forward();
   }
 
-  getRoute(pathname: Pages): Route | undefined {
+  getRoute(pathname: Paths): Route | undefined {
     return this.routes.find((route) => route.match(pathname));
   }
 }
@@ -78,7 +78,7 @@ class Router {
 const router = new Router('#app');
 
 Object.entries(routes).forEach(([pathname, page]) => {
-  router.use(pathname as Pages, page);
+  router.use(pathname as Paths, page);
 });
 
 export default router;

@@ -1,23 +1,23 @@
 import { Component, ComponentProps } from './Component';
 import { render } from '../utils/render';
-import { Pages } from '../constants/routes';
+import { Paths } from '../constants/routes';
 import { isEqual } from '../utils/isEqual';
 import { unrender } from '../utils/unrender';
 
 export class Route {
-  private _pathname: Pages;
+  private _pathname: Paths;
   private _blockClass: () => Component;
   private _block: Component | null;
   private _props: ComponentProps;
 
-  constructor(pathname: Pages, view: () => Component, props: ComponentProps) {
+  constructor(pathname: Paths, view: () => Component, props: ComponentProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
   }
 
-  navigate(pathname: Pages): void {
+  navigate(pathname: Paths): void {
     if (this.match(pathname)) {
       this._pathname = pathname;
       this.render();
@@ -31,7 +31,7 @@ export class Route {
     }
   }
 
-  match(pathname: Pages): boolean {
+  match(pathname: Paths): boolean {
     return isEqual(pathname, this._pathname);
   }
 
