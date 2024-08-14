@@ -1,0 +1,16 @@
+{
+	"extends": "stylelint-config-standard",
+	"rules": {
+		"selector-pseudo-class-no-unknown": [true, {
+			"ignorePseudoClasses": ["global"]
+		}],
+		"no-descending-specificity": null,
+		"rule-empty-line-before":  "always",
+		"declaration-block-no-shorthand-property-overrides": true,
+		"selector-pseudo-element-colon-notation": "double",
+		"font-family-name-quotes": "always-where-required"
+	},
+	"ignoreFiles": [
+		"dist/**"
+	]
+} 
