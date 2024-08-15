@@ -1,10 +1,10 @@
-import router from 'src/share/classes/Router';
+import router from 'src/serveses/router/Router';
 import Button from '../../components/Button';
 import ChatItem from '../../components/ChatItem';
 import MessageItem from '../../components/MessageItem';
 import Search from '../../components/Search';
 import { Component } from '../../share/classes/Component';
-import { validator } from '../../share/utils/validator';
+import { validator } from '../../share/utils';
 import styles from './chat.module.scss';
 import tpl from './tpl';
 import { Paths } from 'src/share/constants/routes';
@@ -21,12 +21,7 @@ class ButtonSubmit extends Component {
           click: () => {
             const message = document.querySelector('#message');
             const messageValue = (message as HTMLInputElement)?.value;
-            const isMessageValid = validator(
-              messageValue,
-              message as HTMLElement,
-              'message',
-              'message'
-            );
+            const isMessageValid = validator(messageValue, 'message', 'message');
 
             if (isMessageValid) {
               console.log(message);
@@ -60,7 +55,7 @@ class MessageField extends Component {
             const { value } = <HTMLInputElement>e.target;
             console.log(value, 'value');
 
-            e.target && validator(value, e.target as HTMLElement, 'message', 'message');
+            e.target && validator(value, 'message', 'message');
           },
         },
       },
@@ -141,6 +136,6 @@ class Chat extends Component {
   }
 }
 
-const chat = (): Chat => new Chat();
+const chat = new Chat();
 
 export default chat;

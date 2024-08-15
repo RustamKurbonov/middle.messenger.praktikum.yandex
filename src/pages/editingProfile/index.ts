@@ -5,9 +5,9 @@ import Button from '../../components/Button';
 import ProfileSidebar from '../../components/ProfileSidebar';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
-import { validator } from '../../share/utils/validator';
-import router from 'src/share/classes/Router';
+import { validator } from '../../share/utils';
 import { Paths } from 'src/share/constants/routes';
+import router from 'src/serveses/router/Router';
 
 interface EditingProfileFormProps extends ComponentProps {
   propsAndChildren: {
@@ -67,39 +67,18 @@ class EditingProfile extends Component {
                   const newPasswordValue = (newPassword as HTMLInputElement)?.value;
                   const form = document.querySelector('#editingProfile');
 
-                  const isFirstNameValid = validator(
-                    firstNameValue,
-                    firstName,
-                    'name',
-                    'first_name'
-                  );
-                  const isSecondNameValid = validator(
-                    secondNameValue,
-                    secondName,
-                    'name',
-                    'second_name'
-                  );
+                  const isFirstNameValid = validator(firstNameValue, 'name', 'first_name');
+                  const isSecondNameValid = validator(secondNameValue, 'name', 'second_name');
                   const isDisplayNameValid = validator(
                     displayNameValue,
-                    displayName,
                     'displayName',
                     'display_name'
                   );
-                  const isLoginValid = validator(loginValue, login, 'login', 'login');
-                  const isEmailValid = validator(emailValue, email, 'email', 'email');
-                  const isPhoneValid = validator(phoneValue, phone, 'phone', 'phone');
-                  const isOldPasswordValid = validator(
-                    oldPasswordValue,
-                    oldPassword,
-                    'password',
-                    'oldPassword'
-                  );
-                  const isNewPasswordValid = validator(
-                    newPasswordValue,
-                    newPassword,
-                    'password',
-                    'newPassword'
-                  );
+                  const isLoginValid = validator(loginValue, 'login', 'login');
+                  const isEmailValid = validator(emailValue, 'email', 'email');
+                  const isPhoneValid = validator(phoneValue, 'phone', 'phone');
+                  const isOldPasswordValid = validator(oldPasswordValue, 'password', 'oldPassword');
+                  const isNewPasswordValid = validator(newPasswordValue, 'password', 'newPassword');
 
                   if (
                     isFirstNameValid &&
@@ -161,7 +140,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'name', 'first_name');
+                          e.target && validator(value, 'name', 'first_name');
                         },
                       },
                     },
@@ -184,7 +163,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'name', 'second_name');
+                          e.target && validator(value, 'name', 'second_name');
                         },
                       },
                     },
@@ -207,8 +186,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target &&
-                            validator(value, e.target as Element, 'displayName', 'display_name');
+                          e.target && validator(value, 'displayName', 'display_name');
                         },
                       },
                     },
@@ -231,7 +209,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'login', 'login');
+                          e.target && validator(value, 'login', 'login');
                         },
                       },
                     },
@@ -254,7 +232,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'email', 'email');
+                          e.target && validator(value, 'email', 'email');
                         },
                       },
                     },
@@ -277,7 +255,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'phone', 'phone');
+                          e.target && validator(value, 'phone', 'phone');
                         },
                       },
                     },
@@ -300,7 +278,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          validator(value, e.target as Element, 'password', 'oldPassword');
+                          validator(value, 'password', 'oldPassword');
                         },
                       },
                     },
@@ -323,7 +301,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          validator(value, e.target as Element, 'password', 'newPassword');
+                          validator(value, 'password', 'newPassword');
                         },
                       },
                     },
@@ -354,6 +332,6 @@ class EditingProfile extends Component {
   }
 }
 
-const editingProfile = (): EditingProfile => new EditingProfile();
+const editingProfile = new EditingProfile();
 
 export default editingProfile;

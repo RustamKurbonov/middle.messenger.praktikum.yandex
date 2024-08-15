@@ -17,7 +17,7 @@ export enum Paths {
   Error500 = '/error500',
 }
 
-export const routes: Record<Paths, () => Component> = {
+export const routes: Record<Paths, Component> = {
   '/': login,
   '/sign-up': registration,
   '/settings': profile,

@@ -50,3 +50,5 @@ export interface MouseEvent<T = Element, E = NativeMouseEvent> extends UIEvent<T
   screenY: number;
   shiftKey: boolean;
 }
+
+export type IndexedValue = string | number | boolean | Array<IndexedValue> | Object;

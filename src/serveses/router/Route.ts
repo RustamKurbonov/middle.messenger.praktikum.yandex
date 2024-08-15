@@ -1,16 +1,14 @@
-import { Component, ComponentProps } from './Component';
-import { render } from '../utils/render';
-import { Paths } from '../constants/routes';
-import { isEqual } from '../utils/isEqual';
-import { unrender } from '../utils/unrender';
+import { Component, ComponentProps } from 'src/share/classes/Component';
+import { Paths } from 'src/share/constants/routes';
+import { isEqualPaths, unrender, render } from 'src/share/utils';
 
 export class Route {
   private _pathname: Paths;
-  private _blockClass: () => Component;
+  private _blockClass: Component;
   private _block: Component | null;
   private _props: ComponentProps;
 
-  constructor(pathname: Paths, view: () => Component, props: ComponentProps) {
+  constructor(pathname: Paths, view: Component, props: ComponentProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -32,12 +30,12 @@ export class Route {
   }
 
   match(pathname: Paths): boolean {
-    return isEqual(pathname, this._pathname);
+    return isEqualPaths(pathname, this._pathname);
   }
 
   render(): void {
     if (!this._block) {
-      this._block = this._blockClass();
+      this._block = this._blockClass;
       render(this._props.rootQuery || '', this._block);
     }
   }

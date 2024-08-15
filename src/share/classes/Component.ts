@@ -14,7 +14,8 @@ export type PropsAndChildren = {
     | Array<Component>
     | string
     | { [name: string]: string }
-    | { [name: string]: Function };
+    | { [name: string]: Function }
+    | undefined;
 };
 
 export class Component {
@@ -181,6 +182,7 @@ export class Component {
   }
 
   _componentDidUpdate(): void {
+    //oldValue: PropsAndChildren, newValue: PropsAndChildren
     const isReRender = this.componentDidUpdate();
     if (isReRender) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
@@ -196,7 +198,7 @@ export class Component {
       return;
     }
 
-    this._setUpdate = false;
+    this._setUpdate = true;
     const oldValue = { ...this._props };
 
     const { props, children } = this.getChildren(nextProps);

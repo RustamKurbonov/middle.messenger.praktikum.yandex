@@ -1,6 +1,6 @@
-import { Paths, routes } from '../constants/routes';
-import { Component } from './Component';
+import { Paths, routes } from 'src/share/constants/routes';
 import { Route } from './Route';
+import { Component } from 'src/share/classes/Component';
 
 class Router {
   static __instance: Router;
@@ -22,7 +22,7 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname: Paths, block: () => Component): Router {
+  use(pathname: Paths, block: Component): Router {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
 
     this.routes.push(route);

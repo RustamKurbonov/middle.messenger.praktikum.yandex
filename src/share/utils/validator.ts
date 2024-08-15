@@ -45,12 +45,13 @@ const minMax: Record<ValidatorType, { min?: number; max?: number }> = {
   },
 };
 
-export const validator = (
-  value: string,
-  elem: Element | null,
-  type: ValidatorType,
-  id: string
-): boolean => {
+export const validator = (value: string, type: ValidatorType, id: string): boolean => {
+  if (!id) {
+    return false;
+  }
+
+  const elem = document.getElementById(id);
+
   if (!elem) {
     return false;
   }

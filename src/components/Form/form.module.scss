@@ -6,7 +6,6 @@
   height: 100vh;
 
   :global {
-
     .form-error {
       position: absolute;
       display: none;
@@ -52,6 +51,11 @@
       justify-content: end;
       flex: 1 1 auto;
       gap: 12px;
+    }
+
+    .error {
+      color: red;
+      padding: 8px;
     }
   }
 }

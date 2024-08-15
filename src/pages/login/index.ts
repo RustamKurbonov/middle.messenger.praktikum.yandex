@@ -1,113 +1,121 @@
-import router from 'src/share/classes/Router';
+import router from 'src/serveses/router/Router';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
-import { validator } from '../../share/utils/validator';
+import { getFieldValue, validator } from '../../share/utils';
 import { Paths } from 'src/share/constants/routes';
+import userController from 'src/serveses/controllers/UserController';
 
-const login = (): Form =>
-  new Form({
-    tagName: 'main',
-    propsAndChildren: {
-      title: 'Авторизация',
-      id: 'authorization',
-      fields: [
-        new FormItem({
-          tagName: 'div',
-          propsAndChildren: {
-            label: 'Логин',
-            id: 'login',
-            input: new Input({
-              tagName: 'input',
-              propsAndChildren: {
-                attr: {
-                  id: 'login',
-                  name: 'login',
-                  type: 'text',
-                },
-                events: {
-                  blur: (e) => {
-                    const { value } = <HTMLInputElement>e.target;
-                    e.target && validator(value, e.target as Element, 'login', 'login');
-                  },
-                },
-              },
-            }),
-          },
-        }),
-        new FormItem({
-          tagName: 'div',
-          propsAndChildren: {
-            label: 'Пароль',
-            id: 'password',
-            input: new Input({
-              tagName: 'input',
-              propsAndChildren: {
-                attr: {
-                  id: 'password',
-                  name: 'password',
-                  type: 'password',
-                },
-                events: {
-                  blur: (e) => {
-                    const { value } = <HTMLInputElement>e.target;
-                    validator(value, e.target as Element, 'password', 'password');
-                  },
-                },
-              },
-            }),
-          },
-        }),
-      ],
-      buttons: [
-        new Button({
-          tagName: 'button',
-          propsAndChildren: {
-            label: 'Войти',
-            type: 'primary',
-            events: {
-              click: (e) => {
-                e.preventDefault();
-                const login = document.querySelector('#login');
-                const password = document.querySelector('#password');
-                const form = document.querySelector('#authorization');
-                const loginValue = (login as HTMLInputElement).value;
-                const passwordValue = (password as HTMLInputElement).value;
+const handleLogin = (): void => {
+  const login = getFieldValue('#login');
+  const password = getFieldValue('#password');
 
-                const isLoginValid = validator(loginValue, login, 'login', 'login');
-                const isPasswordValid = validator(passwordValue, password, 'password', 'password');
+  const validFields = [
+    validator(login, 'login', 'login'),
+    validator(password, 'password', 'password'),
+  ];
 
-                if (isLoginValid && isPasswordValid) {
-                  console.log({
-                    login: loginValue,
-                    password,
-                  });
-                  router.go(Paths.Chat);
-                } else {
-                  form?.classList.add('error');
-                }
-              },
-            },
-          },
-        }),
-        new Button({
-          tagName: 'button',
-          propsAndChildren: {
-            label: 'Зарегистрироваться',
-            events: {
-              click(e) {
-                e.preventDefault();
-                router.go(Paths.Registration);
-              },
-            },
-          },
-        }),
-      ],
-      attr: {
-        class: 'asdadasds',
+  if (!validFields.includes(false)) {
+    userController.signin(
+      { login, password },
+      () => {
+        loginForm.setProps({ errorText: undefined });
+        router.go(Paths.Chat);
       },
-    },
-  });
+      (error) => {
+        loginForm.setProps({ errorText: error.toString() });
+      }
+    );
+  } else {
+    loginForm.setProps({ errorText: 'Ошибка валидации' });
+  }
+};
 
-export default login;
+const loginForm = new Form({
+  tagName: 'main',
+  propsAndChildren: {
+    title: 'Авторизация',
+    id: 'authorization',
+    fields: [
+      new FormItem({
+        tagName: 'div',
+        propsAndChildren: {
+          label: 'Логин',
+          id: 'login',
+          input: new Input({
+            tagName: 'input',
+            propsAndChildren: {
+              attr: {
+                id: 'login',
+                name: 'login',
+                type: 'text',
+              },
+              events: {
+                blur: (e) => {
+                  const { value } = <HTMLInputElement>e.target;
+                  e.target && validator(value, 'login', 'login');
+                },
+              },
+            },
+          }),
+        },
+      }),
+      new FormItem({
+        tagName: 'div',
+        propsAndChildren: {
+          label: 'Пароль',
+          id: 'password',
+          input: new Input({
+            tagName: 'input',
+            propsAndChildren: {
+              attr: {
+                id: 'password',
+                name: 'password',
+                type: 'password',
+              },
+              events: {
+                blur: (e) => {
+                  const { value } = <HTMLInputElement>e.target;
+                  validator(value, 'password', 'password');
+                },
+              },
+            },
+          }),
+        },
+      }),
+    ],
+    buttons: [
+      new Button({
+        tagName: 'button',
+        propsAndChildren: {
+          label: 'Войти',
+          type: 'primary',
+          events: {
+            click: (e) => {
+              e.preventDefault();
+              handleLogin();
+            },
+          },
+        },
+      }),
+      new Button({
+        tagName: 'button',
+        propsAndChildren: {
+          label: 'Зарегистрироваться',
+          events: {
+            click(e) {
+              e.preventDefault();
+              router.go(Paths.Registration);
+            },
+          },
+        },
+      }),
+    ],
+    attr: {
+      class: 'asdadasds',
+    },
+  },
+});
+
+export default loginForm;

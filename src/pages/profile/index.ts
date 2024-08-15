@@ -4,8 +4,9 @@ import styles from './profile.module.scss';
 import Button from '../../components/Button';
 import ProfileParam from '../../components/ProfileParam';
 import ProfileSidebar from '../../components/ProfileSidebar';
-import router from 'src/share/classes/Router';
 import { Paths } from 'src/share/constants/routes';
+import router from 'src/serveses/router/Router';
+import userController from 'src/serveses/controllers/UserController';
 
 class Profile extends Component {
   constructor() {
@@ -32,6 +33,12 @@ class Profile extends Component {
               type: 'warning',
               attr: {
                 href: '../login',
+              },
+              events: {
+                click(e) {
+                  e.preventDefault();
+                  userController.logout(() => router.go(Paths.Login));
+                },
               },
             },
           }),
@@ -79,5 +86,5 @@ class Profile extends Component {
   }
 }
 
-const profile = (): Profile => new Profile();
+const profile = new Profile();
 export default profile;
