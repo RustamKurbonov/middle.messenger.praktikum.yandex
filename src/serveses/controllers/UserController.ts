@@ -10,10 +10,15 @@ class UserController {
     api
       .createUser(data)
       .then(() => {
-        api.getUserInfo().then((response) => {
-          store.set('user', response);
-        });
-        onOk && onOk();
+        api
+          .getUserInfo()
+          .then((response) => {
+            store.set('user', response);
+            onOk && onOk();
+          })
+          .catch((error) => {
+            onError && onError(error);
+          });
       })
       .catch((error) => {
         onError && onError(error);
@@ -24,8 +29,15 @@ class UserController {
     api
       .signin(data)
       .then(() => {
-        store.set('user', data);
-        onOk && onOk();
+        api
+          .getUserInfo()
+          .then((response) => {
+            store.set('user', JSON.parse(response));
+            onOk && onOk();
+          })
+          .catch((error) => {
+            onError && onError(error);
+          });
       })
       .catch((error) => {
         onError && onError(error);

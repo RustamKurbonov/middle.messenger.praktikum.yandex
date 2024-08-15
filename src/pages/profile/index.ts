@@ -1,4 +1,4 @@
-import { Component } from '../../share/classes/Component';
+import { Component, ComponentProps } from '../../share/classes/Component';
 import tpl from './tpl';
 import styles from './profile.module.scss';
 import Button from '../../components/Button';
@@ -7,13 +7,72 @@ import ProfileSidebar from '../../components/ProfileSidebar';
 import { Paths } from 'src/share/constants/routes';
 import router from 'src/serveses/router/Router';
 import userController from 'src/serveses/controllers/UserController';
+import { connect } from 'src/serveses/store/connect';
+import { Indexed } from 'src/share/utils';
+
+export interface ProfileProps {
+  first_name: string;
+  second_name: string;
+  login: string;
+  avatar: string;
+  email: string;
+  phone: string;
+}
+
+const firstName = connect(ProfileParam, (state) => mapDataToProps(state, 'first_name'));
+const secondName = connect(ProfileParam, (state) => mapDataToProps(state, 'second_name'));
+const phone = connect(ProfileParam, (state) => mapDataToProps(state, 'phone'));
+const email = connect(ProfileParam, (state) => mapDataToProps(state, 'email'));
 
 class Profile extends Component {
-  constructor() {
+  constructor(props: ComponentProps) {
     super({
       tagName: 'main',
       propsAndChildren: {
-        username: 'Иван',
+        first_name: props?.propsAndChildren?.login || '',
+        avatar: '',
+        profileParams: [
+          new firstName({
+            tagName: 'li',
+            propsAndChildren: {
+              title: 'Имя',
+              value: props?.propsAndChildren?.first_name?.toString() || '',
+            },
+          }),
+          new secondName({
+            tagName: 'li',
+            propsAndChildren: {
+              title: 'Фамилия',
+              value: props?.propsAndChildren?.second_name?.toString() || '',
+            },
+          }),
+          new phone({
+            tagName: 'li',
+            propsAndChildren: {
+              title: 'Телефон',
+              value: props?.propsAndChildren?.phone?.toString() || '',
+            },
+          }),
+          new email({
+            tagName: 'li',
+            propsAndChildren: {
+              title: 'Почта',
+              value: props?.propsAndChildren?.email?.toString() || '',
+            },
+          }),
+        ],
+        profileSidebar: new ProfileSidebar({
+          propsAndChildren: {
+            events: {
+              click() {
+                router.back();
+              },
+            },
+          },
+        }),
+        attr: {
+          class: styles.profile,
+        },
         buttons: [
           new Button({
             tagName: 'button',
@@ -43,40 +102,6 @@ class Profile extends Component {
             },
           }),
         ],
-        profileParams: [
-          new ProfileParam({
-            tagName: 'li',
-            propsAndChildren: { title: 'Логин', value: 'ivanivanov' },
-          }),
-          new ProfileParam({
-            tagName: 'li',
-            propsAndChildren: { title: 'Имя', value: 'Иван' },
-          }),
-          new ProfileParam({
-            tagName: 'li',
-            propsAndChildren: { title: 'Фамилия', value: 'Иванов' },
-          }),
-          new ProfileParam({
-            tagName: 'li',
-            propsAndChildren: { title: 'Телефон', value: '+7999999999' },
-          }),
-          new ProfileParam({
-            tagName: 'li',
-            propsAndChildren: { title: 'Почта', value: 'ivanivanov@mail.com' },
-          }),
-        ],
-        profileSidebar: new ProfileSidebar({
-          propsAndChildren: {
-            events: {
-              click() {
-                router.back();
-              },
-            },
-          },
-        }),
-        attr: {
-          class: styles.profile,
-        },
       },
     });
   }
@@ -86,5 +111,21 @@ class Profile extends Component {
   }
 }
 
-const profile = new Profile();
-export default profile;
+export const mapChatToProps = (state: Indexed): Indexed => {
+  return {
+    first_name: state?.user?.login || '',
+    avatar: state?.user?.avatar || '',
+  };
+};
+
+export const mapDataToProps = (state: Indexed, fieldName: string): Indexed => {
+  return {
+    value: state?.user?.[fieldName] || '',
+  };
+};
+
+const profile = connect(Profile, mapChatToProps);
+
+const test = new profile({});
+
+export default test;

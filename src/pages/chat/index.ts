@@ -53,8 +53,6 @@ class MessageField extends Component {
         events: {
           blur: (e: FocusEvent) => {
             const { value } = <HTMLInputElement>e.target;
-            console.log(value, 'value');
-
             e.target && validator(value, 'message', 'message');
           },
         },
