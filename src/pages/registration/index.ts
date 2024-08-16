@@ -47,179 +47,185 @@ const handleRegister = (): void => {
   }
 };
 
-const registrationForm = new Form({
-  tagName: 'main',
-  propsAndChildren: {
-    title: 'Регистрация',
-    id: 'registration',
-    fields: [
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Имя',
-          id: 'first_name',
-          input: new Input({
-            tagName: 'input',
+class RegistrationForm extends Form {
+  constructor() {
+    super({
+      tagName: 'main',
+      propsAndChildren: {
+        title: 'Регистрация',
+        id: 'registration',
+        fields: [
+          new FormItem({
+            tagName: 'div',
             propsAndChildren: {
-              attr: {
-                id: 'first_name',
-                name: 'first_name',
-                type: 'text',
-              },
+              label: 'Имя',
+              id: 'first_name',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'first_name',
+                    name: 'first_name',
+                    type: 'text',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      e.target && validator(value, 'name', 'first_name');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+          new FormItem({
+            tagName: 'div',
+            propsAndChildren: {
+              label: 'Фамилия',
+              id: 'second_name',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'second_name',
+                    name: 'second_name',
+                    type: 'text',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      e.target && validator(value, 'name', 'second_name');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+          new FormItem({
+            tagName: 'div',
+            propsAndChildren: {
+              label: 'Логин',
+              id: 'login',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'login',
+                    name: 'login',
+                    type: 'text',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      e.target && validator(value, 'login', 'login');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+          new FormItem({
+            tagName: 'div',
+            propsAndChildren: {
+              label: 'Почта',
+              id: 'email',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'email',
+                    name: 'email',
+                    type: 'email',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      e.target && validator(value, 'email', 'email');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+          new FormItem({
+            tagName: 'div',
+            propsAndChildren: {
+              label: 'Телефон',
+              id: 'phone',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'phone',
+                    name: 'phone',
+                    type: 'phone',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      e.target && validator(value, 'phone', 'phone');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+          new FormItem({
+            tagName: 'div',
+            propsAndChildren: {
+              label: 'Пароль',
+              id: 'password',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'password',
+                    name: 'password',
+                    type: 'password',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      validator(value, 'password', 'password');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+        ],
+        buttons: [
+          new Button({
+            tagName: 'button',
+            propsAndChildren: {
+              label: 'Зарегистрироваться',
+              type: 'primary',
               events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  e.target && validator(value, 'name', 'first_name');
+                click: (e) => {
+                  e.preventDefault();
+                  handleRegister();
                 },
               },
             },
           }),
-        },
-      }),
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Фамилия',
-          id: 'second_name',
-          input: new Input({
-            tagName: 'input',
+          new Button({
+            tagName: 'button',
             propsAndChildren: {
-              attr: {
-                id: 'second_name',
-                name: 'second_name',
-                type: 'text',
-              },
+              label: 'Войти',
               events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  e.target && validator(value, 'name', 'second_name');
+                click(e) {
+                  e.preventDefault();
+                  router.go(Paths.Login);
                 },
               },
             },
           }),
-        },
-      }),
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Логин',
-          id: 'login',
-          input: new Input({
-            tagName: 'input',
-            propsAndChildren: {
-              attr: {
-                id: 'login',
-                name: 'login',
-                type: 'text',
-              },
-              events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  e.target && validator(value, 'login', 'login');
-                },
-              },
-            },
-          }),
-        },
-      }),
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Почта',
-          id: 'email',
-          input: new Input({
-            tagName: 'input',
-            propsAndChildren: {
-              attr: {
-                id: 'email',
-                name: 'email',
-                type: 'email',
-              },
-              events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  e.target && validator(value, 'email', 'email');
-                },
-              },
-            },
-          }),
-        },
-      }),
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Телефон',
-          id: 'phone',
-          input: new Input({
-            tagName: 'input',
-            propsAndChildren: {
-              attr: {
-                id: 'phone',
-                name: 'phone',
-                type: 'phone',
-              },
-              events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  e.target && validator(value, 'phone', 'phone');
-                },
-              },
-            },
-          }),
-        },
-      }),
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Пароль',
-          id: 'password',
-          input: new Input({
-            tagName: 'input',
-            propsAndChildren: {
-              attr: {
-                id: 'password',
-                name: 'password',
-                type: 'password',
-              },
-              events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  validator(value, 'password', 'password');
-                },
-              },
-            },
-          }),
-        },
-      }),
-    ],
-    buttons: [
-      new Button({
-        tagName: 'button',
-        propsAndChildren: {
-          label: 'Зарегистрироваться',
-          type: 'primary',
-          events: {
-            click: (e) => {
-              e.preventDefault();
-              handleRegister();
-            },
-          },
-        },
-      }),
-      new Button({
-        tagName: 'button',
-        propsAndChildren: {
-          label: 'Войти',
-          events: {
-            click(e) {
-              e.preventDefault();
-              router.go(Paths.Login);
-            },
-          },
-        },
-      }),
-    ],
-  },
-});
+        ],
+      },
+    });
+  }
+}
+
+const registrationForm = new RegistrationForm();
 
 export default registrationForm;

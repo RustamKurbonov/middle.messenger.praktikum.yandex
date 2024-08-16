@@ -166,7 +166,9 @@ export class Component {
     });
   }
 
-  componentDidMount(): void {}
+  componentDidMount(callBack?: () => void): void {
+    callBack && callBack();
+  }
 
   dispatchComponentDidMount(): void {
     this._eventBus.emit(Component.EVENTS.FLOW_CDM);
@@ -182,14 +184,14 @@ export class Component {
   }
 
   _componentDidUpdate(): void {
-    //oldValue: PropsAndChildren, newValue: PropsAndChildren
     const isReRender = this.componentDidUpdate();
     if (isReRender) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
   }
 
-  componentDidUpdate(): boolean {
+  componentDidUpdate(callBack?: () => void): boolean {
+    callBack && callBack();
     return true;
   }
 

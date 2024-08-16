@@ -1,5 +1,6 @@
 import api, { SigninFields, RegistrationFields } from 'src/api/userAPI';
 import store from '../store/Store';
+import { deleteCookie, setCookie } from 'src/share/utils';
 
 class UserController {
   public createUser(
@@ -10,15 +11,7 @@ class UserController {
     api
       .createUser(data)
       .then(() => {
-        api
-          .getUserInfo()
-          .then((response) => {
-            store.set('user', response);
-            onOk && onOk();
-          })
-          .catch((error) => {
-            onError && onError(error);
-          });
+        this.getUserInfo(onOk, onError);
       })
       .catch((error) => {
         onError && onError(error);
@@ -29,15 +22,7 @@ class UserController {
     api
       .signin(data)
       .then(() => {
-        api
-          .getUserInfo()
-          .then((response) => {
-            store.set('user', JSON.parse(response));
-            onOk && onOk();
-          })
-          .catch((error) => {
-            onError && onError(error);
-          });
+        this.getUserInfo(onOk, onError);
       })
       .catch((error) => {
         onError && onError(error);
@@ -47,7 +32,26 @@ class UserController {
   public logout(onOk?: () => void): void {
     api.logout().then(() => {
       onOk && onOk();
+      deleteCookie('user');
     });
+  }
+
+  public getUserInfo(onOk?: () => void, onError?: (error: Error) => void): void {
+    api
+      .getUserInfo()
+      .then((response) => {
+        const data = JSON.parse(response);
+
+        if (data.id) {
+          setCookie('user', data.id);
+          store.set('user', data);
+        }
+
+        onOk && onOk();
+      })
+      .catch((error) => {
+        onError && onError(error);
+      });
   }
 }
 

@@ -2,7 +2,7 @@ import tpl from './tpl';
 import { Component, ComponentProps } from '../../share/classes/Component';
 import styles from './form.module.scss';
 
-interface FormProps extends ComponentProps {
+export interface FormProps extends ComponentProps {
   propsAndChildren: {
     title: string;
     fields: Component[];

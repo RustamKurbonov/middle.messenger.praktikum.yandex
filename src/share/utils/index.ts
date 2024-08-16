@@ -9,3 +9,4 @@ export * from './merge';
 export * from './isEqual';
 export * from './cloneDeep';
 export * from './set';
+export * from './cookie';

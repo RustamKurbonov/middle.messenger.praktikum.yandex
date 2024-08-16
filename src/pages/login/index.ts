@@ -32,90 +32,96 @@ const handleLogin = (): void => {
   }
 };
 
-const loginForm = new Form({
-  tagName: 'main',
-  propsAndChildren: {
-    title: 'Авторизация',
-    id: 'authorization',
-    fields: [
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Логин',
-          id: 'login',
-          input: new Input({
-            tagName: 'input',
+class LoginForm extends Form {
+  constructor() {
+    super({
+      tagName: 'main',
+      propsAndChildren: {
+        title: 'Авторизация',
+        id: 'authorization',
+        fields: [
+          new FormItem({
+            tagName: 'div',
             propsAndChildren: {
-              attr: {
-                id: 'login',
-                name: 'login',
-                type: 'text',
-              },
+              label: 'Логин',
+              id: 'login',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'login',
+                    name: 'login',
+                    type: 'text',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      e.target && validator(value, 'login', 'login');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+          new FormItem({
+            tagName: 'div',
+            propsAndChildren: {
+              label: 'Пароль',
+              id: 'password',
+              input: new Input({
+                tagName: 'input',
+                propsAndChildren: {
+                  attr: {
+                    id: 'password',
+                    name: 'password',
+                    type: 'password',
+                  },
+                  events: {
+                    blur: (e) => {
+                      const { value } = <HTMLInputElement>e.target;
+                      validator(value, 'password', 'password');
+                    },
+                  },
+                },
+              }),
+            },
+          }),
+        ],
+        buttons: [
+          new Button({
+            tagName: 'button',
+            propsAndChildren: {
+              label: 'Войти',
+              type: 'primary',
               events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  e.target && validator(value, 'login', 'login');
+                click: (e) => {
+                  e.preventDefault();
+                  handleLogin();
                 },
               },
             },
           }),
-        },
-      }),
-      new FormItem({
-        tagName: 'div',
-        propsAndChildren: {
-          label: 'Пароль',
-          id: 'password',
-          input: new Input({
-            tagName: 'input',
+          new Button({
+            tagName: 'button',
             propsAndChildren: {
-              attr: {
-                id: 'password',
-                name: 'password',
-                type: 'password',
-              },
+              label: 'Зарегистрироваться',
               events: {
-                blur: (e) => {
-                  const { value } = <HTMLInputElement>e.target;
-                  validator(value, 'password', 'password');
+                click(e) {
+                  e.preventDefault();
+                  router.go(Paths.Registration);
                 },
               },
             },
           }),
+        ],
+        attr: {
+          class: 'asdadasds',
         },
-      }),
-    ],
-    buttons: [
-      new Button({
-        tagName: 'button',
-        propsAndChildren: {
-          label: 'Войти',
-          type: 'primary',
-          events: {
-            click: (e) => {
-              e.preventDefault();
-              handleLogin();
-            },
-          },
-        },
-      }),
-      new Button({
-        tagName: 'button',
-        propsAndChildren: {
-          label: 'Зарегистрироваться',
-          events: {
-            click(e) {
-              e.preventDefault();
-              router.go(Paths.Registration);
-            },
-          },
-        },
-      }),
-    ],
-    attr: {
-      class: 'asdadasds',
-    },
-  },
-});
+      },
+    });
+  }
+}
+
+const loginForm = new LoginForm();
 
 export default loginForm;

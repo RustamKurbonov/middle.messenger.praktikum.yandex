@@ -16,7 +16,6 @@ export const connect = (
         const newState = mapStateToProps(store.getState());
 
         if (!isEqual(state, newState)) {
-          console.log({ ...mapStateToProps(store.getState()) });
           this.setProps({ ...mapStateToProps(store.getState()) });
         }
 
