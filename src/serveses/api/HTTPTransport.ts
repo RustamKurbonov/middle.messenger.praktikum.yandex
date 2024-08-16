@@ -1,6 +1,6 @@
 import { queryStringify } from 'src/share/utils';
 
-enum METHODS {
+export enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -12,8 +12,6 @@ type Options = {
   headers?: Record<string, string>;
   method?: METHODS;
   data?: Record<string, string>;
-  // credentials?: string;
-  // mode?: string
 };
 
 class HTTPTransport {

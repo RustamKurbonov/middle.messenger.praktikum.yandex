@@ -6,7 +6,7 @@ import ProfileParam from '../../components/ProfileParam';
 import ProfileSidebar from '../../components/ProfileSidebar';
 import { Paths } from 'src/share/constants/routes';
 import router from 'src/serveses/router/Router';
-import userController from 'src/serveses/controllers/UserController';
+import authController from 'src/serveses/controllers/AuthController';
 import { connect } from 'src/serveses/store/connect';
 import { Indexed } from 'src/share/utils';
 
@@ -96,7 +96,7 @@ class Profile extends Component {
               events: {
                 click(e) {
                   e.preventDefault();
-                  userController.logout(() => router.go(Paths.Login));
+                  authController.logout(() => router.go(Paths.Login));
                 },
               },
             },
@@ -111,21 +111,21 @@ class Profile extends Component {
   }
 }
 
-export const mapChatToProps = (state: Indexed): Indexed => {
+const mapChatToProps = (state: Indexed): Indexed => {
   return {
     first_name: state?.user?.login || '',
     avatar: state?.user?.avatar || '',
   };
 };
 
-export const mapDataToProps = (state: Indexed, fieldName: string): Indexed => {
+const mapDataToProps = (state: Indexed, fieldName: string): Indexed => {
   return {
     value: state?.user?.[fieldName] || '',
   };
 };
 
-const profile = connect(Profile, mapChatToProps);
+const profileClass = connect(Profile, mapChatToProps);
 
-const test = new profile({});
+const profile = new profileClass({});
 
-export default test;
+export default profile;

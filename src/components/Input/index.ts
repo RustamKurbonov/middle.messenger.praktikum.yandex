@@ -4,7 +4,7 @@ import styles from './Input.module.scss';
 
 interface InputProps extends ComponentProps {
   propsAndChildren: {
-    attr: { id: string; name: string; type: string };
+    attr: { id: string; name: string; type: string; value?: string };
     events?: {
       blur: (e: Event) => void;
     };

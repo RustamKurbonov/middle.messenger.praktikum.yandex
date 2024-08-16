@@ -5,7 +5,7 @@ import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
 import { getFieldValue, validator } from '../../share/utils';
 import { Paths } from 'src/share/constants/routes';
-import userController from 'src/serveses/controllers/UserController';
+import authController from 'src/serveses/controllers/AuthController';
 
 const handleLogin = (): void => {
   const login = getFieldValue('#login');
@@ -17,7 +17,7 @@ const handleLogin = (): void => {
   ];
 
   if (!validFields.includes(false)) {
-    userController.signin(
+    authController.signin(
       { login, password },
       () => {
         loginForm.setProps({ errorText: undefined });

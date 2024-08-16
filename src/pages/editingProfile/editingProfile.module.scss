@@ -4,7 +4,6 @@
   height: 100vh;
 
   :global {
-
     .editing-profile-wrapper {
       display: flex;
       align-items: center;
@@ -36,8 +35,13 @@
 
     .editing-profile-buttons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 12px;
+    }
+
+    .error {
+      color: red;
+      padding: 8px;
     }
   }
 }

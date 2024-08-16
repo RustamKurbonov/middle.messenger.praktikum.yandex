@@ -5,7 +5,7 @@ import Input from '../../components/Input';
 import { validator, getFieldValue } from '../../share/utils';
 import { Paths } from 'src/share/constants/routes';
 import router from 'src/serveses/router/Router';
-import userController from 'src/serveses/controllers/UserController';
+import authController from 'src/serveses/controllers/AuthController';
 
 const handleRegister = (): void => {
   const first_name = getFieldValue('#first_name');
@@ -25,7 +25,7 @@ const handleRegister = (): void => {
   ];
 
   if (!validFields.includes(false)) {
-    userController.createUser(
+    authController.createUser(
       {
         first_name,
         second_name,
