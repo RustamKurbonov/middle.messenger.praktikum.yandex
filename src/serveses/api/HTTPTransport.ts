@@ -11,7 +11,7 @@ type Options = {
   timeout?: number;
   headers?: Record<string, string>;
   method?: METHODS;
-  data?: Record<string, string>;
+  data?: Record<string, string> | FormData;
 };
 
 class HTTPTransport {
@@ -52,7 +52,9 @@ class HTTPTransport {
 
       xhr.open(
         method,
-        isGet && Boolean(data) ? `${path}${data ? queryStringify(data) : ''}` : path
+        isGet && Boolean(data)
+          ? `${path}${data ? queryStringify(data as Record<string, string>) : ''}`
+          : path
       );
 
       Object.keys(headers).forEach((key) => {
@@ -74,7 +76,11 @@ class HTTPTransport {
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        if (data instanceof FormData) {
+          xhr.send(data);
+        } else {
+          xhr.send(JSON.stringify(data));
+        }
       }
     });
   };

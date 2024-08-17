@@ -196,9 +196,6 @@ export class Component {
   }
 
   setProps = (nextProps: PropsAndChildren): void => {
-    console.log(nextProps, 'nextProps');
-    console.log(this._props);
-
     if (!nextProps) {
       return;
     }

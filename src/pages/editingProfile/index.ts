@@ -10,7 +10,8 @@ import { Paths } from 'src/share/constants/routes';
 import router from 'src/serveses/router/Router';
 import { connect } from 'src/serveses/store/connect';
 import userController from 'src/serveses/controllers/UserController';
-import { ChangePasswordProps, ChangeProfileProps } from 'src/api/userApi';
+import { ChangePasswordFields, ChangeProfileFields, ChangeAvatarFields } from 'src/api/userApi';
+import InputImage from 'src/components/InputImage';
 
 interface EditingProfileFormProps extends ComponentProps {
   propsAndChildren: {
@@ -43,7 +44,7 @@ const handleProfileChange = (): void => {
   ];
 
   if (!validFields.includes(false)) {
-    const profileData: ChangeProfileProps = {
+    const profileData: ChangeProfileFields = {
       display_name,
       email,
       first_name,
@@ -76,7 +77,7 @@ const handlePasswordChange = (): void => {
   ];
 
   if (!validFields.includes(false)) {
-    const password: ChangePasswordProps = {
+    const password: ChangePasswordFields = {
       oldPassword,
       newPassword,
     };
@@ -92,6 +93,29 @@ const handlePasswordChange = (): void => {
     );
   } else {
     editingProfile.setProps({ errorText: 'Ошибка валидации' });
+  }
+};
+
+const handleIconChange = (): void => {
+  const fileInput = document.querySelector('#add-img');
+
+  if (fileInput) {
+    const file = (fileInput as HTMLInputElement)?.files?.[0];
+
+    if (file) {
+      const formData: ChangeAvatarFields = new FormData();
+      formData.append('avatar', file);
+
+      userController.changeAvatar(
+        formData,
+        () => {
+          router.go(Paths.Chat);
+        },
+        (error) => {
+          editingProfile.setProps({ errorText: error.toString() });
+        }
+      );
+    }
   }
 };
 
@@ -121,7 +145,7 @@ class EditingProfile extends Component {
       propsAndChildren: {
         buttons: [
           new Button({
-            tagName: 'a',
+            tagName: 'button',
             propsAndChildren: {
               label: 'Обновить данные',
               type: 'primary',
@@ -134,7 +158,7 @@ class EditingProfile extends Component {
             },
           }),
           new Button({
-            tagName: 'a',
+            tagName: 'button',
             propsAndChildren: {
               label: 'Обновить пароль',
               events: {
@@ -146,7 +170,7 @@ class EditingProfile extends Component {
             },
           }),
           new Button({
-            tagName: 'a',
+            tagName: 'button',
             propsAndChildren: {
               label: 'Отмена',
               events: {
@@ -357,6 +381,19 @@ class EditingProfile extends Component {
             },
           },
         }),
+        iconInput: new InputImage({ id: 'formImage', name: 'avatar' }),
+        imagesButton: new Button({
+          tagName: 'button',
+          propsAndChildren: {
+            label: 'Сохранить аватар',
+            events: {
+              click(e) {
+                e.preventDefault();
+                handleIconChange();
+              },
+            },
+          },
+        }),
         attr: {
           class: styles['editing-profile'],
         },
@@ -372,7 +409,7 @@ class EditingProfile extends Component {
 const mapEditProfileToProps = (state: Indexed): Indexed => {
   return {
     first_name: state?.user?.login || '',
-    avatar: state?.user?.avatar || '',
+    avatar: state?.user?.avatar || '../../assets/icons/Ellipse.svg',
   };
 };
 

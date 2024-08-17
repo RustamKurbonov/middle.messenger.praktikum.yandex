@@ -30,7 +30,6 @@ class Profile extends Component {
       tagName: 'main',
       propsAndChildren: {
         first_name: props?.propsAndChildren?.login || '',
-        avatar: '',
         profileParams: [
           new firstName({
             tagName: 'li',
@@ -114,7 +113,7 @@ class Profile extends Component {
 const mapChatToProps = (state: Indexed): Indexed => {
   return {
     first_name: state?.user?.login || '',
-    avatar: state?.user?.avatar || '',
+    avatar: state?.user?.avatar || '../../assets/icons/Ellipse.svg',
   };
 };
 

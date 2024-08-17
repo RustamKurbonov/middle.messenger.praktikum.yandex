@@ -1,6 +1,7 @@
 import api, { SigninFields, RegistrationFields } from 'src/api/authAPI';
 import store from '../store/Store';
 import { deleteCookie, setCookie } from 'src/share/utils';
+import { resourcesApiPath } from 'src/api/constants';
 
 class AuthController {
   public createUser(
@@ -44,7 +45,7 @@ class AuthController {
 
         if (data.id) {
           setCookie('user', data.id);
-          store.set('user', data);
+          store.set('user', { ...data, avatar: encodeURI(`${resourcesApiPath}/${data.avatar}`) });
         }
 
         onOk && onOk();
