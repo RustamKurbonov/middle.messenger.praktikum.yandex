@@ -11,6 +11,7 @@ import { connect } from 'src/serveses/store/connect';
 import { Indexed } from 'src/share/utils';
 
 export interface ProfileProps {
+  id: number;
   first_name: string;
   second_name: string;
   login: string;
@@ -19,6 +20,7 @@ export interface ProfileProps {
   phone: string;
 }
 
+const id = connect(ProfileParam, (state) => mapDataToProps(state, 'id'));
 const firstName = connect(ProfileParam, (state) => mapDataToProps(state, 'first_name'));
 const secondName = connect(ProfileParam, (state) => mapDataToProps(state, 'second_name'));
 const phone = connect(ProfileParam, (state) => mapDataToProps(state, 'phone'));
@@ -31,6 +33,13 @@ class Profile extends Component {
       propsAndChildren: {
         first_name: props?.propsAndChildren?.login || '',
         profileParams: [
+          new id({
+            tagName: 'li',
+            propsAndChildren: {
+              title: 'ID',
+              value: props?.propsAndChildren?.id?.toString() || '',
+            },
+          }),
           new firstName({
             tagName: 'li',
             propsAndChildren: {
@@ -110,10 +119,10 @@ class Profile extends Component {
   }
 }
 
-const mapChatToProps = (state: Indexed): Indexed => {
+const mapProfileToProps = (state: Indexed): Indexed => {
   return {
     first_name: state?.user?.login || '',
-    avatar: state?.user?.avatar || '../../assets/icons/Ellipse.svg',
+    avatar: state?.user?.avatar || '',
   };
 };
 
@@ -123,7 +132,7 @@ const mapDataToProps = (state: Indexed, fieldName: string): Indexed => {
   };
 };
 
-const profileClass = connect(Profile, mapChatToProps);
+const profileClass = connect(Profile, mapProfileToProps);
 
 const profile = new profileClass({});
 

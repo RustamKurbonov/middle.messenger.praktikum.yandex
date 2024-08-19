@@ -7,7 +7,7 @@ const tpl = `
           {{{buttons}}}
           </div>
         </form>
-        <div class="error">
+        <div class="error-text">
         {{errorText}}
         </div>
       </section>`;

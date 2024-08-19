@@ -1,13 +1,29 @@
 import router from 'src/serveses/router/Router';
 import Button from '../../components/Button';
 import ChatItem from '../../components/ChatItem';
-import MessageItem from '../../components/MessageItem';
 import Search from '../../components/Search';
 import { Component } from '../../share/classes/Component';
-import { validator } from '../../share/utils';
+import { getFieldValue, Indexed, validator } from '../../share/utils';
 import styles from './chat.module.scss';
 import tpl from './tpl';
 import { Paths } from 'src/share/constants/routes';
+import Input from 'src/components/Input';
+import chatsController, { Chat as ChatType } from 'src/serveses/controllers/ChatsController';
+import { connect } from 'src/serveses/store/connect';
+import Message from 'src/components/Message';
+import messageSocket, { Message as MessageType } from 'src/serveses/socket/messageSocket';
+import MessageItem from 'src/components/MessageItem';
+import moment from 'moment';
+import { MouseEvent } from '../../share/types/index';
+
+const handleAddChat = (): void => {
+  const title = (document.querySelector('#chatName') as HTMLInputElement)?.value;
+  const idUserAdded = (document.querySelector('#idUserAdded') as HTMLInputElement)?.value;
+
+  if (title.trim() && idUserAdded.trim()) {
+    chatsController.createChat({ title, idUserAdded });
+  }
+};
 
 class ButtonSubmit extends Component {
   constructor() {
@@ -18,13 +34,15 @@ class ButtonSubmit extends Component {
           class: styles['button-submit'],
         },
         events: {
-          click: () => {
-            const message = document.querySelector('#message');
-            const messageValue = (message as HTMLInputElement)?.value;
-            const isMessageValid = validator(messageValue, 'message', 'message');
+          click: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+            e.preventDefault();
+            const message = getFieldValue('#message');
+            const field = document.querySelector('#message') as HTMLInputElement;
 
-            if (isMessageValid) {
-              console.log(message);
+            if (validator(message, 'message', 'message')) {
+              messageSocket.sendMessage(message);
+              chatsController.getChats({});
+              field.value = '';
             }
           },
         },
@@ -71,7 +89,6 @@ class Chat extends Component {
   constructor() {
     super({
       propsAndChildren: {
-        userName: 'Иван',
         search: new Search({
           tagName: 'input',
           propsAndChildren: { attr: { placeholder: 'Поиск' } },
@@ -88,38 +105,43 @@ class Chat extends Component {
             },
           },
         }),
+        chats: [],
         buttonSubmit: new ButtonSubmit(),
+        chatName: new Input({
+          tagName: 'input',
+          propsAndChildren: {
+            attr: {
+              id: 'chatName',
+              name: 'chatName',
+              type: 'text',
+              placeholder: 'Введите название чата',
+            },
+          },
+        }),
+        idUserAdded: new Input({
+          tagName: 'input',
+          propsAndChildren: {
+            attr: {
+              id: 'idUserAdded',
+              name: 'idUserAdded',
+              type: 'text',
+              placeholder: 'Id добавляемого пользователя',
+            },
+          },
+        }),
+        addChat: new Button({
+          tagName: 'button',
+          propsAndChildren: {
+            label: '+ Создать чат',
+            events: {
+              click(e) {
+                e.preventDefault();
+                handleAddChat();
+              },
+            },
+          },
+        }),
         messageField: new MessageField(),
-        chatItems: [
-          new ChatItem({
-            tagName: 'button',
-            propsAndChildren: {
-              icon: '../../assets/icons/Ellipse.svg',
-              name: 'Андрей',
-              text: 'Друзья, у меня для вас особенный выпуск новостей! Друзья, у меня для вас особенный',
-              date: '10:49',
-              count: '4',
-            },
-          }),
-        ],
-        messageItems: [
-          new MessageItem({
-            tagName: 'div',
-            propsAndChildren: {
-              text: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.',
-              type: 'incoming',
-              time: '11:56',
-            },
-          }),
-          new MessageItem({
-            tagName: 'div',
-            propsAndChildren: {
-              text: 'Круто!',
-              type: 'outgoing',
-              time: '12:00',
-            },
-          }),
-        ],
         attr: {
           class: styles.chat,
         },
@@ -134,6 +156,63 @@ class Chat extends Component {
   }
 }
 
-const chat = new Chat();
+const mapChatToProps = (state: Indexed): Indexed => {
+  const chats = state?.chats || [];
+  const userId = state?.user?.id;
+  const messages: MessageType[] = state?.messages || [];
+
+  return {
+    messages:
+      state.activeChat &&
+      new Message({
+        ...state.activeChat,
+        messages: messages
+          .reverse()
+          .map(({ content, time, user_id }) => {
+            return new MessageItem({
+              tagName: 'div',
+              propsAndChildren: {
+                text: content,
+                type: userId === user_id ? 'outgoing' : 'incoming',
+                time: moment(time).format('DD.MM.YYYY HH:mm:ss'),
+              },
+            });
+          })
+          .reverse(),
+      }),
+    chats: chats.map(({ avatar, created_by, id, last_message, title, unread_count }: ChatType) => {
+      console.log(last_message, 'last_message');
+
+      return new ChatItem({
+        tagName: 'button',
+        propsAndChildren: {
+          id: id.toString(),
+          icon: avatar,
+          name: title,
+          date: created_by.toString(),
+          count: unread_count,
+          lastMessage: last_message,
+          events: {
+            click(e) {
+              e.preventDefault();
+              messageSocket.closeWebSocket();
+              const data = chatsController.getChatUsers(id.toString(), title, avatar);
+
+              data.then((response) => {
+                if (response) {
+                  messageSocket.createWebSocket(response.userId, response.chatId, response.token);
+                }
+              });
+            },
+          },
+        },
+      });
+    }),
+  };
+};
+
+const chatClass = connect(Chat, mapChatToProps);
+
+const chat = new chatClass({});
 
 export default chat;

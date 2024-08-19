@@ -8,12 +8,17 @@ export interface ComponentProps {
   rootQuery?: string;
 }
 
+export interface ObjectType {
+  [name: string]: string | ObjectType;
+}
+
 export type PropsAndChildren = {
   [name: string]:
     | Component
     | Array<Component>
     | string
-    | { [name: string]: string }
+    | number
+    | ObjectType
     | { [name: string]: Function }
     | undefined;
 };
@@ -203,7 +208,11 @@ export class Component {
     this._setUpdate = true;
     const oldValue = { ...this._props };
 
-    const { props, children } = this.getChildren(nextProps);
+    const { props, children, lists } = this.getChildren(nextProps);
+
+    if (Object.values(lists).length) {
+      Object.assign(this._lists, lists);
+    }
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);

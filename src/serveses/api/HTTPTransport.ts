@@ -11,7 +11,7 @@ type Options = {
   timeout?: number;
   headers?: Record<string, string>;
   method?: METHODS;
-  data?: Record<string, string> | FormData;
+  data?: Record<string, string | number | string[] | number[]> | FormData;
 };
 
 class HTTPTransport {

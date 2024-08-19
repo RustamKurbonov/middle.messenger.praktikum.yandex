@@ -2,6 +2,7 @@ import api, { SigninFields, RegistrationFields } from 'src/api/authAPI';
 import store from '../store/Store';
 import { deleteCookie, setCookie } from 'src/share/utils';
 import { resourcesApiPath } from 'src/api/constants';
+import chatsController from './ChatsController';
 
 class AuthController {
   public createUser(
@@ -45,7 +46,14 @@ class AuthController {
 
         if (data.id) {
           setCookie('user', data.id);
-          store.set('user', { ...data, avatar: encodeURI(`${resourcesApiPath}/${data.avatar}`) });
+          store.set('user', {
+            ...data,
+            avatar: data.avatar
+              ? encodeURI(`${resourcesApiPath}/${data.avatar}`)
+              : '../../assets/icons/Ellipse.svg',
+          });
+
+          chatsController.getChats({});
         }
 
         onOk && onOk();
