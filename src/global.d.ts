@@ -9,3 +9,5 @@ declare module '*.scss' {
   const _: Record<string, string>;
   export default _;
 }
+
+declare module 'src';
