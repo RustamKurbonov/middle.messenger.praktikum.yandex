@@ -1,7 +1,7 @@
 import api, { CreateChatFields, GetChatFields } from 'src/api/chatsAPI';
 import store from '../store/Store';
 import { resourcesApiPath } from 'src/api/constants';
-import { UserFields } from 'src/api/userApi1111';
+import { UserFields } from 'src/api/userApi';
 
 export interface LastMessage {
   user: {

@@ -1,4 +1,4 @@
-import api, { UserFields, ChangePasswordFields, ChangeAvatarFields } from 'src/api/userApi1111';
+import api, { UserFields, ChangePasswordFields, ChangeAvatarFields } from 'src/api/userApi';
 import store from '../store/Store';
 
 class UserController {
