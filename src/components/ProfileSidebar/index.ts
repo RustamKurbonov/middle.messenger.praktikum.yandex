@@ -1,6 +1,6 @@
 import styles from './profileSidebar.module.scss';
 import { Component, ComponentProps } from '../../share/classes/Component';
-import { MouseEvent } from '../../share/types/MouseEvent';
+import { MouseEvent } from '../../share/types';
 
 interface ProfileSidebarProps extends ComponentProps {
   propsAndChildren: {

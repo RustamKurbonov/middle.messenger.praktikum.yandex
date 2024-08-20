@@ -1,4 +1,4 @@
-import api, { UserFields, ChangePasswordFields, ChangeAvatarFields } from 'src/api/userApi';
+import api, { UserFields, ChangePasswordFields, ChangeAvatarFields } from '../../api/userApi';
 import store from '../store/Store';
 
 class UserController {
@@ -9,12 +9,12 @@ class UserController {
   ): void {
     api
       .changeProfile(data)
-      .then((response) => {
+      .then((response: string) => {
         const data = JSON.parse(response);
         store.set('user', data);
         onOk && onOk();
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         onError && onError(error);
       });
   }
@@ -29,7 +29,7 @@ class UserController {
       .then(() => {
         onOk && onOk();
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         onError && onError(error);
       });
   }
@@ -41,13 +41,13 @@ class UserController {
   ): void {
     api
       .changeAvatar(data)
-      .then((response) => {
+      .then((response: string) => {
         const data = JSON.parse(response);
 
         store.set('user', data);
         onOk && onOk();
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         onError && onError(error);
       });
   }
