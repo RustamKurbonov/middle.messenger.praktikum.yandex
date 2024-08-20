@@ -12,7 +12,7 @@ import Button from 'src/components/Button';
 import { Paths } from 'src/share/constants/routes';
 import chatsController from 'src/serveses/controllers/ChatsController';
 import UserItem from 'src/components/UserItem';
-import { UserFields } from '../../api/userApi';
+import { UserFields } from 'src/api/userApi';
 
 interface ChatSettingProps {
   avatar: string;
