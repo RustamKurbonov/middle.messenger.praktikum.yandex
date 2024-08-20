@@ -14,7 +14,7 @@ class InputImage extends Component {
       propsAndChildren: {
         name: props.name,
         attr: {
-          class: styles.inputImages,
+          class: styles['input-images'],
           id: props.id,
         },
       },

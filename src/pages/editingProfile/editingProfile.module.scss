@@ -4,6 +4,7 @@
   height: 100vh;
 
   :global {
+
     .editing-profile-wrapper {
       display: flex;
       align-items: center;
@@ -38,6 +39,7 @@
       }
 
       &:hover {
+
         .editing-profile-icon-input {
           opacity: 1;
           visibility: visible;

@@ -54,13 +54,22 @@ class Router {
     }
 
     if (!user) {
-      authController.getUserInfo(undefined, (error: Error) => {
-        if (error.message === '401') {
-          if (pathname !== Paths.Login && pathname !== Paths.Registration) {
-            this.go(Paths.Login);
+      authController.getUserInfo(
+        (user) => {
+          if (user) {
+            if (pathname === Paths.Login || pathname === Paths.Registration) {
+              this.go(Paths.Chat);
+            }
+          }
+        },
+        (error: Error) => {
+          if (error.message === '401') {
+            if (pathname !== Paths.Login && pathname !== Paths.Registration) {
+              this.go(Paths.Login);
+            }
           }
         }
-      });
+      );
     }
 
     if (this._currentRoute && this._currentRoute !== route) {
