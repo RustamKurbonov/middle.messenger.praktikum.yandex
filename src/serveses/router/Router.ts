@@ -1,11 +1,13 @@
 import { Paths, routes } from 'src/share/constants/routes';
 import { Route } from './Route';
 import { Component } from 'src/share/classes/Component';
+import store from '../store/Store';
+import authController from '../controllers/AuthController';
 
 class Router {
   static __instance: Router;
-  routes: Route[];
-  history: History;
+  private routes: Route[];
+  private history: History;
   private _currentRoute: Route | null;
   private _rootQuery: string;
 
@@ -43,10 +45,22 @@ class Router {
   }
 
   _onRoute(pathname: Paths): void {
+    const state = store.getState();
+    const user = state?.user;
     const route = this.getRoute(pathname);
 
     if (!route) {
       return;
+    }
+
+    if (!user) {
+      authController.getUserInfo(undefined, (error: Error) => {
+        if (error.message === '401') {
+          if (pathname !== Paths.Login && pathname !== Paths.Registration) {
+            this.go(Paths.Login);
+          }
+        }
+      });
     }
 
     if (this._currentRoute && this._currentRoute !== route) {

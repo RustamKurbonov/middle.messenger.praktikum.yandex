@@ -10,4 +10,4 @@ export * from './isEqual';
 export * from './cloneDeep';
 export * from './set';
 export * from './cookie';
-export * from './isSuccess';
+export * from './apiUtils';

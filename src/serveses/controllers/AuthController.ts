@@ -1,8 +1,18 @@
 import api, { SigninFields, RegistrationFields } from 'src/api/authAPI';
 import store from '../store/Store';
-import { deleteCookie, setCookie } from 'src/share/utils';
 import { resourcesApiPath } from 'src/api/constants';
 import chatsController from './ChatsController';
+
+export interface User {
+  avatar: string;
+  display_name: string;
+  email: string;
+  first_name: string;
+  id: number;
+  login: string;
+  phone: string;
+  second_name: string;
+}
 
 class AuthController {
   public createUser(
@@ -34,31 +44,30 @@ class AuthController {
   public logout(onOk?: () => void): void {
     api.logout().then(() => {
       onOk && onOk();
-      deleteCookie('user');
+      store.set('user', undefined);
     });
   }
 
-  public getUserInfo(onOk?: () => void, onError?: (error: Error) => void): void {
+  public getUserInfo(onOk?: (user: User) => void, onError?: (error: Error) => void): void {
     api
       .getUserInfo()
       .then((response) => {
-        const data = JSON.parse(response);
+        const data: User = JSON.parse(response);
+        const user = {
+          ...data,
+          avatar: data.avatar
+            ? encodeURI(`${resourcesApiPath}/${data.avatar}`)
+            : '../../assets/icons/Ellipse.svg',
+        };
 
         if (data.id) {
-          setCookie('user', data.id);
-          store.set('user', {
-            ...data,
-            avatar: data.avatar
-              ? encodeURI(`${resourcesApiPath}/${data.avatar}`)
-              : '../../assets/icons/Ellipse.svg',
-          });
-
+          store.set('user', user);
           chatsController.getChats({});
         }
 
-        onOk && onOk();
+        onOk && onOk(user);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         onError && onError(error);
       });
   }

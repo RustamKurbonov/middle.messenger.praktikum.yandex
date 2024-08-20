@@ -14,8 +14,6 @@ interface UserItemProps extends ComponentProps {
 
 class UserItem extends Component {
   constructor(props: UserItemProps) {
-    console.log(props, 'props');
-
     super({
       ...props,
       propsAndChildren: {

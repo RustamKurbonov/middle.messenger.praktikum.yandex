@@ -1,6 +1,6 @@
 import HTTPTransport from 'src/serveses/api/HTTPTransport';
 import { baseApiPath } from './constants';
-import { isSuccess } from 'src/share/utils';
+import { isNoAccess, isSuccess } from 'src/share/utils';
 
 const authPath = '/auth';
 const chatAPIInstance = new HTTPTransport(baseApiPath + authPath);
@@ -40,6 +40,11 @@ class AuthAPI {
     if (isSuccess(data)) {
       return data.responseText;
     }
+
+    if (isNoAccess(data)) {
+      throw new Error(data.status.toString());
+    }
+
     throw new Error(`${data.responseText}`);
   }
 
