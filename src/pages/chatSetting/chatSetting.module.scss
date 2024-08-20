@@ -1,0 +1,75 @@
+.editing-profile {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  :global {
+    .editing-chat-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 36px;
+      width: 100%;
+      width: 500px;
+      height: 100%;
+
+      & input {
+        width: 100%;
+      }
+    }
+
+    .editing-chat-top {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .editing-chat-icon {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      border-radius: 50%;
+      overflow: hidden;
+
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .editing-chat-name {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .editing-chat-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .error {
+      color: red;
+      padding: 8px;
+    }
+
+    .editing-chat-users-wrapper {
+      width: 100%;
+    }
+
+    .editing-chat-users-title {
+      margin-bottom: 12px;
+    }
+
+    .editing-chat-form-wrapper {
+      width: 500px;
+    }
+  }
+}

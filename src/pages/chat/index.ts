@@ -70,6 +70,7 @@ class MessageField extends Component {
         },
         events: {
           blur: (e: FocusEvent) => {
+            e.preventDefault();
             const { value } = <HTMLInputElement>e.target;
             e.target && validator(value, 'message', 'message');
           },
@@ -166,23 +167,18 @@ const mapChatToProps = (state: Indexed): Indexed => {
       state.activeChat &&
       new Message({
         ...state.activeChat,
-        messages: messages
-          .reverse()
-          .map(({ content, time, user_id }) => {
-            return new MessageItem({
-              tagName: 'div',
-              propsAndChildren: {
-                text: content,
-                type: userId === user_id ? 'outgoing' : 'incoming',
-                time: moment(time).format('DD.MM.YYYY HH:mm:ss'),
-              },
-            });
-          })
-          .reverse(),
+        messages: messages.reverse().map(({ content, time, user_id }) => {
+          return new MessageItem({
+            tagName: 'div',
+            propsAndChildren: {
+              text: content,
+              type: userId === user_id ? 'outgoing' : 'incoming',
+              time: moment(time).format('DD.MM.YYYY HH:mm:ss'),
+            },
+          });
+        }),
       }),
     chats: chats.map(({ avatar, created_by, id, last_message, title, unread_count }: ChatType) => {
-      console.log(last_message, 'last_message');
-
       return new ChatItem({
         tagName: 'button',
         propsAndChildren: {
@@ -196,7 +192,7 @@ const mapChatToProps = (state: Indexed): Indexed => {
             click(e) {
               e.preventDefault();
               messageSocket.closeWebSocket();
-              const data = chatsController.getChatUsers(id.toString(), title, avatar);
+              const data = chatsController.getChatTocken(id.toString(), title, avatar);
 
               data.then((response) => {
                 if (response) {

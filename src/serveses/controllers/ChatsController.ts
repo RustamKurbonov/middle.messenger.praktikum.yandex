@@ -1,6 +1,7 @@
 import api, { CreateChatFields, GetChatFields } from 'src/api/chatsAPI';
 import store from '../store/Store';
 import { resourcesApiPath } from 'src/api/constants';
+import { UserFields } from 'src/api/userApi';
 
 export interface LastMessage {
   user: {
@@ -37,7 +38,7 @@ class ChatsController {
 
         if (responseObj?.id) {
           this.getChats({});
-          this.addChatUsers(data.idUserAdded, responseObj.id);
+          this.addUsersChat(data.idUserAdded, responseObj.id);
           onOk && onOk();
         }
       })
@@ -71,17 +72,38 @@ class ChatsController {
       });
   }
 
-  public addChatUsers(userId: string, chatId: string): void {
-    api.addChatUsers(userId, chatId);
+  public addUsersChat(userId: string, chatId: string, onOk?: () => void): void {
+    api.addUsersChat(userId, chatId).then(() => {
+      onOk && onOk();
+      this.getChatUsers(chatId);
+    });
   }
 
-  public getChatUsers(
+  public deleteUsersChat(userId: string, chatId: string, onOk?: () => void): void {
+    api.deleteUsersChat(userId, chatId).then(() => {
+      onOk && onOk();
+      this.getChatUsers(chatId);
+    });
+  }
+
+  public getChatUsers(chatId: string, onOk?: () => void): void {
+    api.getChatUsers(chatId).then((response) => {
+      const data: UserFields[] = JSON.parse(response);
+
+      if (data) {
+        store.set('chatUsers', data);
+        onOk && onOk();
+      }
+    });
+  }
+
+  public getChatTocken(
     chatId: string,
     title: string,
     avatar: string
   ): Promise<{ userId: string; chatId: string; token: string } | undefined> {
     return api
-      .getChatUsers(chatId)
+      .getChatTocken(chatId)
       .then((response): { userId: string; chatId: string; token: string } | undefined => {
         const data: { token?: string } = JSON.parse(response);
         const userId = store.getState()?.user?.id || '';
@@ -90,6 +112,7 @@ class ChatsController {
           store.set('activeChat', { token: data.token, id: chatId, title, avatar });
 
           if (userId && chatId) {
+            this.getChatUsers(chatId);
             return { userId, chatId, token: data.token };
           }
         }

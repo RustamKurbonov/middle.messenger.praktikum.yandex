@@ -6,6 +6,7 @@ import editingProfile from '../../pages/editingProfile';
 import error404 from '../../pages/error404';
 import error500 from '../../pages/error500';
 import chat from '../../pages/chat';
+import chatSetting from '../../pages/chatSetting';
 
 export enum Paths {
   Login = '/',
@@ -15,6 +16,7 @@ export enum Paths {
   Chat = '/messenger',
   Error404 = '/error404',
   Error500 = '/error500',
+  ChatSetting = '/chatSetting',
 }
 
 export const routes: Record<Paths, Component> = {
@@ -25,4 +27,5 @@ export const routes: Record<Paths, Component> = {
   '/error404': error404,
   '/error500': error500,
   '/messenger': chat,
+  '/chatSetting': chatSetting,
 };

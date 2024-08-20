@@ -88,8 +88,8 @@ class MessageSocket {
       if (Array.isArray(response)) {
         store.set('messages', response);
       } else if (response.type === 'message') {
-        const oldMessages = store.getState()?.messages || [];
-        store.set('messages', [...oldMessages, response]);
+        const oldMessages: Message[] = store.getState()?.messages || [];
+        store.set('messages', oldMessages.push(response));
       }
     });
   }

@@ -10,7 +10,7 @@ import { Paths } from 'src/share/constants/routes';
 import router from 'src/serveses/router/Router';
 import { connect } from 'src/serveses/store/connect';
 import userController from 'src/serveses/controllers/UserController';
-import { ChangePasswordFields, ChangeProfileFields, ChangeAvatarFields } from 'src/api/userApi';
+import { ChangePasswordFields, UserFields, ChangeAvatarFields } from 'src/api/userApi';
 import InputImage from 'src/components/InputImage';
 
 interface EditingProfileFormProps extends ComponentProps {
@@ -44,7 +44,7 @@ const handleProfileChange = (): void => {
   ];
 
   if (!validFields.includes(false)) {
-    const profileData: ChangeProfileFields = {
+    const profileData: UserFields = {
       display_name,
       email,
       first_name,

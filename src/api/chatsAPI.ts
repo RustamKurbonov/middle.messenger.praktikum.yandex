@@ -37,7 +37,7 @@ class ChatsApi {
     throw new Error(`${data.responseText}`);
   }
 
-  async getChatUsers(id: string): Promise<string> {
+  async getChatTocken(id: string): Promise<string> {
     const data = await chatAPIInstance.post(`${chatsPath}/token/${id}`, {
       headers: { 'Content-Type': 'application/json' },
     });
@@ -47,12 +47,36 @@ class ChatsApi {
     throw new Error(`${data.responseText}`);
   }
 
-  async addChatUsers(userId: string, chatId: string): Promise<string> {
+  async addUsersChat(userId: string, chatId: string): Promise<string> {
     const data = await chatAPIInstance.put(`${chatsPath}/users`, {
       data: {
         users: [Number(userId)],
         chatId: Number(chatId),
       },
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (isSuccess(data)) {
+      return data.responseText;
+    }
+    throw new Error(`${data.responseText}`);
+  }
+
+  async deleteUsersChat(userId: string, chatId: string): Promise<string> {
+    const data = await chatAPIInstance.delete(`${chatsPath}/users`, {
+      data: {
+        users: [Number(userId)],
+        chatId: Number(chatId),
+      },
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (isSuccess(data)) {
+      return data.responseText;
+    }
+    throw new Error(`${data.responseText}`);
+  }
+
+  async getChatUsers(chatId: string): Promise<string> {
+    const data = await chatAPIInstance.get(`/${chatsPath}/${chatId}/users`, {
       headers: { 'Content-Type': 'application/json' },
     });
     if (isSuccess(data)) {

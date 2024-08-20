@@ -1,13 +1,9 @@
-import api, {
-  ChangeProfileFields,
-  ChangePasswordFields,
-  ChangeAvatarFields,
-} from 'src/api/userApi';
+import api, { UserFields, ChangePasswordFields, ChangeAvatarFields } from 'src/api/userApi';
 import store from '../store/Store';
 
 class UserController {
   public changeProfile(
-    data: ChangeProfileFields,
+    data: UserFields,
     onOk?: () => void,
     onError?: (error: Error) => void
   ): void {

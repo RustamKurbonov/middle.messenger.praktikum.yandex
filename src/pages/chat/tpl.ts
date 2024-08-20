@@ -21,9 +21,9 @@ const tpl = `
     {{{messages}}}
     <section class="chat-body_form">
         <button class="chat-body_clip"></button>
-      <form class="chat-body_field" id="messageForm">
+      <div class="chat-body_field" id="messageForm">
         {{{messageField}}}
-      </form>
+      </div>
       {{{buttonSubmit}}}
     </section>
   </section>

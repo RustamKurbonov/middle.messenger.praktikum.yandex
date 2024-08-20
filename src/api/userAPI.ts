@@ -2,13 +2,15 @@ import HTTPTransport from 'src/serveses/api/HTTPTransport';
 import { baseApiPath } from './constants';
 import { isSuccess } from 'src/share/utils';
 
-export interface ChangeProfileFields {
+export interface UserFields {
   first_name: string;
   second_name: string;
   display_name: string;
   login: string;
   email: string;
   phone: string;
+  role?: string;
+  id?: number;
 }
 
 export interface ChangePasswordFields {
@@ -22,7 +24,7 @@ const authPath = '/user';
 const chatAPIInstance = new HTTPTransport(baseApiPath + authPath);
 
 class UserApi {
-  async changeProfile(props: ChangeProfileFields): Promise<string> {
+  async changeProfile(props: UserFields): Promise<string> {
     const data = await chatAPIInstance.put('/profile', {
       data: { ...props },
       headers: { 'Content-Type': 'application/json' },

@@ -2,13 +2,11 @@ const tpl = `
   <nav class="message-nav">
     <div class="message-user">
       <div class="message-icon"></div>
-        <div class="message-name">{{title}}</div>
+      <div class="message-name">{{title}}</div>
       </div>
+      {{{setting}}}
   </nav>
-
-  <div class="message-content">
-    {{{messages}}}
-  </div>
+  {{{content}}}
 `;
 
 export default tpl;
