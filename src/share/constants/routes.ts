@@ -16,7 +16,7 @@ export enum Paths {
   Chat = '/messenger',
   Error404 = '/error404',
   Error500 = '/error500',
-  ChatSetting = '/chatSetting',
+  ChatSetting = '/chat-setting',
 }
 
 export const routes: Record<Paths, Component> = {
