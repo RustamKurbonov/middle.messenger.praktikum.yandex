@@ -52,20 +52,25 @@ class AuthController {
     api
       .getUserInfo()
       .then((response) => {
-        const data: User = JSON.parse(response);
-        const user = {
-          ...data,
-          avatar: data.avatar
-            ? encodeURI(`${resourcesApiPath}/${data.avatar}`)
-            : '../../assets/icons/Ellipse.svg',
-        };
+        try {
+          const data: User = JSON.parse(response);
 
-        if (data.id) {
-          store.set('user', user);
-          chatsController.getChats({});
+          const user = {
+            ...data,
+            avatar: data.avatar
+              ? encodeURI(`${resourcesApiPath}/${data.avatar}`)
+              : '../../assets/icons/Ellipse.svg',
+          };
+
+          if (data.id) {
+            store.set('user', user);
+            chatsController.getChats({});
+          }
+
+          onOk && onOk(user);
+        } catch (error) {
+          onError && onError(error);
         }
-
-        onOk && onOk(user);
       })
       .catch((error: Error) => {
         onError && onError(error);

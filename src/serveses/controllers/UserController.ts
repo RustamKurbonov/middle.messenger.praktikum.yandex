@@ -10,9 +10,13 @@ class UserController {
     api
       .changeProfile(data)
       .then((response: string) => {
-        const data = JSON.parse(response);
-        store.set('user', data);
-        onOk && onOk();
+        try {
+          const data = JSON.parse(response);
+          store.set('user', data);
+          onOk && onOk();
+        } catch (error) {
+          onError && onError(error);
+        }
       })
       .catch((error: Error) => {
         onError && onError(error);
@@ -42,10 +46,14 @@ class UserController {
     api
       .changeAvatar(data)
       .then((response: string) => {
-        const data = JSON.parse(response);
+        try {
+          const data = JSON.parse(response);
 
-        store.set('user', data);
-        onOk && onOk();
+          store.set('user', data);
+          onOk && onOk();
+        } catch (error) {
+          onError && onError(error);
+        }
       })
       .catch((error: Error) => {
         onError && onError(error);

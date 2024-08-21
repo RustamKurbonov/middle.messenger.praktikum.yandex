@@ -34,12 +34,16 @@ class ChatsController {
     api
       .createChat({ title: data.title })
       .then((response) => {
-        const responseObj: { id?: string } = JSON.parse(response);
+        try {
+          const responseObj: { id?: string } = JSON.parse(response);
 
-        if (responseObj?.id) {
-          this.getChats({});
-          this.addUsersChat(data.idUserAdded, responseObj.id);
-          onOk && onOk();
+          if (responseObj?.id) {
+            this.getChats({});
+            this.addUsersChat(data.idUserAdded, responseObj.id);
+            onOk && onOk();
+          }
+        } catch (error) {
+          onError && onError(error);
         }
       })
       .catch((error) => {
@@ -51,20 +55,24 @@ class ChatsController {
     api
       .getChats(data)
       .then((response) => {
-        const data: Chat[] = JSON.parse(response);
+        try {
+          const data: Chat[] = JSON.parse(response);
 
-        if (data) {
-          store.set(
-            'chats',
-            data.map((chat) => ({
-              ...chat,
-              avatar: chat.avatar
-                ? encodeURI(`${resourcesApiPath}/${chat.avatar}`)
-                : '../../assets/icons/Ellipse.svg',
-              last_message: chat.last_message || { content: '', time: '', user: '' },
-            }))
-          );
-          onOk && onOk();
+          if (data) {
+            store.set(
+              'chats',
+              data.map((chat) => ({
+                ...chat,
+                avatar: chat.avatar
+                  ? encodeURI(`${resourcesApiPath}/${chat.avatar}`)
+                  : '../../assets/icons/Ellipse.svg',
+                last_message: chat.last_message || { content: '', time: '', user: '' },
+              }))
+            );
+            onOk && onOk();
+          }
+        } catch (error) {
+          onError && onError(error);
         }
       })
       .catch((error) => {
@@ -88,12 +96,14 @@ class ChatsController {
 
   public getChatUsers(chatId: string, onOk?: () => void): void {
     api.getChatUsers(chatId).then((response) => {
-      const data: UserFields[] = JSON.parse(response);
+      try {
+        const data: UserFields[] = JSON.parse(response);
 
-      if (data) {
-        store.set('chatUsers', data);
-        onOk && onOk();
-      }
+        if (data) {
+          store.set('chatUsers', data);
+          onOk && onOk();
+        }
+      } catch (error) {}
     });
   }
 
@@ -105,18 +115,22 @@ class ChatsController {
     return api
       .getChatTocken(chatId)
       .then((response): { userId: string; chatId: string; token: string } | undefined => {
-        const data: { token?: string } = JSON.parse(response);
-        const userId = store.getState()?.user?.id || '';
+        try {
+          const data: { token?: string } = JSON.parse(response);
+          const userId = store.getState()?.user?.id || '';
 
-        if (data?.token) {
-          store.set('activeChat', { token: data.token, id: chatId, title, avatar });
+          if (data?.token) {
+            store.set('activeChat', { token: data.token, id: chatId, title, avatar });
 
-          if (userId && chatId) {
-            this.getChatUsers(chatId);
-            return { userId, chatId, token: data.token };
+            if (userId && chatId) {
+              this.getChatUsers(chatId);
+              return { userId, chatId, token: data.token };
+            }
           }
+          return;
+        } catch (error) {
+          return;
         }
-        return;
       });
   }
 }

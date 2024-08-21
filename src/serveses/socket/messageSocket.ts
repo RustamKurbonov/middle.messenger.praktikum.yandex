@@ -83,14 +83,16 @@ class MessageSocket {
 
   _listenerMessages(): void {
     this.socket.addEventListener('message', (event) => {
-      const response: Message | Message[] = JSON.parse(event.data);
+      try {
+        const response: Message | Message[] = JSON.parse(event.data);
 
-      if (Array.isArray(response)) {
-        store.set('messages', response);
-      } else if (response.type === 'message') {
-        const oldMessages: Message[] = store.getState()?.messages || [];
-        store.set('messages', oldMessages.push(response));
-      }
+        if (Array.isArray(response)) {
+          store.set('messages', response);
+        } else if (response.type === 'message') {
+          const oldMessages: Message[] = store.getState()?.messages || [];
+          store.set('messages', oldMessages.push(response));
+        }
+      } catch (error) {}
     });
   }
 
