@@ -27,5 +27,5 @@ export const routes: Record<Paths, Component> = {
   '/error404': error404,
   '/error500': error500,
   '/messenger': chat,
-  '/chatSetting': chatSetting,
+  '/chat-setting': chatSetting,
 };
