@@ -58,7 +58,7 @@ class AuthController {
           const user = {
             ...data,
             avatar: data.avatar
-              ? encodeURI(`${resourcesApiPath}/${data.avatar}`)
+              ? encodeURI(`${resourcesApiPath}${data.avatar}`)
               : '../../assets/icons/Ellipse.svg',
           };
 

@@ -1,5 +1,6 @@
 import api, { UserFields, ChangePasswordFields, ChangeAvatarFields } from 'src/api/userApi';
 import store from '../store/Store';
+import { resourcesApiPath } from 'src/api/constants';
 
 class UserController {
   public changeProfile(
@@ -49,7 +50,14 @@ class UserController {
         try {
           const data = JSON.parse(response);
 
-          store.set('user', data);
+          const user = {
+            ...data,
+            avatar: data.avatar
+              ? encodeURI(`${resourcesApiPath}${data.avatar}`)
+              : '../../assets/icons/Ellipse.svg',
+          };
+
+          store.set('user', user);
           onOk && onOk();
         } catch (error) {
           onError && onError(error);
