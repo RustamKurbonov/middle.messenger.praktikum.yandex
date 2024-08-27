@@ -5,6 +5,11 @@ import EventBus from './EventBus';
 export interface ComponentProps {
   tagName?: string;
   propsAndChildren?: PropsAndChildren;
+  rootQuery?: string;
+}
+
+export interface ObjectType {
+  [name: string]: string | ObjectType;
 }
 
 export type PropsAndChildren = {
@@ -12,8 +17,10 @@ export type PropsAndChildren = {
     | Component
     | Array<Component>
     | string
-    | { [name: string]: string }
-    | { [name: string]: Function };
+    | number
+    | ObjectType
+    | { [name: string]: Function }
+    | undefined;
 };
 
 export class Component {
@@ -21,6 +28,7 @@ export class Component {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   };
 
@@ -142,6 +150,7 @@ export class Component {
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   init(): void {
@@ -162,13 +171,21 @@ export class Component {
     });
   }
 
-  componentDidMount(): void {}
+  componentDidMount(callBack?: () => void): void {
+    callBack && callBack();
+  }
 
   dispatchComponentDidMount(): void {
     this._eventBus.emit(Component.EVENTS.FLOW_CDM);
     if (Object.keys(this._children).length) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
+  }
+
+  _componentWillUnmount(): void {}
+
+  dispatchComponentWillUnmount(): void {
+    this._eventBus.emit(Component.EVENTS.FLOW_CWU);
   }
 
   _componentDidUpdate(): void {
@@ -178,7 +195,8 @@ export class Component {
     }
   }
 
-  componentDidUpdate(): boolean {
+  componentDidUpdate(callBack?: () => void): boolean {
+    callBack && callBack();
     return true;
   }
 
@@ -187,10 +205,14 @@ export class Component {
       return;
     }
 
-    this._setUpdate = false;
+    this._setUpdate = true;
     const oldValue = { ...this._props };
 
-    const { props, children } = this.getChildren(nextProps);
+    const { props, children, lists } = this.getChildren(nextProps);
+
+    if (Object.values(lists).length) {
+      Object.assign(this._lists, lists);
+    }
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);
@@ -274,19 +296,5 @@ export class Component {
     const element = document.createElement(tagName);
 
     return element;
-  }
-
-  show(): void {
-    const content = this.getContent();
-    if (content) {
-      content.style.display = 'block';
-    }
-  }
-
-  hide(): void {
-    const content = this.getContent();
-    if (content) {
-      content.style.display = 'none';
-    }
   }
 }

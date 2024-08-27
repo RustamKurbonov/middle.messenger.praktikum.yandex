@@ -7,6 +7,9 @@ const tpl = `
           {{{buttons}}}
           </div>
         </form>
+        <div class="error-text">
+        {{errorText}}
+        </div>
       </section>`;
 
 export default tpl;

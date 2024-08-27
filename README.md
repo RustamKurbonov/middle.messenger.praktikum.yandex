@@ -96,12 +96,13 @@ npm run format
 
 ## Список страниц
 
-- авторизация: http://127.0.0.1:5173/login/
-- регистрация: http://127.0.0.1:5173/registration/
-- чат: http://127.0.0.1:5173/chat/
-- профиль: http://127.0.0.1:5173/profile/
-- редактирование профиля: http://127.0.0.1:5173/editingProfile/
-- ошибка 404: http://127.0.0.1:5173/error404/
-- ошибка 500: http://127.0.0.1:5173/error500/
+- авторизация: http://127.0.0.1:5173/
+- регистрация: http://127.0.0.1:5173/sign-up
+- чат: http://127.0.0.1:5173/messenger
+- профиль: http://127.0.0.1:5173/settings
+- редактирование профиля: http://127.0.0.1:5173/settings-change
+- редактирование чата: http://127.0.0.1:5173/chat-change
+- ошибка 404: http://127.0.0.1:5173/error404
+- ошибка 500: http://127.0.0.1:5173/error500
 
-Netlify: https://regal-griffin-964a9d.netlify.app/ Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
+Netlify: https://66c5de291e5c440008fdb49b--regal-griffin-964a9d.netlify.app. Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1

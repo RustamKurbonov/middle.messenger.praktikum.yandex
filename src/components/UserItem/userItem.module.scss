@@ -1,0 +1,17 @@
+.user-item {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  width: 100%;
+  gap: 16px;
+  justify-content: space-between;
+
+  & button {
+    flex: 0 0 40px;
+  }
+
+  & p {
+    padding: 0 8px;
+    color: #c9c5c5;
+  }
+}

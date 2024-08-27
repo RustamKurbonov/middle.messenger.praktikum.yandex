@@ -6,9 +6,10 @@
   min-height: 94px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   background-color: transparent;
+  cursor: pointer;
 
   :global {
 
@@ -28,6 +29,7 @@
       justify-content: start;
       gap: 4px;
       text-align: left;
+      flex: 1 1 auto;
     }
 
     .chat-item-title {

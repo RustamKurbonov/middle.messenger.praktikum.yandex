@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import styles from './button.module.scss';
 import { Component, ComponentProps } from '../../share/classes/Component';
+import { MouseEvent } from '../../share/types/index';
 
 interface ButtonProps extends ComponentProps {
   propsAndChildren: {
@@ -10,7 +11,7 @@ interface ButtonProps extends ComponentProps {
       href: string;
     };
     events?: {
-      click: (e: HTMLButtonElement) => void;
+      click: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
     };
   };
 }

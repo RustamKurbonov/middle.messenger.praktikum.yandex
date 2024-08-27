@@ -1,10 +1,11 @@
 import styles from './profileSidebar.module.scss';
 import { Component, ComponentProps } from '../../share/classes/Component';
+import { MouseEvent } from '../../share/types';
 
 interface ProfileSidebarProps extends ComponentProps {
   propsAndChildren: {
-    attr: {
-      href: string;
+    events?: {
+      click: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
     };
   };
 }
@@ -13,11 +14,10 @@ class ProfileSidebar extends Component {
   constructor(props: ProfileSidebarProps) {
     super({
       ...props,
-      tagName: 'a',
+      tagName: 'button',
       propsAndChildren: {
         ...props.propsAndChildren,
         attr: {
-          ...props.propsAndChildren.attr,
           class: styles['profile-sidebar'],
         },
       },
@@ -25,7 +25,7 @@ class ProfileSidebar extends Component {
   }
 
   render(): DocumentFragment {
-    return this.compile('{{href}}', {
+    return this.compile('{{button}}', {
       ...this._props,
     });
   }

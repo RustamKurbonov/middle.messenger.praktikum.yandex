@@ -5,13 +5,119 @@ import Button from '../../components/Button';
 import ProfileSidebar from '../../components/ProfileSidebar';
 import FormItem from '../../components/FormItem';
 import Input from '../../components/Input';
-import { validator } from '../../share/utils/validator';
+import { getFieldValue, Indexed, validator } from '../../share/utils';
+import { Paths } from 'src/share/constants/routes';
+import router from 'src/serveses/router/Router';
+import { connect } from 'src/serveses/store/connect';
+import userController from 'src/serveses/controllers/UserController';
+import { ChangePasswordFields, UserFields, ChangeAvatarFields } from 'src/api/userApi';
+import InputImage from 'src/components/InputImage';
 
 interface EditingProfileFormProps extends ComponentProps {
   propsAndChildren: {
     formItems: Component[];
   };
 }
+
+const inputFirstName = connect(Input, (state) => mapDataToProps(state, 'first_name'));
+const inputSecondName = connect(Input, (state) => mapDataToProps(state, 'second_name'));
+const inputDisplayName = connect(Input, (state) => mapDataToProps(state, 'display_name'));
+const inputLogin = connect(Input, (state) => mapDataToProps(state, 'login'));
+const inputEmail = connect(Input, (state) => mapDataToProps(state, 'email'));
+const inputPhone = connect(Input, (state) => mapDataToProps(state, 'phone'));
+
+const handleProfileChange = (): void => {
+  const first_name = getFieldValue('#first_name');
+  const second_name = getFieldValue('#second_name');
+  const display_name = getFieldValue('#display_name');
+  const login = getFieldValue('#login');
+  const email = getFieldValue('#email');
+  const phone = getFieldValue('#phone');
+
+  const validFields = [
+    validator(first_name, 'name', 'first_name'),
+    validator(second_name, 'name', 'second_name'),
+    validator(display_name, 'name', 'display_name'),
+    validator(login, 'login', 'login'),
+    validator(email, 'email', 'email'),
+    validator(phone, 'phone', 'phone'),
+  ];
+
+  if (!validFields.includes(false)) {
+    const profileData: UserFields = {
+      display_name,
+      email,
+      first_name,
+      login,
+      phone,
+      second_name,
+    };
+
+    userController.changeProfile(
+      profileData,
+      () => {
+        router.go(Paths.Chat);
+      },
+      (error) => {
+        editingProfile.setProps({ errorText: error.toString() });
+      }
+    );
+  } else {
+    editingProfile.setProps({ errorText: 'Ошибка валидации' });
+  }
+};
+
+const handlePasswordChange = (): void => {
+  const oldPassword = getFieldValue('#oldPassword');
+  const newPassword = getFieldValue('#newPassword');
+
+  const validFields = [
+    validator(oldPassword, 'password', 'oldPassword'),
+    validator(newPassword, 'password', 'newPassword'),
+  ];
+
+  if (!validFields.includes(false)) {
+    const password: ChangePasswordFields = {
+      oldPassword,
+      newPassword,
+    };
+
+    userController.changePassword(
+      password,
+      () => {
+        router.go(Paths.Chat);
+      },
+      (error) => {
+        editingProfile.setProps({ errorText: error.toString() });
+      }
+    );
+  } else {
+    editingProfile.setProps({ errorText: 'Ошибка валидации' });
+  }
+};
+
+const handleIconChange = (): void => {
+  const fileInput = document.querySelector('#add-img');
+
+  if (fileInput) {
+    const file = (fileInput as HTMLInputElement)?.files?.[0];
+
+    if (file) {
+      const formData: ChangeAvatarFields = new FormData();
+      formData.append('avatar', file);
+
+      userController.changeAvatar(
+        formData,
+        () => {
+          router.go(Paths.Chat);
+        },
+        (error) => {
+          editingProfile.setProps({ errorText: error.toString() });
+        }
+      );
+    }
+  }
+};
 
 class EditingProfileForm extends Component {
   constructor(props: EditingProfileFormProps) {
@@ -37,98 +143,42 @@ class EditingProfile extends Component {
     super({
       tagName: 'main',
       propsAndChildren: {
-        username: 'Иван',
         buttons: [
           new Button({
-            tagName: 'a',
+            tagName: 'button',
             propsAndChildren: {
-              label: 'Сохранить',
+              label: 'Обновить данные',
               type: 'primary',
               events: {
-                click: () => {
-                  const firstName = document.querySelector('#first_name');
-                  const firstNameValue = (firstName as HTMLInputElement)?.value;
-                  const secondName = document.querySelector('#second_name');
-                  const secondNameValue = (secondName as HTMLInputElement)?.value;
-                  const displayName = document.querySelector('#display_name');
-                  const displayNameValue = (displayName as HTMLInputElement)?.value;
-                  const login = document.querySelector('#login');
-                  const loginValue = (login as HTMLInputElement)?.value;
-                  const email = document.querySelector('#email');
-                  const emailValue = (email as HTMLInputElement)?.value;
-                  const phone = document.querySelector('#phone');
-                  const phoneValue = (phone as HTMLInputElement)?.value;
-                  const oldPassword = document.querySelector('#oldPassword');
-                  const oldPasswordValue = (oldPassword as HTMLInputElement)?.value;
-                  const newPassword = document.querySelector('#newPassword');
-                  const newPasswordValue = (newPassword as HTMLInputElement)?.value;
-                  const form = document.querySelector('#editingProfile');
-
-                  const isFirstNameValid = validator(
-                    firstNameValue,
-                    firstName,
-                    'name',
-                    'first_name'
-                  );
-                  const isSecondNameValid = validator(
-                    secondNameValue,
-                    secondName,
-                    'name',
-                    'second_name'
-                  );
-                  const isDisplayNameValid = validator(
-                    displayNameValue,
-                    displayName,
-                    'displayName',
-                    'display_name'
-                  );
-                  const isLoginValid = validator(loginValue, login, 'login', 'login');
-                  const isEmailValid = validator(emailValue, email, 'email', 'email');
-                  const isPhoneValid = validator(phoneValue, phone, 'phone', 'phone');
-                  const isOldPasswordValid = validator(
-                    oldPasswordValue,
-                    oldPassword,
-                    'password',
-                    'oldPassword'
-                  );
-                  const isNewPasswordValid = validator(
-                    newPasswordValue,
-                    newPassword,
-                    'password',
-                    'newPassword'
-                  );
-
-                  if (
-                    isFirstNameValid &&
-                    isSecondNameValid &&
-                    isDisplayNameValid &&
-                    isLoginValid &&
-                    isEmailValid &&
-                    isPhoneValid &&
-                    isOldPasswordValid &&
-                    isNewPasswordValid
-                  ) {
-                    console.log({
-                      firstName: firstNameValue,
-                      secondName: secondNameValue,
-                      displayName: displayNameValue,
-                      login: loginValue,
-                      email: emailValue,
-                      phone: phoneValue,
-                      oldPassword: oldPasswordValue,
-                      newPassword: newPasswordValue,
-                    });
-                  } else {
-                    form?.classList.add('error');
-                  }
+                click(e) {
+                  e.preventDefault();
+                  handleProfileChange();
                 },
               },
             },
           }),
           new Button({
-            tagName: 'a',
+            tagName: 'button',
+            propsAndChildren: {
+              label: 'Обновить пароль',
+              events: {
+                click(e) {
+                  e.preventDefault();
+                  handlePasswordChange();
+                },
+              },
+            },
+          }),
+          new Button({
+            tagName: 'button',
             propsAndChildren: {
               label: 'Отмена',
+              events: {
+                click(e) {
+                  e.preventDefault();
+                  router.go(Paths.Chat);
+                },
+              },
             },
           }),
         ],
@@ -140,7 +190,7 @@ class EditingProfile extends Component {
                 propsAndChildren: {
                   label: 'Имя',
                   id: 'first_name',
-                  input: new Input({
+                  input: new inputFirstName({
                     tagName: 'input',
                     propsAndChildren: {
                       attr: {
@@ -149,9 +199,9 @@ class EditingProfile extends Component {
                         type: 'text',
                       },
                       events: {
-                        blur: (e) => {
+                        blur: (e: Event) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'name', 'first_name');
+                          e.target && validator(value, 'name', 'first_name');
                         },
                       },
                     },
@@ -163,7 +213,7 @@ class EditingProfile extends Component {
                 propsAndChildren: {
                   label: 'Фамилия',
                   id: 'second_name',
-                  input: new Input({
+                  input: new inputSecondName({
                     tagName: 'input',
                     propsAndChildren: {
                       attr: {
@@ -172,9 +222,9 @@ class EditingProfile extends Component {
                         type: 'text',
                       },
                       events: {
-                        blur: (e) => {
+                        blur: (e: Event) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'name', 'second_name');
+                          e.target && validator(value, 'name', 'second_name');
                         },
                       },
                     },
@@ -186,7 +236,7 @@ class EditingProfile extends Component {
                 propsAndChildren: {
                   label: 'Никнейм',
                   id: 'display_name',
-                  input: new Input({
+                  input: new inputDisplayName({
                     tagName: 'input',
                     propsAndChildren: {
                       attr: {
@@ -195,10 +245,9 @@ class EditingProfile extends Component {
                         type: 'text',
                       },
                       events: {
-                        blur: (e) => {
+                        blur: (e: Event) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target &&
-                            validator(value, e.target as Element, 'displayName', 'display_name');
+                          e.target && validator(value, 'displayName', 'display_name');
                         },
                       },
                     },
@@ -210,7 +259,7 @@ class EditingProfile extends Component {
                 propsAndChildren: {
                   label: 'Логин',
                   id: 'login',
-                  input: new Input({
+                  input: new inputLogin({
                     tagName: 'input',
                     propsAndChildren: {
                       attr: {
@@ -219,9 +268,9 @@ class EditingProfile extends Component {
                         type: 'text',
                       },
                       events: {
-                        blur: (e) => {
+                        blur: (e: Event) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'login', 'login');
+                          e.target && validator(value, 'login', 'login');
                         },
                       },
                     },
@@ -233,7 +282,7 @@ class EditingProfile extends Component {
                 propsAndChildren: {
                   label: 'Почта',
                   id: 'email',
-                  input: new Input({
+                  input: new inputEmail({
                     tagName: 'input',
                     propsAndChildren: {
                       attr: {
@@ -242,9 +291,9 @@ class EditingProfile extends Component {
                         type: 'email',
                       },
                       events: {
-                        blur: (e) => {
+                        blur: (e: Event) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'email', 'email');
+                          e.target && validator(value, 'email', 'email');
                         },
                       },
                     },
@@ -256,7 +305,7 @@ class EditingProfile extends Component {
                 propsAndChildren: {
                   label: 'Телефон',
                   id: 'phone',
-                  input: new Input({
+                  input: new inputPhone({
                     tagName: 'input',
                     propsAndChildren: {
                       attr: {
@@ -265,9 +314,9 @@ class EditingProfile extends Component {
                         type: 'text',
                       },
                       events: {
-                        blur: (e) => {
+                        blur: (e: Event) => {
                           const { value } = <HTMLInputElement>e.target;
-                          e.target && validator(value, e.target as Element, 'phone', 'phone');
+                          e.target && validator(value, 'phone', 'phone');
                         },
                       },
                     },
@@ -290,7 +339,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          validator(value, e.target as Element, 'password', 'oldPassword');
+                          validator(value, 'password', 'oldPassword');
                         },
                       },
                     },
@@ -313,7 +362,7 @@ class EditingProfile extends Component {
                       events: {
                         blur: (e) => {
                           const { value } = <HTMLInputElement>e.target;
-                          validator(value, e.target as Element, 'password', 'newPassword');
+                          validator(value, 'password', 'newPassword');
                         },
                       },
                     },
@@ -324,7 +373,26 @@ class EditingProfile extends Component {
           },
         }),
         profileSidebar: new ProfileSidebar({
-          propsAndChildren: { attr: { href: './chat' } },
+          propsAndChildren: {
+            events: {
+              click() {
+                router.back();
+              },
+            },
+          },
+        }),
+        iconInput: new InputImage({ id: 'formImage', name: 'avatar' }),
+        imagesButton: new Button({
+          tagName: 'button',
+          propsAndChildren: {
+            label: 'Сохранить аватар',
+            events: {
+              click(e) {
+                e.preventDefault();
+                handleIconChange();
+              },
+            },
+          },
         }),
         attr: {
           class: styles['editing-profile'],
@@ -338,6 +406,23 @@ class EditingProfile extends Component {
   }
 }
 
-const editingProfile = (): EditingProfile => new EditingProfile();
+const mapEditProfileToProps = (state: Indexed): Indexed => {
+  return {
+    first_name: state?.user?.login || '',
+    avatar: state?.user?.avatar || '../../assets/icons/Ellipse.svg',
+  };
+};
+
+const mapDataToProps = (state: Indexed, fieldName: string): Indexed => {
+  return {
+    attr: {
+      value: state?.user?.[fieldName] || '',
+    },
+  };
+};
+
+const editingProfileClass = connect(EditingProfile, mapEditProfileToProps);
+
+const editingProfile = new editingProfileClass({});
 
 export default editingProfile;

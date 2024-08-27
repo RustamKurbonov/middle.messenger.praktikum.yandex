@@ -1,5 +1,5 @@
 const tpl = `
-  <div class="chat-item-icon" style="background-image: url({{icon}})">
+  <div class="chat-item-icon" style="background-image: url({{icon}})" id={{id}}>
   </div>
   <div class="chat-item-content">
     <div class="chat-item-title">{{name}}</div>
