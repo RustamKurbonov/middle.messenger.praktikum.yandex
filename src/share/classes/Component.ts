@@ -2,6 +2,7 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
+const test = '';
 export interface ComponentProps {
   tagName?: string;
   propsAndChildren?: PropsAndChildren;
