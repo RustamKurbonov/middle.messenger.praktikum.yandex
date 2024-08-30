@@ -11,7 +11,7 @@ class Router {
   private _currentRoute: Route | null;
   private _rootQuery: string;
 
-  constructor(rootQuery: string, routes: Record<Paths, Component>) {
+  constructor(rootQuery: string) {
     if (Router.__instance) {
       return Router.__instance;
     }
@@ -21,14 +21,10 @@ class Router {
     this._currentRoute = null;
     this._rootQuery = rootQuery;
 
-    Object.entries(routes).forEach(([pathname, page]) => {
-      this._use(pathname as Paths, page);
-    });
-
     Router.__instance = this;
   }
 
-  _use(pathname: Paths, block: Component): Router {
+  use(pathname: Paths, block: Component): Router {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
 
     this.routes.push(route);
@@ -89,17 +85,11 @@ class Router {
     this._onRoute(pathname);
   }
 
-  back(history?: History): void {
-    if (history) {
-      history.back();
-    }
+  back(): void {
     this.history.back();
   }
 
-  forward(history?: History): void {
-    if (history) {
-      history.forward();
-    }
+  forward(): void {
     this.history.forward();
   }
 
@@ -108,6 +98,9 @@ class Router {
   }
 }
 
-const router = new Router('#app', routes);
+const router = new Router('#app');
+Object.entries(routes).forEach(([pathname, page]) => {
+  router.use(pathname as Paths, page);
+});
 
 export default router;
