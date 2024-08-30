@@ -22,22 +22,22 @@ class HTTPTransport {
   }
 
   get = (url: string, options: Options): Promise<XMLHttpRequest> => {
-    return this._request(url, { ...options, method: METHODS.GET }, options.timeout);
+    return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
   };
 
   post = (url: string, options: Options): Promise<XMLHttpRequest> => {
-    return this._request(url, { ...options, method: METHODS.POST }, options.timeout);
+    return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
   };
 
   put = (url: string, options: Options): Promise<XMLHttpRequest> => {
-    return this._request(url, { ...options, method: METHODS.PUT }, options.timeout);
+    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
   };
 
   delete = (url: string, options: Options): Promise<XMLHttpRequest> => {
-    return this._request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-  _request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
+  request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
     const path = this._basePath + url;
     const { headers = {}, method, data } = options;
 
