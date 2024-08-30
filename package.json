@@ -20,11 +20,6 @@
     "test:watch": "jest --watch",
     "prepare": "husky && husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit"
-    }
-  },
   "devDependencies": {
     "@jest/globals": "29.7.0",
     "@testing-library/jest-dom": "6.4.2",
