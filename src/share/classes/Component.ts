@@ -31,13 +31,21 @@ export class Component {
     FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   };
+
   _props: PropsAndChildren;
+
   _id: string;
+
   _element: HTMLElement | null = null;
+
   _meta: { tagName: string; props?: PropsAndChildren } | null = null;
+
   _eventBus: EventBus;
+
   _setUpdate = false;
+
   _lists: PropsAndChildren;
+
   _children: PropsAndChildren;
 
   constructor({ tagName = 'div', propsAndChildren = {} }: ComponentProps) {
@@ -137,6 +145,14 @@ export class Component {
     return fragment.content;
   }
 
+  _registerEvents(eventBus: EventBus): void {
+    eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
+  }
+
   init(): void {
     const meta = this._meta;
 
@@ -146,6 +162,13 @@ export class Component {
     }
 
     this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
+  }
+
+  _componentDidMount(): void {
+    this.componentDidMount();
+    Object.values(this._children).forEach((child) => {
+      (child as Component).dispatchComponentDidMount();
+    });
   }
 
   componentDidMount(callBack?: () => void): void {
@@ -159,8 +182,17 @@ export class Component {
     }
   }
 
+  _componentWillUnmount(): void {}
+
   dispatchComponentWillUnmount(): void {
     this._eventBus.emit(Component.EVENTS.FLOW_CWU);
+  }
+
+  _componentDidUpdate(): void {
+    const isReRender = this.componentDidUpdate();
+    if (isReRender) {
+      this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
+    }
   }
 
   componentDidUpdate(callBack?: () => void): boolean {
@@ -198,6 +230,18 @@ export class Component {
 
   get element(): HTMLElement | null {
     return this._element;
+  }
+
+  _render(): void {
+    const block = this.render();
+
+    if (block && this._element) {
+      this.removeEvents();
+      this._element.innerHTML = '';
+      this._element.appendChild(block);
+      this.addAttribute();
+      this.addEvents();
+    }
   }
 
   render(): Node | void {}
@@ -242,42 +286,6 @@ export class Component {
 
   getContent(): HTMLElement | null {
     return this.element;
-  }
-
-  _render(): void {
-    const block = this.render();
-
-    if (block && this._element) {
-      this.removeEvents();
-      this._element.innerHTML = '';
-      this._element.appendChild(block);
-      this.addAttribute();
-      this.addEvents();
-    }
-  }
-
-  _componentDidUpdate(): void {
-    const isReRender = this.componentDidUpdate();
-    if (isReRender) {
-      this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
-    }
-  }
-
-  _componentWillUnmount(): void {}
-
-  _componentDidMount(): void {
-    this.componentDidMount();
-    Object.values(this._children).forEach((child) => {
-      (child as Component).dispatchComponentDidMount();
-    });
-  }
-
-  _registerEvents(eventBus: EventBus): void {
-    eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   _makePropsProxy(props: PropsAndChildren): PropsAndChildren {
