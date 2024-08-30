@@ -20,6 +20,11 @@
     "test:watch": "jest --watch",
     "prepare": "husky && husky install"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
+  },
   "lint-staged": {
     "*.ts": "npx tsc --noEmit",
     "*.{js,jsx,ts,tsx}": "npx eslint",
