@@ -99,6 +99,7 @@ class Router {
 }
 
 const router = new Router('#app');
+
 Object.entries(routes).forEach(([pathname, page]) => {
   router.use(pathname as Paths, page);
 });

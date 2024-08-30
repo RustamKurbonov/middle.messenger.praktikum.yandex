@@ -94,20 +94,6 @@ npm run format:check
 npm run format
 ```
 
-## Unit test
-
-На проекте используется библиотека `Jest` для юнит тестов
-
-Команда запуска:
-
-```bash
-npm run test
-```
-
-## Husky
-
-Настроен `pre-commit` на проекте. Проверяются: `ESlint`, `Stylelint` и `test`
-
 ## Список страниц
 
 - авторизация: http://127.0.0.1:5173/

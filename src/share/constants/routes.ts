@@ -8,7 +8,7 @@ import error500 from '../../pages/error500';
 import chat from '../../pages/chat';
 import chatSetting from '../../pages/chatSetting';
 
-export const enum Paths {
+export enum Paths {
   Login = '/',
   Registration = '/sign-up',
   Profile = '/settings',
