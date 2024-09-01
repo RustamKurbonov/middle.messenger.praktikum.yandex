@@ -99,6 +99,7 @@ export class Component {
       });
 
     const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
+
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
     Object.values(this._children).forEach((child) => {
