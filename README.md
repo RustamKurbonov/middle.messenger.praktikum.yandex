@@ -94,6 +94,20 @@ npm run format:check
 npm run format
 ```
 
+## Unit test
+
+На проекте используется библиотека `Jest` для юнит тестов
+
+Команда запуска:
+
+```bash
+npm run test
+```
+
+## Husky
+
+Настроен `pre-commit` на проекте. Проверяются: `ESlint`, `Stylelint` и `test`
+
 ## Список страниц
 
 - авторизация: http://127.0.0.1:5173/
@@ -105,4 +119,4 @@ npm run format
 - ошибка 404: http://127.0.0.1:5173/error404
 - ошибка 500: http://127.0.0.1:5173/error500
 
-Netlify: https://66c5de291e5c440008fdb49b--regal-griffin-964a9d.netlify.app. Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
+Netlify: https://66d483f822725d0008749ee9--regal-griffin-964a9d.netlify.app. Макеты: Макеты с примером дизайна от Яндекс.Практикума: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
